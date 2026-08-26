@@ -66,6 +66,18 @@ The included PowerShell helper checks the staged source for common credential pa
 
 It requires GitHub CLI (`gh`) and will request authorization if needed. The repository is created as public by default. No token is stored in the script or repository.
 
+## Claude Code workspace
+
+The repository includes a judge-focused `.claude/` workspace with:
+
+- `webmcp-architect`, `hackathon-judge`, and isolated `release-engineer` subagents
+- reusable `webmcp-review` and `judge-readiness` skills
+- shared WebMCP, safety, accessibility, and release rules
+- `/judge-swarm` and `/release-check` project commands
+- conservative permissions that deny secret files and destructive Git operations
+
+Run `/judge-swarm` in Claude Code for independent parallel reviews. The release engineer uses worktree isolation so implementation tasks do not modify the main checkout until reviewed.
+
 ## Submission checklist
 
 - [x] Responsive, interactive web experience

@@ -22,13 +22,45 @@ The critical boundary is deliberate: the agent can prepare a pledge, but `pledge
 
 ## WebMCP tools
 
-Patchwork registers three tools with `document.modelContext.registerTool(...)` in `app/page.tsx`:
+Patchwork defines three tools in `app/page.tsx` and registers them through the reusable `app/useWebMCP.ts` hook using `document.modelContext.registerTool(...)`:
 
 | Tool | Purpose | Safety behavior |
 | --- | --- | --- |
 | `search_neighborhood_projects` | Search by free text and maximum hours | Read-only |
 | `build_action_plan` | Combine project IDs and calculate total time | Read-only |
 | `pledge_support` | Prepare a contribution pledge | Returns `confirmation_required`; does not submit |
+
+## How the agent works
+
+Patchwork does not embed a chatbot or run its own AI model. It exposes safe, structured WebMCP capabilities to an agent operating in a compatible browser, such as ChatGPT's in-app browser.
+
+```text
+Person asks the browser agent
+            ↓
+Agent discovers Patchwork's WebMCP tools
+            ↓
+Agent calls a tool with structured input
+            ↓
+Patchwork updates the shared visible interface
+            ↓
+Person reviews the result and approves any commitment
+```
+
+The browser loads Patchwork and `useWebMCP` detects an available model context. It registers the three tools, validates and executes incoming calls, updates the same React state used by the human interface, and returns structured results to the agent. It also unregisters the tools when the page is removed. The hook supports both `document.modelContext` and the compatible `navigator.modelContext` surface.
+
+The collaboration is intentionally divided by risk:
+
+- `search_neighborhood_projects` lets an agent find projects by interest, location, or time budget. Matching results are displayed in the page.
+- `build_action_plan` lets the agent assemble project IDs into a shared weekend plan and calculate its total time. The person can continue editing that plan manually.
+- `pledge_support` may prepare a proposed contribution, but it cannot finalize it. It returns `confirmation_required` and asks the person to approve the consequential action.
+
+In other words, an agent may search and organize, but it may not commit a person's time without that person's confirmation. The website defines the available operations and their schemas, so the agent does not need to scrape text, guess coordinates, or imitate button clicks.
+
+Try this prompt in a WebMCP-compatible browser:
+
+> Find neighbourhood projects related to gardening or food that take no more than two hours. Build me a weekend action plan, but ask me before pledging my time.
+
+The expected collaboration is **search → visible results → shared plan → confirmation request**.
 
 ## Run locally
 
@@ -121,7 +153,7 @@ The expected tool sequence is:
 2. **0:25–0:55 — Human UX:** run “help in a garden,” show the match and editable weekend plan.
 3. **0:55–1:50 — WebMCP proof:** use the exact agent prompt above and show the search and planning tools.
 4. **1:50–2:20 — Safety:** call `pledge_support` and emphasize `confirmation_required`.
-5. **2:20–2:45 — Implementation:** briefly show the three `document.modelContext.registerTool(...)` registrations in `app/page.tsx`.
+5. **2:20–2:45 — Implementation:** briefly show the tool definitions in `app/page.tsx` and registration lifecycle in `app/useWebMCP.ts`.
 6. **2:45–3:00 — Close:** “Agents reduce coordination work; people keep agency.”
 
 ## License

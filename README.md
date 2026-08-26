@@ -90,14 +90,39 @@ Run `/judge-swarm` in Claude Code for independent parallel reviews. The release 
 - [ ] Public demo video under three minutes
 - [ ] Devpost text and links submitted
 
-## Suggested demo flow (under three minutes)
+## How to demo it
 
-1. Explain the problem: local needs are fragmented and planning takes effort.
-2. Show manual search and adding a project to the weekend plan.
-3. Ask the agent to find projects within a time budget using `search_neighborhood_projects`.
-4. Build a plan with `build_action_plan` and show it reflected in the experience.
-5. Call `pledge_support` and highlight that confirmation is required.
-6. Close with the shared-agency idea: agents reduce coordination work; people keep agency.
+Use ChatGPT's in-app browser or WebMCP-enabled Chrome and open the live Pages URL.
+
+### Human flow
+
+1. Enter **“help in a garden”** in the main search and select **Explore**.
+2. Patchwork scrolls to the matching orchard project, adds it to the weekend plan, and reports what changed.
+3. Try **“donate food”**, **“fix clothes”**, or **“safer streets”** to demonstrate intent-aware matching.
+4. Use the category chips and `+` buttons to edit the plan manually.
+5. Select **Review my plan** to show the total hours and the no-commitment safety message.
+
+### Agent flow
+
+Give the browser agent this exact prompt:
+
+> Find neighbourhood projects I can help with this weekend in three hours or less. I care about food access and the outdoors. Build a plan, but do not make any pledge without asking me first.
+
+The expected tool sequence is:
+
+1. `search_neighborhood_projects` finds relevant projects within the time budget.
+2. `build_action_plan` returns selected records and total hours.
+3. `pledge_support` prepares a draft and returns `confirmation_required`.
+4. Point out that the agent reduced discovery and planning work while the person retained control of the commitment.
+
+### Three-minute judging video
+
+1. **0:00–0:25 — Problem:** local needs are fragmented and turning intent into a realistic plan takes work.
+2. **0:25–0:55 — Human UX:** run “help in a garden,” show the match and editable weekend plan.
+3. **0:55–1:50 — WebMCP proof:** use the exact agent prompt above and show the search and planning tools.
+4. **1:50–2:20 — Safety:** call `pledge_support` and emphasize `confirmation_required`.
+5. **2:20–2:45 — Implementation:** briefly show the three `document.modelContext.registerTool(...)` registrations in `app/page.tsx`.
+6. **2:45–3:00 — Close:** “Agents reduce coordination work; people keep agency.”
 
 ## License
 

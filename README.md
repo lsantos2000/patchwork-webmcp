@@ -132,7 +132,7 @@ For exact prompts, expected tool calls, Claude review instructions, recording re
 
 ### Playwright tests
 
-The `tests/` folder contains a Chromium smoke suite for the public deployment. It verifies production styling, all three WebMCP registrations through a controlled model-context test shim, agent-to-UI state updates, device-local plan restoration, human plan controls, and the pledge confirmation boundary.
+The `tests/` folder contains 35 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all three WebMCP registrations through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
 
 ```bash
 npm install
@@ -140,7 +140,7 @@ npm run test:e2e:install
 npm run test:e2e
 ```
 
-Set `PLAYWRIGHT_BASE_URL` to test another deployment. GitHub Actions runs the same suite against the public Cloudflare Pages URL on pushes and pull requests to `main`, retaining its HTML report when the job completes.
+Set `PLAYWRIGHT_USE_LOCAL=1` to let Playwright start and test the current source, or set `PLAYWRIGHT_BASE_URL` to test another deployment. GitHub Actions tests the checked-out source on pushes and pull requests to `main`, retaining its HTML report when the job completes. With neither variable set, the suite targets the public Cloudflare Pages URL.
 
 ### Production build
 

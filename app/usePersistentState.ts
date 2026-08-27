@@ -15,6 +15,8 @@ export function usePersistentState<T>(
       const saved = window.localStorage.getItem(key);
       if (saved !== null) {
         const parsed: unknown = JSON.parse(saved);
+        // Hydration intentionally reconciles the client-only localStorage value after mount.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         if (isValid(parsed)) setValue(parsed);
         else window.localStorage.removeItem(key);
       }

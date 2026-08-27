@@ -24,7 +24,7 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
         env:
-          PLAYWRIGHT_BASE_URL: https://patchwork-webmcp.pages.dev
+          PLAYWRIGHT_USE_LOCAL: '1'
       - uses: actions/upload-artifact@v5
         if: ${{ !cancelled() }}
         with:

@@ -29,11 +29,12 @@ Use this guide to verify Patchwork's public deployment, human interface, WebMCP 
 
 5. Verify that `search_neighborhood_projects` runs and the visible results change.
 6. Verify that `build_action_plan` runs and the Weekend Plan shows the same selected projects and total hours.
-7. Then ask:
+7. Refresh or leave and reopen Patchwork; verify that the same plan returns with **Saved on this device** visible.
+8. Then ask:
 
    > Prepare a pledge for one selected project, but do not submit it.
 
-8. Verify that `pledge_support` returns `confirmation_required` and Patchwork states that nothing was submitted.
+9. Verify that `pledge_support` returns `confirmation_required` and Patchwork states that nothing was submitted.
 
 ## Chrome WebMCP testing
 
@@ -92,6 +93,8 @@ Keep credentials, personal notifications, profiles, and unrelated tabs out of th
 - [ ] Search and planning update shared visible state.
 - [ ] Agent-selected records match the displayed plan.
 - [ ] Total hours are correct.
+- [ ] Search, filter, and plan survive a refresh in the same browser.
+- [ ] **Clear plan** removes the saved selections.
 - [ ] Pledge remains a draft.
 - [ ] Human confirmation is explicitly required.
 - [ ] No errors appear in the interaction.

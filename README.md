@@ -8,6 +8,14 @@ Built for the **WebMCP Challenge** (submissions close September 3 at 1:00 PM PT)
 
 > **Browser testing:** See the complete [ChatGPT, Google Chrome WebMCP, and Claude review guide](docs/browser-test.md).
 
+## Quick links
+
+- **Live application:** [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/)
+- **Browser and WebMCP testing:** [docs/browser-test.md](docs/browser-test.md)
+- **Visual evidence:** [docs/evidence](docs/evidence)
+- **Claude workspace instructions:** [CLAUDE.md](CLAUDE.md)
+- **Open-source license:** [MIT License](LICENSE)
+
 ## Project description
 
 ### Why Patchwork is a strong fit for WebMCP
@@ -25,6 +33,12 @@ Before WebMCP, an agent would typically need to read rendered text, infer contro
 ### How WebMCP is implemented
 
 Patchwork defines `search_neighborhood_projects`, `build_action_plan`, and `pledge_support` in `app/page.tsx`. The reusable `app/useWebMCP.ts` hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback, isolated registration errors, and `unregisterTool` cleanup. Tool handlers update the same React state used by the human interface and return structured results to the agent. Read-only search and planning can proceed directly; `pledge_support` returns `confirmation_required` and never submits a pledge.
+
+### Device-local storage
+
+Patchwork saves the current search, category filter, and Weekend Plan in the browser's `localStorage`. Human edits and plans created through `build_action_plan` use the same persistence path, so leaving, refreshing, or reopening the site in the same browser restores the shared workspace. The interface shows **Saved on this device** and provides a **Clear plan** control. Stored values are validated before restoration, and malformed or outdated values fall back safely to the default state.
+
+This storage is intentionally local and contains only project selections and interface state—no credentials or personal information. It does not sync across browsers or devices and may be removed when site data is cleared or private browsing ends. Pledge drafts and approvals are never restored: every consequential commitment still requires fresh human confirmation. Agent-generated plan results include `persisted_on_device: true` so a compatible client can explain where the plan was saved.
 
 ## Why WebMCP
 
@@ -47,7 +61,7 @@ Patchwork defines three tools in `app/page.tsx` and registers them through the r
 | Tool | Purpose | Safety behavior |
 | --- | --- | --- |
 | `search_neighborhood_projects` | Search by free text and maximum hours | Read-only |
-| `build_action_plan` | Combine project IDs and calculate total time | Read-only |
+| `build_action_plan` | Combine project IDs, calculate total time, update the UI, and save the plan on this device | Read-only |
 | `pledge_support` | Prepare a contribution pledge | Returns `confirmation_required`; does not submit |
 
 ## How the agent works
@@ -99,6 +113,16 @@ npm run dev
 Open [http://localhost:3000](http://localhost:3000).
 
 To test the WebMCP tools, use ChatGPT's in-app browser or Chrome 149+ with `chrome://flags/#enable-webmcp-testing` enabled.
+
+For exact prompts, expected tool calls, Claude review instructions, recording requirements, troubleshooting, and pass criteria, follow the complete [browser-test guide](docs/browser-test.md).
+
+### Test persistence
+
+1. Add or remove projects from the Weekend Plan.
+2. Refresh the page or navigate away and return.
+3. Confirm that the search, category, selected projects, and total hours are restored.
+4. Use **Clear plan**, refresh again, and confirm that the empty plan remains saved.
+5. Prepare a pledge draft and confirm that it still requires fresh human approval rather than being restored as approved.
 
 ### Production build
 

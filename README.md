@@ -8,6 +8,24 @@ Built for the **WebMCP Challenge** (submissions close September 3 at 1:00 PM PT)
 
 > **Browser testing:** See the complete [ChatGPT, Google Chrome WebMCP, and Claude review guide](docs/browser-test.md).
 
+## Project description
+
+### Why Patchwork is a strong fit for WebMCP
+
+Finding a local opportunity is rarely a single lookup. People must interpret scattered descriptions, compare interests and time requirements, assemble a realistic plan, and decide what they are willing to contribute. Patchwork is a strong WebMCP use case because those steps map naturally to structured website capabilities: search current projects, combine selected records into a plan, and prepare a contribution for human review. The website remains the authoritative source of its data and supported actions, while the agent handles the coordination work.
+
+### How it creates a better user experience
+
+People can browse Patchwork normally or describe their intent conversationally—such as wanting to support food access and outdoor work within three hours. The agent can translate that request into structured searches and a visible weekend plan without scraping the page or guessing where to click. Every agent action is reflected in the same interface the person can inspect and edit, reducing repetitive comparison work without hiding what changed.
+
+### What people and agents can do together
+
+Before WebMCP, an agent would typically need to read rendered text, infer controls, and imitate a sequence of browser interactions. That approach is brittle and often separates the agent's answer from the website's actual state. With Patchwork, the agent can discover current opportunities, create a time-bounded plan, and prepare a pledge draft through declared tools. The person can then adjust the same plan manually and remains the only party authorized to approve a commitment. This creates a shared workspace rather than a chatbot response beside an unrelated website.
+
+### How WebMCP is implemented
+
+Patchwork defines `search_neighborhood_projects`, `build_action_plan`, and `pledge_support` in `app/page.tsx`. The reusable `app/useWebMCP.ts` hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback, isolated registration errors, and `unregisterTool` cleanup. Tool handlers update the same React state used by the human interface and return structured results to the agent. Read-only search and planning can proceed directly; `pledge_support` returns `confirmation_required` and never submits a pledge.
+
 ## Why WebMCP
 
 Local opportunity sites contain useful information, but people still have to search, compare schedules, and translate good intentions into a practical plan. Patchwork exposes the same project data and actions that people see in the interface as structured WebMCP tools. A compatible agent can therefore search by interest or time, combine projects into a plan, and draft a pledge without scraping or guessing.

@@ -1,0 +1,30 @@
+.plan-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 16px;
+  color: #5c6c65;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.clear-plan {
+  border: 0;
+  padding: 5px 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.clear-plan:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.plan-actions + .review {
+  margin-top: 16px;
+}

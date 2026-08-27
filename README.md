@@ -2,17 +2,23 @@
 
 **Small actions. Shared momentum.**
 
+## Patchwork WebMCP
+
+This [2:59 public demo video](https://youtu.be/e2J0PO7MzzM) showcases the [Patchwork public repository](https://github.com/lsantos2000/patchwork-webmcp) in response to the [WebMCP Challenge on Devpost](https://webmcp.devpost.com/?ref_feature=challenge).
+
 Patchwork is a WebMCP-powered neighbourhood action exchange. It helps people discover local projects, ask an agent to assemble a realistic plan, and keep final commitments explicitly human-approved.
 
 Built for the **WebMCP Challenge** (submissions close September 3 at 1:00 PM PT).
 
-> **Browser testing:** See the complete [ChatGPT, Google Chrome WebMCP, and Claude review guide](docs/browser-test.md).
+> **Browser testing:** See the complete [ChatGPT, Google Chrome WebMCP, and Claude review guide](resources/docs/browser-test.md).
 
 ## Quick links
 
 - **Live application:** [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/)
-- **Browser and WebMCP testing:** [docs/browser-test.md](docs/browser-test.md)
-- **Visual evidence:** [docs/evidence](docs/evidence)
+- **Demo video:** [YouTube](https://youtu.be/e2J0PO7MzzM) · [repository copy](resources/video/Patchwork_WebMCP.mp4)
+- **Browser and WebMCP testing:** [resources/docs/browser-test.md](resources/docs/browser-test.md)
+- **Visual evidence:** [resources/images](resources/images)
+- **All submission resources:** [resources](resources)
 - **Claude workspace instructions:** [CLAUDE.md](CLAUDE.md)
 - **Open-source license:** [MIT License](LICENSE)
 
@@ -114,7 +120,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 To test the WebMCP tools, use ChatGPT's in-app browser or Chrome 149+ with `chrome://flags/#enable-webmcp-testing` enabled.
 
-For exact prompts, expected tool calls, Claude review instructions, recording requirements, troubleshooting, and pass criteria, follow the complete [browser-test guide](docs/browser-test.md).
+For exact prompts, expected tool calls, Claude review instructions, recording requirements, troubleshooting, and pass criteria, follow the complete [browser-test guide](resources/docs/browser-test.md).
 
 ### Test persistence
 
@@ -123,6 +129,18 @@ For exact prompts, expected tool calls, Claude review instructions, recording re
 3. Confirm that the search, category, selected projects, and total hours are restored.
 4. Use **Clear plan**, refresh again, and confirm that the empty plan remains saved.
 5. Prepare a pledge draft and confirm that it still requires fresh human approval rather than being restored as approved.
+
+### Playwright tests
+
+The `tests/` folder contains a Chromium smoke suite for the public deployment. It verifies production styling, all three WebMCP registrations through a controlled model-context test shim, agent-to-UI state updates, device-local plan restoration, human plan controls, and the pledge confirmation boundary.
+
+```bash
+npm install
+npm run test:e2e:install
+npm run test:e2e
+```
+
+Set `PLAYWRIGHT_BASE_URL` to test another deployment. GitHub Actions runs the same suite against the public Cloudflare Pages URL on pushes and pull requests to `main`, retaining its HTML report when the job completes.
 
 ### Production build
 
@@ -172,35 +190,35 @@ These captures come from the public Cloudflare Pages deployment at [patchwork-we
 
 ### 1. Human-first discovery
 
-![Patchwork hero and neighbourhood project discovery](docs/evidence/01-hero-search.png)
+![Patchwork hero and neighbourhood project discovery](resources/images/01-hero-search.png)
 
 Patchwork gives people a complete visual experience before an agent is involved: a clear prompt, live neighbourhood needs, and an explicit promise that the person approves every commitment.
 
 ### 2. Intent-aware project results
 
-![Filtered neighbourhood projects](docs/evidence/02-filtered-projects.png)
+![Filtered neighbourhood projects](resources/images/02-filtered-projects.png)
 
 People can filter and compare outdoors, skills, food, and community opportunities without leaving the page.
 
 ### 3. Human-editable shared plan
 
-![Human-editable weekend action plan](docs/evidence/03-human-weekend-plan.png)
+![Human-editable weekend action plan](resources/images/03-human-weekend-plan.png)
 
 Selected projects appear in one weekend plan with a visible time total. The person can add or remove projects at any time.
 
 ### 4. Agent request to shared plan
 
-![Agent request reflected in Patchwork results](docs/evidence/04a-agent-request-and-results.png)
+![Agent request reflected in Patchwork results](resources/images/04a-agent-request-and-results.png)
 
 The request for food-access and outdoor projects is reflected in the same project interface used by the person.
 
-![Resulting three-hour shared action plan](docs/evidence/04-agent-created-plan.png)
+![Resulting three-hour shared action plan](resources/images/04-agent-created-plan.png)
 
 The resulting two-project plan totals three hours and remains editable. These still images demonstrate the shared visible state; the demo video should additionally show the live `build_action_plan` WebMCP invocation.
 
 ### 5. Human confirmation boundary
 
-![Plan review showing that no pledge was sent](docs/evidence/05-human-confirmation-required.png)
+![Plan review showing that no pledge was sent](resources/images/05-human-confirmation-required.png)
 
 Reviewing a plan does not submit a pledge. Patchwork states both **“Nothing is submitted without your confirmation”** and **“No pledge sent.”**
 
@@ -229,7 +247,7 @@ The expected tool sequence is:
 3. `pledge_support` prepares a draft and returns `confirmation_required`.
 4. Point out that the agent reduced discovery and planning work while the person retained control of the commitment.
 
-> **Browser-test note:** The exact ChatGPT in-app browser steps, Chrome WebMCP setup, Claude review instructions, evidence requirements, and pass criteria are maintained in [`docs/browser-test.md`](docs/browser-test.md).
+> **Browser-test note:** The exact ChatGPT in-app browser steps, Chrome WebMCP setup, Claude review instructions, evidence requirements, and pass criteria are maintained in [`resources/docs/browser-test.md`](resources/docs/browser-test.md).
 
 ### Three-minute judging video
 

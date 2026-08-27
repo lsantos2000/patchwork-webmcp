@@ -122,6 +122,44 @@ Run `/judge-swarm` in Claude Code for independent parallel reviews. The release 
 - [ ] Public demo video under three minutes
 - [ ] Devpost text and links submitted
 
+## Visual evidence
+
+These captures come from the public Cloudflare Pages deployment at [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/).
+
+### 1. Human-first discovery
+
+![Patchwork hero and neighbourhood project discovery](docs/evidence/01-hero-search.png)
+
+Patchwork gives people a complete visual experience before an agent is involved: a clear prompt, live neighbourhood needs, and an explicit promise that the person approves every commitment.
+
+### 2. Intent-aware project results
+
+![Filtered neighbourhood projects](docs/evidence/02-filtered-projects.png)
+
+People can filter and compare outdoors, skills, food, and community opportunities without leaving the page.
+
+### 3. Human-editable shared plan
+
+![Human-editable weekend action plan](docs/evidence/03-human-weekend-plan.png)
+
+Selected projects appear in one weekend plan with a visible time total. The person can add or remove projects at any time.
+
+### 4. Agent request to shared plan
+
+![Agent request reflected in Patchwork results](docs/evidence/04a-agent-request-and-results.png)
+
+The request for food-access and outdoor projects is reflected in the same project interface used by the person.
+
+![Resulting three-hour shared action plan](docs/evidence/04-agent-created-plan.png)
+
+The resulting two-project plan totals three hours and remains editable. These still images demonstrate the shared visible state; the demo video should additionally show the live `build_action_plan` WebMCP invocation.
+
+### 5. Human confirmation boundary
+
+![Plan review showing that no pledge was sent](docs/evidence/05-human-confirmation-required.png)
+
+Reviewing a plan does not submit a pledge. Patchwork states both **“Nothing is submitted without your confirmation”** and **“No pledge sent.”**
+
 ## How to demo it
 
 Use ChatGPT's in-app browser or WebMCP-enabled Chrome and open the live Pages URL.

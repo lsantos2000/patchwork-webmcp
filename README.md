@@ -6,6 +6,8 @@ Patchwork is a WebMCP-powered neighbourhood action exchange. It helps people dis
 
 Built for the **WebMCP Challenge** (submissions close September 3 at 1:00 PM PT).
 
+> **Browser testing:** See the complete [ChatGPT, Google Chrome WebMCP, and Claude review guide](docs/browser-test.md).
+
 ## Why WebMCP
 
 Local opportunity sites contain useful information, but people still have to search, compare schedules, and translate good intentions into a practical plan. Patchwork exposes the same project data and actions that people see in the interface as structured WebMCP tools. A compatible agent can therefore search by interest or time, combine projects into a plan, and draft a pledge without scraping or guessing.
@@ -185,7 +187,7 @@ The expected tool sequence is:
 3. `pledge_support` prepares a draft and returns `confirmation_required`.
 4. Point out that the agent reduced discovery and planning work while the person retained control of the commitment.
 
-> **Note — testing with ChatGPT's in-app browser:** Open [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/) inside the browser panel and keep the page open while talking to the agent. If needed, say: **“Discover and use the WebMCP tools registered by this page.”** Ask it to find food-access and outdoor projects within three hours and build a plan without pledging anything. The expected visible sequence is `search_neighborhood_projects` → `build_action_plan` → an updated Weekend Plan and total hours. Then ask it to prepare, but not submit, a pledge and verify that `pledge_support` returns `confirmation_required`. For recorded evidence, keep both the tool activity and the resulting Patchwork interface visible. If tools are not discovered, hard-refresh with `Ctrl+Shift+R`, confirm the public Pages URL, and retry in a fresh task with Patchwork already open.
+> **Browser-test note:** The exact ChatGPT in-app browser steps, Chrome WebMCP setup, Claude review instructions, evidence requirements, and pass criteria are maintained in [`docs/browser-test.md`](docs/browser-test.md).
 
 ### Three-minute judging video
 

@@ -185,6 +185,8 @@ The expected tool sequence is:
 3. `pledge_support` prepares a draft and returns `confirmation_required`.
 4. Point out that the agent reduced discovery and planning work while the person retained control of the commitment.
 
+> **Note — testing with ChatGPT's in-app browser:** Open [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/) inside the browser panel and keep the page open while talking to the agent. If needed, say: **“Discover and use the WebMCP tools registered by this page.”** Ask it to find food-access and outdoor projects within three hours and build a plan without pledging anything. The expected visible sequence is `search_neighborhood_projects` → `build_action_plan` → an updated Weekend Plan and total hours. Then ask it to prepare, but not submit, a pledge and verify that `pledge_support` returns `confirmation_required`. For recorded evidence, keep both the tool activity and the resulting Patchwork interface visible. If tools are not discovered, hard-refresh with `Ctrl+Shift+R`, confirm the public Pages URL, and retry in a fresh task with Patchwork already open.
+
 ### Three-minute judging video
 
 1. **0:00–0:25 — Problem:** local needs are fragmented and turning intent into a realistic plan takes work.

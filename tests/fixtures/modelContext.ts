@@ -37,7 +37,7 @@ export async function openPatchwork(page: Page, storage: StorageSeed = {}) {
     });
   }, storage);
   await page.goto('/');
-  await page.waitForFunction(() => Object.keys(window.__patchworkTools).length === 3);
+  await page.waitForFunction(() => Object.keys(window.__patchworkTools).length === 4);
 }
 
 export async function executeTool(page: Page, name: string, input: Record<string, unknown>) {

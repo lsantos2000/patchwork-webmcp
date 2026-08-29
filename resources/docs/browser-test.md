@@ -13,6 +13,7 @@ Use this guide to verify Patchwork's public deployment, human interface, WebMCP 
 | --- | --- |
 | `search_neighborhood_projects` | Returns matching projects and reflects the search in the visible interface |
 | `build_action_plan` | Selects project records, calculates total hours, and updates the Weekend Plan |
+| `propose_neighborhood_project` | Structures a local need and displays a draft that only a person can approve for publication |
 | `pledge_support` | Prepares a draft and returns `confirmation_required`; nothing is submitted |
 
 ## ChatGPT in-app browser
@@ -30,11 +31,12 @@ Use this guide to verify Patchwork's public deployment, human interface, WebMCP 
 5. Verify that `search_neighborhood_projects` runs and the visible results change.
 6. Verify that `build_action_plan` runs and the Weekend Plan shows the same selected projects and total hours.
 7. Refresh or leave and reopen Patchwork; verify that the same plan returns with **Saved on this device** visible.
-8. Then ask:
+8. Ask the agent to draft a new neighbourhood need. Verify that the review card states **Nothing is published without human approval**, then approve or reject it manually.
+9. Then ask:
 
    > Prepare a pledge for one selected project, but do not submit it.
 
-9. Verify that `pledge_support` returns `confirmation_required` and Patchwork states that nothing was submitted.
+10. Verify that `pledge_support` returns `confirmation_required` and Patchwork states that nothing was submitted.
 
 ## Chrome WebMCP testing
 
@@ -54,7 +56,7 @@ If the tools are not discovered, hard-refresh with `Ctrl+Shift+R`, confirm the p
 
 Open the repository in Claude Code and ask:
 
-> Read CLAUDE.md and the project skills. Audit the three WebMCP tools, shared React state, confirmation boundary, browser-test guide, and visual evidence. Do not change or submit anything. Report source-verified claims separately from browser-verified claims.
+> Read CLAUDE.md and the project skills. Audit the four WebMCP tools, shared React state, publishing and commitment boundaries, browser-test guide, and visual evidence. Do not change or submit anything. Report source-verified claims separately from browser-verified claims.
 
 The repository includes role-specific Claude agents, rules, skills, and `/judge-swarm` and `/release-check` commands. Claude should verify:
 
@@ -69,7 +71,7 @@ The repository includes role-specific Claude agents, rules, skills, and `/judge-
 Claude products support standard MCP integrations, but that does not by itself prove support for tools registered by a webpage through WebMCP. Use Claude Code for repository review and use **Google Chrome with WebMCP enabled** for the live browser test unless the selected Claude client explicitly documents WebMCP support.
 
 1. Use Claude Code for the source and judge-readiness audit.
-2. Use ChatGPT's in-app browser or Google Chrome 149+ with WebMCP enabled for the live three-tool run.
+2. Use ChatGPT's in-app browser or Google Chrome 149+ with WebMCP enabled for the live four-tool run.
 3. Preserve the live recording as the browser-level evidence.
 
 Do not describe a source review, ordinary browser automation, or standard MCP-server connection as a successful WebMCP test.
@@ -80,21 +82,23 @@ Record the public URL, agent conversation, readable tool names, and resulting Pa
 
 1. `search_neighborhood_projects` followed by visible results.
 2. `build_action_plan` followed by the matching Weekend Plan and total hours.
-3. `pledge_support` followed by `confirmation_required`.
-4. The message that no pledge was submitted.
-5. A final manual edit proving the person retains control of the plan.
+3. `propose_neighborhood_project` followed by the human-only publish decision.
+4. `pledge_support` followed by `confirmation_required`.
+5. The message that no pledge was submitted.
+6. A final manual edit proving the person retains control of the plan.
 
 Keep credentials, personal notifications, profiles, and unrelated tabs out of the recording.
 
 ## Pass criteria
 
 - [ ] Public Pages URL loads with production CSS.
-- [ ] All three tool names are discoverable or visibly invoked.
+- [ ] All four tool names are discoverable or visibly invoked.
 - [ ] Search and planning update shared visible state.
 - [ ] Agent-selected records match the displayed plan.
 - [ ] Total hours are correct.
 - [ ] Search, filter, and plan survive a refresh in the same browser.
 - [ ] **Clear plan** removes the saved selections.
+- [ ] Proposed needs remain drafts until a person approves publication.
 - [ ] Pledge remains a draft.
 - [ ] Human confirmation is explicitly required.
 - [ ] No errors appear in the interaction.

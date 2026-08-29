@@ -41,7 +41,7 @@ Patchwork demonstrates a humane future for the open web: agents can discover and
 ## Definition of done
 
 - The page builds successfully and works at mobile and desktop widths.
-- All three WebMCP tools register in a compatible browser.
+- All four WebMCP tools register in a compatible browser.
 - Search and plan interactions work without an agent.
 - Consequential actions require human confirmation.
 - README, license, live URL, repository URL, and demo video are ready for submission.

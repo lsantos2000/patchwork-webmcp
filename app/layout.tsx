@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import './persistence.css';
 import './focus.css';
+import './proposal.css';
 
 export const metadata: Metadata = {
   title: 'Patchwork — Small actions, shared momentum',

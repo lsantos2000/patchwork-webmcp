@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { createActionPlan, isSavedFilter, isSavedPlan, isSavedQuery, PROJECTS, searchProjects } from '../../app/projectData';
+import { createActionPlan, isSavedFilter, isSavedPlan, isSavedProjects, isSavedQuery, PROJECTS, searchProjects } from '../../app/projectData';
 
 test.describe('project domain rules', () => {
   test('exposes four stable neighbourhood projects', () => {
@@ -41,6 +41,18 @@ test.describe('project domain rules', () => {
   test('accepts only arrays of known project IDs as saved plans', () => {
     expect(isSavedPlan(['orchard', 'repair'])).toBe(true);
     expect(isSavedPlan(['orchard', 'unknown'])).toBe(false);
+    expect(isSavedPlan(['community-riverside-walk-abc123'])).toBe(true);
     expect(isSavedPlan('orchard')).toBe(false);
+  });
+
+  test('validates human-approved community projects before restoration', () => {
+    const proposal = {
+      id: 'community-riverside-walk-abc123', title: 'Riverside walk', area: 'Harbourview',
+      type: 'Community', time: 2, people: 0, color: 'violet', keywords: 'river litter',
+      desc: 'Walk the riverside path and collect litter before it reaches the harbour.', communityCreated: true,
+    };
+    expect(isSavedProjects([proposal])).toBe(true);
+    expect(isSavedProjects([{ ...proposal, time: 99 }])).toBe(false);
+    expect(isSavedProjects([{ ...proposal, communityCreated: false }])).toBe(false);
   });
 });

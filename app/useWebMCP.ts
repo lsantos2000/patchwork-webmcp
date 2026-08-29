@@ -15,7 +15,7 @@ export interface WebMCPTool {
 
 type ModelContext = {
   registerTool: (tool: WebMCPTool) => void;
-  unregisterTool?: (name: string) => void;
+  unregisterTool?: (name: string) => unknown;
 };
 
 declare global {
@@ -59,7 +59,18 @@ export function useWebMCP(tools: WebMCPTool[]) {
 
     return () => {
       if (typeof context.unregisterTool !== 'function') return;
-      for (const name of registered) context.unregisterTool(name);
+      for (const name of registered) {
+        try {
+          const cleanup = context.unregisterTool(name);
+          if (cleanup && typeof (cleanup as PromiseLike<unknown>).then === 'function') {
+            void Promise.resolve(cleanup).catch((error) => {
+              console.warn(`[WebMCP] Failed to unregister ${name}`, error);
+            });
+          }
+        } catch (error) {
+          console.warn(`[WebMCP] Failed to unregister ${name}`, error);
+        }
+      }
     };
   }, [tools]);
 }

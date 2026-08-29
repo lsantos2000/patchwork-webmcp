@@ -17,6 +17,8 @@ The video demonstrates the public Patchwork deployment, project discovery, share
 - [Agent request and results](images/04a-agent-request-and-results.png)
 - [Agent-created plan](images/04-agent-created-plan.png)
 - [Human confirmation required](images/05-human-confirmation-required.png)
+- [Agent-drafted need awaiting human review](images/06-agent-drafted-need-review.png)
+- [Human-approved community project](images/07-human-approved-community-project.png)
 
 ## Documentation
 

@@ -10,6 +10,8 @@ Patchwork is a WebMCP-powered neighbourhood action exchange. It helps people dis
 
 Built for the **WebMCP Challenge** (submissions close September 3 at 1:00 PM PT).
 
+Patchwork and its WebMCP implementation were created during the August 25–September 3, 2026 submission period.
+
 > **Browser testing:** See the complete [ChatGPT, Google Chrome WebMCP, and Claude review guide](resources/docs/browser-test.md).
 
 ## Quick links
@@ -21,6 +23,14 @@ Built for the **WebMCP Challenge** (submissions close September 3 at 1:00 PM PT)
 - **All submission resources:** [resources](resources)
 - **Claude workspace instructions:** [CLAUDE.md](CLAUDE.md)
 - **Open-source license:** [MIT License](LICENSE)
+
+## Judge it in 60 seconds
+
+1. Open the [live application](https://patchwork-webmcp.pages.dev/) in ChatGPT's in-app browser or WebMCP-enabled Chrome.
+2. Ask: **“Find food-access and outdoor projects that fit within three hours. Build a plan, but do not pledge anything.”**
+3. Verify the visible results and three-hour Weekend Plan created through `search_neighborhood_projects` and `build_action_plan`.
+4. Ask the agent to draft a new neighbourhood need. Verify that `propose_neighborhood_project` shows a review card but cannot publish until a person selects **Approve and publish**.
+5. Ask for a pledge draft. Verify that `pledge_support` returns `confirmation_required` and nothing is submitted.
 
 ## Project description
 
@@ -34,15 +44,15 @@ People can browse Patchwork normally or describe their intent conversationally�
 
 ### What people and agents can do together
 
-Before WebMCP, an agent would typically need to read rendered text, infer controls, and imitate a sequence of browser interactions. That approach is brittle and often separates the agent's answer from the website's actual state. With Patchwork, the agent can discover current opportunities, create a time-bounded plan, and prepare a pledge draft through declared tools. The person can then adjust the same plan manually and remains the only party authorized to approve a commitment. This creates a shared workspace rather than a chatbot response beside an unrelated website.
+Before WebMCP, an agent would typically need to read rendered text, infer controls, and imitate a sequence of browser interactions. That approach is brittle and often separates the agent's answer from the website's actual state. With Patchwork, the agent can discover current opportunities, create a time-bounded plan, structure a new community need, and prepare a pledge draft through declared tools. The person can then adjust the same plan manually and remains the only party authorized to publish a proposed need or approve a commitment. This creates a shared workspace rather than a chatbot response beside an unrelated website.
 
 ### How WebMCP is implemented
 
-Patchwork defines `search_neighborhood_projects`, `build_action_plan`, and `pledge_support` in `app/page.tsx`. The reusable `app/useWebMCP.ts` hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback, isolated registration errors, and `unregisterTool` cleanup. Tool handlers update the same React state used by the human interface and return structured results to the agent. Read-only search and planning can proceed directly; `pledge_support` returns `confirmation_required` and never submits a pledge.
+Patchwork defines `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support` in `app/page.tsx`. The reusable `app/useWebMCP.ts` hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback, isolated registration errors, and `unregisterTool` cleanup. Tool handlers update the same React state used by the human interface and return structured results to the agent. Search and planning can proceed directly; creating and committing remain human decisions.
 
 ### Device-local storage
 
-Patchwork saves the current search, category filter, and Weekend Plan in the browser's `localStorage`. Human edits and plans created through `build_action_plan` use the same persistence path, so leaving, refreshing, or reopening the site in the same browser restores the shared workspace. The interface shows **Saved on this device** and provides a **Clear plan** control. Stored values are validated before restoration, and malformed or outdated values fall back safely to the default state.
+Patchwork saves the current search, category filter, Weekend Plan, and human-approved community projects in the browser's `localStorage`. Human edits and plans created through `build_action_plan` use the same persistence path, so leaving, refreshing, or reopening the site in the same browser restores the shared workspace. The interface shows **Saved on this device** and provides a **Clear plan** control. Stored values are validated before restoration, and malformed or outdated values fall back safely to the default state.
 
 This storage is intentionally local and contains only project selections and interface state—no credentials or personal information. It does not sync across browsers or devices and may be removed when site data is cleared or private browsing ends. Pledge drafts and approvals are never restored: every consequential commitment still requires fresh human confirmation. Agent-generated plan results include `persisted_on_device: true` so a compatible client can explain where the plan was saved.
 
@@ -62,12 +72,13 @@ The critical boundary is deliberate: the agent can prepare a pledge, but `pledge
 
 ## WebMCP tools
 
-Patchwork defines three tools in `app/page.tsx` and registers them through the reusable `app/useWebMCP.ts` hook using `document.modelContext.registerTool(...)`:
+Patchwork defines four tools in `app/page.tsx` and registers them through the reusable `app/useWebMCP.ts` hook using `document.modelContext.registerTool(...)`:
 
 | Tool | Purpose | Safety behavior |
 | --- | --- | --- |
 | `search_neighborhood_projects` | Search by free text and maximum hours | Read-only |
 | `build_action_plan` | Combine project IDs, calculate total time, update the UI, and save the plan on this device | Read-only |
+| `propose_neighborhood_project` | Structure a new community need and display it for review | Returns `human_approval_required`; cannot publish |
 | `pledge_support` | Prepare a contribution pledge | Returns `confirmation_required`; does not submit |
 
 ## How the agent works
@@ -86,12 +97,13 @@ Patchwork updates the shared visible interface
 Person reviews the result and approves any commitment
 ```
 
-The browser loads Patchwork and `useWebMCP` detects an available model context. It registers the three tools, validates and executes incoming calls, updates the same React state used by the human interface, and returns structured results to the agent. It also unregisters the tools when the page is removed. The hook supports both `document.modelContext` and the compatible `navigator.modelContext` surface.
+The browser loads Patchwork and `useWebMCP` detects an available model context. It registers the four tools, validates and executes incoming calls, updates the same React state used by the human interface, and returns structured results to the agent. It also unregisters the tools when the page is removed. The hook supports both `document.modelContext` and the compatible `navigator.modelContext` surface.
 
 The collaboration is intentionally divided by risk:
 
 - `search_neighborhood_projects` lets an agent find projects by interest, location, or time budget. Matching results are displayed in the page.
 - `build_action_plan` lets the agent assemble project IDs into a shared weekend plan and calculate its total time. The person can continue editing that plan manually.
+- `propose_neighborhood_project` lets the agent structure a local need, but the draft remains outside the catalog until a person explicitly approves it.
 - `pledge_support` may prepare a proposed contribution, but it cannot finalize it. It returns `confirmation_required` and asks the person to approve the consequential action.
 
 In other words, an agent may search and organize, but it may not commit a person's time without that person's confirmation. The website defines the available operations and their schemas, so the agent does not need to scrape text, guess coordinates, or imitate button clicks.
@@ -132,7 +144,7 @@ For exact prompts, expected tool calls, Claude review instructions, recording re
 
 ### Playwright tests
 
-The `tests/` folder contains 35 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all three WebMCP registrations through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
+The `tests/` folder contains 39 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all four WebMCP registrations through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, proposal approval and rejection, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
 
 ```bash
 npm install
@@ -180,13 +192,13 @@ Run `/judge-swarm` in Claude Code for independent parallel reviews. The release 
 - [x] Cloudflare-compatible production build
 - [x] Public source with setup instructions
 - [x] Open-source license
-- [ ] Public live URL verified in a WebMCP-compatible browser
-- [ ] Public demo video under three minutes
+- [x] Public live URL verified in a WebMCP-compatible browser
+- [x] Public demo video under three minutes
 - [ ] Devpost text and links submitted
 
 ## Visual evidence
 
-These captures come from the public Cloudflare Pages deployment at [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/).
+These captures come from Playwright-controlled runs against the public Cloudflare Pages deployment at [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/). Screens 6 and 7 were produced by discovering and invoking the live WebMCP tool—not by manually preloading the draft state.
 
 ### 1. Human-first discovery
 
@@ -222,6 +234,18 @@ The resulting two-project plan totals three hours and remains editable. These st
 
 Reviewing a plan does not submit a pledge. Patchwork states both **“Nothing is submitted without your confirmation”** and **“No pledge sent.”**
 
+### 6. Agent-drafted need, awaiting a human decision
+
+![Agent-drafted neighbourhood need awaiting review](resources/images/06-agent-drafted-need-review.png)
+
+The browser agent invoked `propose_neighborhood_project` with structured data. Patchwork returned `human_approval_required`, placed the complete draft in the shared interface, and kept it outside the public catalogue. Both **Reject draft** and **Approve and publish** remain person-controlled actions.
+
+### 7. Human-approved community project
+
+![Human-approved community project published into Patchwork](resources/images/07-human-approved-community-project.png)
+
+Only after a person selected **Approve and publish** did the new need join the visible catalogue and device-local plan. The card is labelled **Community approved** and **Approved by a person**, making provenance and agency legible to judges.
+
 ## How to demo it
 
 Use ChatGPT's in-app browser or WebMCP-enabled Chrome and open the live Pages URL.
@@ -244,8 +268,9 @@ The expected tool sequence is:
 
 1. `search_neighborhood_projects` finds relevant projects within the time budget.
 2. `build_action_plan` returns selected records and total hours.
-3. `pledge_support` prepares a draft and returns `confirmation_required`.
-4. Point out that the agent reduced discovery and planning work while the person retained control of the commitment.
+3. `propose_neighborhood_project` structures a new need but waits for a person to publish it.
+4. `pledge_support` prepares a draft and returns `confirmation_required`.
+5. Point out that the agent reduced discovery and planning work while the person retained control of publishing and commitment.
 
 > **Browser-test note:** The exact ChatGPT in-app browser steps, Chrome WebMCP setup, Claude review instructions, evidence requirements, and pass criteria are maintained in [`resources/docs/browser-test.md`](resources/docs/browser-test.md).
 

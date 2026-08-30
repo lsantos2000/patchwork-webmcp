@@ -4,7 +4,7 @@
 
 ## Patchwork WebMCP
 
-This [2:59 public demo video](https://youtu.be/e2J0PO7MzzM) showcases the [Patchwork public repository](https://github.com/lsantos2000/patchwork-webmcp) in response to the [WebMCP Challenge on Devpost](https://webmcp.devpost.com/?ref_feature=challenge).
+This [2:57 public demo video](https://youtu.be/FXqJG7dmdKg) showcases the [Patchwork public repository](https://github.com/lsantos2000/patchwork-webmcp) in response to the [WebMCP Challenge on Devpost](https://webmcp.devpost.com/?ref_feature=challenge).
 
 Patchwork is a WebMCP-powered neighbourhood action exchange. It helps people discover local projects, ask an agent to assemble a realistic plan, and keep final commitments explicitly human-approved.
 
@@ -17,9 +17,11 @@ Patchwork and its WebMCP implementation were created during the August 25–Sept
 ## Quick links
 
 - **Live application:** [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/)
-- **Demo video:** [YouTube](https://youtu.be/e2J0PO7MzzM) · [repository copy](resources/video/Patchwork_WebMCP.mp4)
+- **Demo video:** [YouTube](https://youtu.be/FXqJG7dmdKg) · [repository copy](resources/video/Patchwork_WebMCP_Judges_Demo.mp4)
+- **Revised demo:** [Narrated MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4) · [script, captions, and upload checklist](resources/video/DEMO_PRODUCTION.md). Individual submission; edited browser evidence, not a continuous recording. Uploaded to [YouTube](https://youtu.be/FXqJG7dmdKg); owner supplied the new link.
 - **Browser and WebMCP testing:** [resources/docs/browser-test.md](resources/docs/browser-test.md)
 - **Visual evidence:** [resources/images](resources/images)
+- **Full demo transcript with slides:** [Narrated walkthrough](resources/video/DEMO_WALKTHROUGH.md)
 - **All submission resources:** [resources](resources)
 - **Claude workspace instructions:** [CLAUDE.md](CLAUDE.md)
 - **Open-source license:** [MIT License](LICENSE)

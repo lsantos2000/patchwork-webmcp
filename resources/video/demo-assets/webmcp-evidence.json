@@ -1,0 +1,128 @@
+{
+  "captured_at": "2026-08-30T17:19:06.163Z",
+  "url": "https://patchwork-webmcp.pages.dev/",
+  "browser": "Codex in-app browser",
+  "capture_method": "Native WebMCP calls; approval control exercised with Playwright; edited still-frame walkthrough",
+  "tools": "WebMCP tools available in this document:\n[\n  {\n    \"name\": \"search_neighborhood_projects\",\n    \"description\": \"Find current neighbourhood projects by area, interest, or available time, and show the search in the shared interface.\",\n    \"inputSchema\": {\n      \"properties\": {\n        \"max_hours\": {\n          \"maximum\": 8,\n          \"minimum\": 1,\n          \"type\": \"number\"\n        },\n        \"query\": {\n          \"type\": \"string\"\n        }\n      },\n      \"type\": \"object\"\n    },\n    \"origin\": \"https://patchwork-webmcp.pages.dev\",\n    \"pageUrl\": \"https://patchwork-webmcp.pages.dev/\"\n  },\n  {\n    \"name\": \"build_action_plan\",\n    \"description\": \"Create a realistic action plan from selected neighbourhood projects, display it for human review, and save it on this device.\",\n    \"inputSchema\": {\n      \"properties\": {\n        \"project_ids\": {\n          \"items\": {\n            \"type\": \"string\"\n          },\n          \"maxItems\": 8,\n          \"type\": \"array\"\n        }\n      },\n      \"required\": [\n        \"project_ids\"\n      ],\n      \"type\": \"object\"\n    },\n    \"origin\": \"https://patchwork-webmcp.pages.dev\",\n    \"pageUrl\": \"https://patchwork-webmcp.pages.dev/\"\n  },\n  {\n    \"name\": \"propose_neighborhood_project\",\n    \"description\": \"Structure a community need as a project draft and display it for explicit human approval before it can join the neighbourhood catalog.\",\n    \"inputSchema\": {\n      \"properties\": {\n        \"area\": {\n          \"maxLength\": 80,\n          \"minLength\": 2,\n          \"type\": \"string\"\n        },\n        \"description\": {\n          \"maxLength\": 300,\n          \"minLength\": 10,\n          \"type\": \"string\"\n        },\n        \"hours\": {\n          \"maximum\": 8,\n          \"minimum\": 1,\n          \"type\": \"number\"\n        },\n        \"title\": {\n          \"maxLength\": 100,\n          \"minLength\": 3,\n          \"type\": \"string\"\n        },\n        \"type\": {\n          \"enum\": [\n            \"Outdoors\",\n            \"Skills\",\n            \"Food\",\n            \"Community\"\n          ],\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"title\",\n        \"area\",\n        \"type\",\n        \"hours\",\n        \"description\"\n      ],\n      \"type\": \"object\"\n    },\n    \"origin\": \"https://patchwork-webmcp.pages.dev\",\n    \"pageUrl\": \"https://patchwork-webmcp.pages.dev/\"\n  },\n  {\n    \"name\": \"pledge_support\",\n    \"description\": \"Draft a support pledge and show it for human review. Never submit or commit without explicit human confirmation.\",\n    \"inputSchema\": {\n      \"properties\": {\n        \"contribution\": {\n          \"type\": \"string\"\n        },\n        \"project_id\": {\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"project_id\",\n        \"contribution\"\n      ],\n      \"type\": \"object\"\n    },\n    \"origin\": \"https://patchwork-webmcp.pages.dev\",\n    \"pageUrl\": \"https://patchwork-webmcp.pages.dev/\"\n  }\n]\nCall tools.call(name, input) to invoke one.",
+  "calls": [
+    {
+      "name": "search_neighborhood_projects",
+      "input": {
+        "query": "garden food",
+        "max_hours": 3
+      },
+      "result": {
+        "projects": [
+          {
+            "area": "North End",
+            "color": "lime",
+            "desc": "Prune six trees, rebuild two beds, and make the harvest easier for students to share.",
+            "id": "orchard",
+            "keywords": "garden gardening plants trees kids school nature grow",
+            "people": 8,
+            "time": 2,
+            "title": "Revive the schoolyard orchard",
+            "type": "Outdoors"
+          },
+          {
+            "area": "West Commons",
+            "color": "coral",
+            "desc": "Coordinate a low-waste pantry refill with shelf-stable food and hygiene basics.",
+            "id": "pantry",
+            "keywords": "donate donation hunger groceries supplies meals food bank",
+            "people": 12,
+            "time": 1,
+            "title": "Restock the little pantry",
+            "type": "Food"
+          }
+        ],
+        "shared_ui_updated": true
+      }
+    },
+    {
+      "name": "build_action_plan",
+      "input": {
+        "project_ids": [
+          "orchard",
+          "pantry"
+        ]
+      },
+      "result": {
+        "persisted_on_device": true,
+        "plan": [
+          {
+            "area": "North End",
+            "color": "lime",
+            "desc": "Prune six trees, rebuild two beds, and make the harvest easier for students to share.",
+            "id": "orchard",
+            "keywords": "garden gardening plants trees kids school nature grow",
+            "people": 8,
+            "time": 2,
+            "title": "Revive the schoolyard orchard",
+            "type": "Outdoors"
+          },
+          {
+            "area": "West Commons",
+            "color": "coral",
+            "desc": "Coordinate a low-waste pantry refill with shelf-stable food and hygiene basics.",
+            "id": "pantry",
+            "keywords": "donate donation hunger groceries supplies meals food bank",
+            "people": 12,
+            "time": 1,
+            "title": "Restock the little pantry",
+            "type": "Food"
+          }
+        ],
+        "shared_ui_updated": true,
+        "total_hours": 3
+      }
+    },
+    {
+      "name": "propose_neighborhood_project",
+      "input": {
+        "title": "Map accessible shade",
+        "area": "West Commons",
+        "type": "Community",
+        "hours": 2,
+        "description": "Check shaded benches and accessible cooling spaces, then prepare a neighbourhood guide."
+      },
+      "result": {
+        "draft": {
+          "area": "West Commons",
+          "color": "violet",
+          "communityCreated": true,
+          "desc": "Check shaded benches and accessible cooling spaces, then prepare a neighbourhood guide.",
+          "id": "community-map-accessible-shade-mtg2pkcy",
+          "keywords": "Map accessible shade West Commons Community",
+          "people": 0,
+          "time": 2,
+          "title": "Map accessible shade",
+          "type": "Community"
+        },
+        "published": false,
+        "shared_ui_updated": true,
+        "status": "human_approval_required"
+      }
+    },
+    {
+      "name": "pledge_support",
+      "input": {
+        "project_id": "pantry",
+        "contribution": "I can help restock pantry supplies for one hour."
+      },
+      "result": {
+        "draft": {
+          "contribution": "I can help restock pantry supplies for one hour.",
+          "project_id": "pantry"
+        },
+        "shared_ui_updated": true,
+        "status": "confirmation_required"
+      }
+    }
+  ],
+  "approval": {
+    "via": "Playwright click on approval control",
+    "draft_review_closed": true,
+    "restored_after_reload": true
+  }
+}

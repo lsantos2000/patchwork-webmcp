@@ -1,0 +1,171 @@
+1
+00:00:00,000 --> 00:00:04,242
+Patchwork turns good intentions into a practical neighbourhood plan. I built this
+
+2
+00:00:04,242 --> 00:00:08,485
+individual project to explore an open web where agents help people organize
+
+3
+00:00:08,485 --> 00:00:11,667
+and create, while the person keeps the final decision.
+
+4
+00:00:12,667 --> 00:00:17,140
+Finding a way to help means comparing opportunities, understanding the time involved,
+
+5
+00:00:17,140 --> 00:00:21,614
+and deciding what to do next. Patchwork brings those steps into one
+
+6
+00:00:21,614 --> 00:00:26,088
+visual workspace. The starter catalogue uses demonstration projects, not a verified live
+
+7
+00:00:26,088 --> 00:00:26,833
+neighbourhood feed.
+
+8
+00:00:27,833 --> 00:00:31,822
+The website exposes four structured Web M C P tools to an
+
+9
+00:00:31,822 --> 00:00:35,812
+external browser agent. There is no embedded chatbot. These tools were discovered
+
+10
+00:00:35,812 --> 00:00:39,801
+and called on the public Cloudflare site. This video is an edited
+
+11
+00:00:39,801 --> 00:00:43,125
+walkthrough of the captured results, not a continuous screen recording.
+
+12
+00:00:44,125 --> 00:00:48,255
+For a gardening and food request, the agent calls search neighborhood projects
+
+13
+00:00:48,255 --> 00:00:52,386
+with a three hour per-project limit. The website returns the orchard and
+
+14
+00:00:52,386 --> 00:00:56,516
+pantry records and updates the visible search. The agent works with project
+
+15
+00:00:56,516 --> 00:00:59,958
+identifiers and structured data, rather than guessing where to click.
+
+16
+00:01:00,958 --> 00:01:05,075
+Next, build action plan selects the orchard and pantry: two projects, three
+
+17
+00:01:05,075 --> 00:01:09,191
+hours total. The tool updates the same React state used by the
+
+18
+00:01:09,191 --> 00:01:13,307
+page. The person can inspect or remove projects manually. The agent chooses
+
+19
+00:01:13,307 --> 00:01:15,708
+the combination; the tool reports its total.
+
+20
+00:01:16,708 --> 00:01:20,615
+The agent can also draft a new need: Map accessible shade. The
+
+21
+00:01:20,615 --> 00:01:24,522
+proposal tool returns human approval required, with published set to false. Patchwork
+
+22
+00:01:24,522 --> 00:01:28,429
+shows the draft beside Reject and Approve controls. A tool call alone
+
+23
+00:01:28,429 --> 00:01:30,708
+does not add it to the catalogue.
+
+24
+00:01:31,708 --> 00:01:35,947
+For this demonstration, browser automation exercises the separate approval button. The draft
+
+25
+00:01:35,947 --> 00:01:40,186
+then joins the local catalogue and plan. After a reload, it is
+
+26
+00:01:40,186 --> 00:01:44,424
+still there. Publishing here means saving on this browser and device, not
+
+27
+00:01:44,424 --> 00:01:47,250
+sharing with other users or a community database.
+
+28
+00:01:48,250 --> 00:01:52,587
+The pledge tool prepares a contribution draft and returns confirmation required. It
+
+29
+00:01:52,587 --> 00:01:56,924
+does not submit anything or contact an organizer. This prototype deliberately stops
+
+30
+00:01:56,924 --> 00:02:01,262
+at drafting. That limitation is explicit, so neither the agent nor the
+
+31
+00:02:01,262 --> 00:02:03,792
+demonstration implies a real-world commitment was made.
+
+32
+00:02:04,792 --> 00:02:09,667
+Implementation uses React and TypeScript, built with Vinext for Cloudflare Pages. A
+
+33
+00:02:09,667 --> 00:02:14,542
+reusable hook registers tool names, descriptions, input schemas, and handlers, with a
+
+34
+00:02:14,542 --> 00:02:19,417
+navigator compatibility fallback and cleanup. Tool handlers update shared state; validated local
+
+35
+00:02:19,417 --> 00:02:21,042
+storage restores supported data.
+
+36
+00:02:22,042 --> 00:02:27,392
+Thirty-nine automated checks passed in the previous validated run, covering state, persistence,
+
+37
+00:02:27,392 --> 00:02:32,742
+approval, and interface behavior. Those tests use a model-context shim. Native browser
+
+38
+00:02:32,742 --> 00:02:38,092
+tool calls provide separate compatibility evidence. Codex helped with implementation, debugging, testing,
+
+39
+00:02:38,092 --> 00:02:39,875
+documentation, and this walkthrough.
+
+40
+00:02:40,875 --> 00:02:44,989
+Open the live site in a Web M C P capable browser
+
+41
+00:02:44,989 --> 00:02:49,102
+and try the documented prompts. The source, MIT license, and testing guide
+
+42
+00:02:49,102 --> 00:02:53,216
+are public. Patchwork shows how agents can reduce coordination work while people
+
+43
+00:02:53,216 --> 00:02:55,958
+keep the final decision. Small actions. Shared momentum.

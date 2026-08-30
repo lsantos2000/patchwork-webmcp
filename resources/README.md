@@ -4,8 +4,13 @@ Public submission and judging resources are grouped here by media type.
 
 ## Video
 
-- [Public YouTube demo — 2:59](https://youtu.be/e2J0PO7MzzM)
-- [Repository MP4](video/Patchwork_WebMCP.mp4)
+- [Public YouTube demo — 2:57](https://youtu.be/FXqJG7dmdKg)
+- [Repository MP4](video/Patchwork_WebMCP_Judges_Demo.mp4)
+- [Revised narrated judging demo](video/Patchwork_WebMCP_Judges_Demo.mp4)
+- [Revision production notes, narration, captions, and upload checklist](video/DEMO_PRODUCTION.md)
+- [Complete narrated walkthrough with all 11 slide images](video/DEMO_WALKTHROUGH.md)
+
+The revision is an edited browser-evidence walkthrough, not a continuous screen recording. It is prepared for an individual submission. The owner uploaded it as a new YouTube video; use the link above for the submission.
 
 The video demonstrates the public Patchwork deployment, project discovery, shared planning, device-local persistence, and the human confirmation boundary.
 

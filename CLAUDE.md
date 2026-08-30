@@ -21,14 +21,15 @@ Patchwork demonstrates a humane future for the open web: agents can discover and
 - Hosting target: Cloudflare Pages
 - WebMCP integration: definitions in `app/page.tsx`, registration and cleanup in `app/useWebMCP.ts`
 - Creator: Leonardo Santos-Macias; individual submission
-- Persistence: browser-local search, filter, plan, and approved project records; not a shared database
+- Persistence: browser-local search, category, per-project time limit, plan, and approved project records; not a shared database
 
 ## WebMCP contract
 
 - Tool names are stable public API. Do not rename them without updating the README and demo.
 - Schemas must remain JSON Schema-compatible.
 - Read tools must return structured serializable objects.
-- `pledge_support` must remain confirmation-gated and must not perform a side effect directly.
+- `pledge_support` may update a visible draft, but must never submit or contact an organizer. Local review is not a real-world commitment.
+- Plan results report persistence as pending; only the UI can report a completed storage write. Keep session-only operation usable if storage fails.
 - Add tests or manual verification notes whenever tool behavior changes.
 
 ## Working conventions
@@ -36,7 +37,7 @@ Patchwork demonstrates a humane future for the open web: agents can discover and
 - Use realistic, concise project copy rather than placeholders.
 - Keep the primary experience usable without an agent.
 - Prefer small focused dependencies and platform-native browser APIs.
-- Run `npm run build` before proposing a release.
+- Run `pnpm exec tsc --noEmit`, `pnpm run build:pages`, and the local-source Playwright suite before proposing a release; CI performs these checks.
 - Review `git diff --cached` and run the credential scan in `scripts/publish-github.ps1` before every public push.
 - Do not commit `dist/`, `pages-dist/`, `node_modules/`, `.wrangler/`, `.openai/`, local caches, or environment files.
 

@@ -42,3 +42,26 @@ test('clear plan persists across reloads', async ({ page }) => {
   await page.reload();
   await expect(page.getByText('0 good ways to help')).toBeVisible();
 });
+
+for (const failure of ['blocked', 'quota'] as const) {
+  test(`storage ${failure} leaves the app usable without falsely claiming it saved`, async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.addInitScript((mode) => {
+      if (mode === 'blocked') {
+        Object.defineProperty(window, 'localStorage', { configurable: true, get() { throw new DOMException('Blocked', 'SecurityError'); } });
+      } else {
+        Storage.prototype.setItem = () => { throw new DOMException('Full', 'QuotaExceededError'); };
+      }
+    }, failure);
+    await openPatchwork(page);
+    await expect(page.getByText('Storage unavailable — changes last only this session')).toBeVisible();
+    await page.getByRole('button', { name: 'Clear plan' }).click();
+    await expect(page.getByText('0h total')).toBeVisible();
+    const result = await executeTool(page, 'build_action_plan', { project_ids: ['pantry'] });
+    expect(result).toMatchObject({ persisted_on_device: false, storage_status: 'pending' });
+    await expect(page.getByText('1h total')).toBeVisible();
+    await expect(page.getByText('Saved on this device', { exact: true })).toHaveCount(0);
+    expect(errors).toEqual([]);
+  });
+}

@@ -1,6 +1,8 @@
 # Revised judging demo
 
-Prepared August 30, 2026, for Luis Santos's **individual submission**. No teammates or invitations are involved.
+Prepared August 30, 2026, for Leonardo Santos-Macias's **individual submission**. No teammates or invitations are involved.
+
+The local video and images have been regenerated to credit **Leonardo Santos-Macias**. The owner has uploaded the corrected, female-narrated MP4 to https://youtu.be/c_RzlVBHSpg. Use this final video link for submission.
 
 ## Deliverables
 
@@ -14,7 +16,7 @@ Prepared August 30, 2026, for Luis Santos's **individual submission**. No teamma
 
 This is an **edited still-frame browser-evidence walkthrough with synthetic narration**, not a continuous screen recording. Captured website states and actual native WebMCP result excerpts demonstrate search, shared planning, proposal review, local persistence, and draft-only pledges. The approval button was exercised with browser automation; this is not evidence that a human personally clicked it. The opening catalogue screenshots come from the existing resource set; the new workflow captures and tool results were recorded on August 30.
 
-The owner uploaded this revision as a [new YouTube video](https://youtu.be/FXqJG7dmdKg). This is now the submission video link. The [original MP4](Patchwork_WebMCP.mp4) is retained only as an archive.
+The owner uploaded this revision as a [new YouTube video](https://youtu.be/c_RzlVBHSpg). This is now the submission video link. The [original MP4](Patchwork_WebMCP.mp4) is retained only as an archive.
 
 ## Owner review and upload
 
@@ -22,8 +24,8 @@ The owner uploaded this revision as a [new YouTube video](https://youtu.be/FXqJG
 2. Review the SRT captions: timings are approximated from narration chunks, not forced-aligned to speech.
 3. Confirm the final duration is below 3:00. The validation JSON records the encoded duration and audio-volume measurements; it is not a substitute for listening.
 4. If you want stronger continuous evidence, record a short uninterrupted browser segment showing an agent invoking the tools and the page changing. Replace the corresponding still-frame scenes while retaining the time limit.
-5. The revision has been uploaded: https://youtu.be/FXqJG7dmdKg. Confirm **Public** visibility, audible narration, and captions; open this new link logged out.
-6. Use https://youtu.be/FXqJG7dmdKg in the Devpost submission. Repository references have been updated locally; the Devpost form must still be checked separately.
+5. The revision has been uploaded: https://youtu.be/c_RzlVBHSpg. Confirm **Public** visibility, audible narration, and captions; open this new link logged out.
+6. Use https://youtu.be/c_RzlVBHSpg in the Devpost submission. Repository references have been updated locally; the Devpost form must still be checked separately.
 
 Suggested title: **Patchwork WebMCP — People and Agents, Shared Plans**.
 
@@ -38,9 +40,11 @@ python scripts/narrate-demo.py --model C:/path/to/en_US-ljspeech-high.onnx --out
 python scripts/render-demo.py --ffmpeg C:/path/to/ffmpeg.exe --audio C:/temp/patchwork-demo/audio --work C:/temp/patchwork-demo/render
 ```
 
-Run from the repository root. Rendering refuses a planned duration of 178 seconds or longer rather than truncating narration. A pitch-preserving 1.08x audio tempo adjustment keeps the complete narration within the requested time. It decodes the final output and checks encoded duration and audio levels. Rendering overwrites the **revised** demo artifacts, not the original video.
+Run from the repository root. Rendering refuses a planned duration of 178 seconds or longer rather than truncating narration. A pitch-preserving 1.08x audio tempo adjustment keeps the complete female narration within the requested time. It decodes the final output and checks encoded duration and audio levels. Rendering overwrites the **revised** demo artifacts, not the original video.
 
-Narration uses [Piper's en_US-ljspeech-high voice](https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US/ljspeech/high). Its model card identifies the [LJ Speech dataset](https://keithito.com/LJ-Speech-Dataset/) as public domain. Voice generation and encoding run locally. Codex assisted with the script, browser evidence, layout, and production tooling.
+Narration now uses [Piper's en_US-ljspeech-high female voice](https://huggingface.co/rhasspy/piper-voices/tree/main/en/en_US/ljspeech/high). Its published model card identifies a public-domain LJ Speech dataset. Voice generation and encoding run locally. Codex assisted with the script, browser evidence, layout, and production tooling. This is a synthetic narrator, not a clone of Leonardo's voice.
+
+The latest local export removes repeated production-disclosure labels from individual slides; these notes and the narration retain the production context. Original PNG captures are never enlarged beyond their native resolution. The 1920×1080 H.264 export uses CRF 14 to reduce compression artifacts. Lower-resolution source captures cannot acquire extra detail through re-encoding.
 
 ## Coverage
 

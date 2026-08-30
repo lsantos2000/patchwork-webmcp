@@ -101,3 +101,4 @@ export function useWebMCP(tools: WebMCPTool[]) {
     };
   }, [tools]);
 }
+```

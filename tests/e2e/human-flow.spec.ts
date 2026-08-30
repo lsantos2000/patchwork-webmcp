@@ -8,6 +8,7 @@ test('loads the styled production experience without console errors', async ({ p
   page.on('console', (message) => message.type() === 'error' && errors.push(message.text()));
   await page.reload();
   await expect(page).toHaveTitle(/Patchwork/);
+  await expect(page.locator('footer.footer')).toContainText('by Leonardo Santos-Macias');
   await expect(page.getByRole('heading', { name: /Small actions/i })).toBeVisible();
   await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(246, 242, 232)');
   expect(errors).toEqual([]);

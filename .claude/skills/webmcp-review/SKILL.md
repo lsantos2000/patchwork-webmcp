@@ -8,7 +8,7 @@ allowed-tools: Read, Glob, Grep
 
 1. Locate every `document.modelContext.registerTool` call and the visible UI for the same capability.
 2. Check names, descriptions, input schemas, required fields, serialization, and failure behavior.
-3. Confirm search and planning are read-only.
+3. Confirm search and planning update only local UI/storage state and create no external commitment. They are not read-only.
 4. Confirm pledge-like actions return a draft or `confirmation_required` and cannot perform a side effect.
 5. Verify tool results derive from the same records shown to users.
 6. Produce a severity-ordered report and one reproducible agent demo flow.

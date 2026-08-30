@@ -1,5 +1,7 @@
 # Patchwork
 
+> Historical participant-supplied draft. Tool counts, missing-video TODOs, testing claims, and personal form answers below are not current verified facts. Use [current-readiness.md](current-readiness.md) and the root submission worksheet for the maintained status.
+
 ## One-line Summary
 
 Patchwork is a human-in-the-loop neighbourhood action exchange that lets people and browser agents discover local projects, assemble realistic plans, and prepare contributions without allowing an agent to commit anyone's time.
@@ -164,4 +166,3 @@ The repository is public, contains setup instructions, and has an MIT license re
 ## Deadline
 
 The official deadline is September 3, 2026 at 1:00 p.m. Pacific Time (20:00 UTC).
-

@@ -4,7 +4,8 @@ Public submission and judging resources are grouped here by media type.
 
 ## Video
 
-- [Public YouTube demo — 2:57](https://youtu.be/FXqJG7dmdKg)
+- [Saved submission video in the media folder](media/Patchwork_WebMCP_Judges_Demo.mp4)
+- [Public YouTube demo — 2:57](https://youtu.be/c_RzlVBHSpg)
 - [Repository MP4](video/Patchwork_WebMCP_Judges_Demo.mp4)
 - [Revised narrated judging demo](video/Patchwork_WebMCP_Judges_Demo.mp4)
 - [Revision production notes, narration, captions, and upload checklist](video/DEMO_PRODUCTION.md)

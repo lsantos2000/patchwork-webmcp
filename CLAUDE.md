@@ -19,7 +19,9 @@ Patchwork demonstrates a humane future for the open web: agents can discover and
 - Styling: `app/globals.css`
 - Metadata: `app/layout.tsx`
 - Hosting target: Cloudflare Pages
-- WebMCP integration: `document.modelContext.registerTool(...)` in the client component
+- WebMCP integration: definitions in `app/page.tsx`, registration and cleanup in `app/useWebMCP.ts`
+- Creator: Leonardo Santos-Macias; individual submission
+- Persistence: browser-local search, filter, plan, and approved project records; not a shared database
 
 ## WebMCP contract
 

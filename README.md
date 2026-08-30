@@ -4,9 +4,9 @@
 
 ## Patchwork WebMCP
 
-This [2:57 public demo video](https://youtu.be/FXqJG7dmdKg) showcases the [Patchwork public repository](https://github.com/lsantos2000/patchwork-webmcp) in response to the [WebMCP Challenge on Devpost](https://webmcp.devpost.com/?ref_feature=challenge).
+This [2:57 public demo video](https://youtu.be/c_RzlVBHSpg) showcases the [Patchwork public repository](https://github.com/lsantos2000/patchwork-webmcp) in response to the [WebMCP Challenge on Devpost](https://webmcp.devpost.com/?ref_feature=challenge).
 
-Patchwork is a WebMCP-powered neighbourhood action exchange. It helps people discover local projects, ask an agent to assemble a realistic plan, and keep final commitments explicitly human-approved.
+Created by **Leonardo Santos-Macias** as an individual project. Patchwork is a WebMCP-powered neighbourhood planning prototype using demonstration projects. Agents prepare plans and project drafts; people review them. Pledges remain drafts, with no submission backend.
 
 Built for the **WebMCP Challenge** (submissions close September 3 at 1:00 PM PT).
 
@@ -17,8 +17,8 @@ Patchwork and its WebMCP implementation were created during the August 25–Sept
 ## Quick links
 
 - **Live application:** [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/)
-- **Demo video:** [YouTube](https://youtu.be/FXqJG7dmdKg) · [repository copy](resources/video/Patchwork_WebMCP_Judges_Demo.mp4)
-- **Revised demo:** [Narrated MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4) · [script, captions, and upload checklist](resources/video/DEMO_PRODUCTION.md). Individual submission; edited browser evidence, not a continuous recording. Uploaded to [YouTube](https://youtu.be/FXqJG7dmdKg); owner supplied the new link.
+- **Demo video:** [YouTube](https://youtu.be/c_RzlVBHSpg) · [repository copy](resources/video/Patchwork_WebMCP_Judges_Demo.mp4)
+- **Revised demo:** [Narrated MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4) · [script, captions, and upload checklist](resources/video/DEMO_PRODUCTION.md). Individual submission; edited browser evidence, not a continuous recording. Uploaded to [YouTube](https://youtu.be/c_RzlVBHSpg); owner supplied the new link.
 - **Browser and WebMCP testing:** [resources/docs/browser-test.md](resources/docs/browser-test.md)
 - **Visual evidence:** [resources/images](resources/images)
 - **Full demo transcript with slides:** [Narrated walkthrough](resources/video/DEMO_WALKTHROUGH.md)
@@ -50,13 +50,13 @@ Before WebMCP, an agent would typically need to read rendered text, infer contro
 
 ### How WebMCP is implemented
 
-Patchwork defines `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support` in `app/page.tsx`. The reusable `app/useWebMCP.ts` hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback, isolated registration errors, and `unregisterTool` cleanup. Tool handlers update the same React state used by the human interface and return structured results to the agent. Search and planning can proceed directly; creating and committing remain human decisions.
+Patchwork defines `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support` in `app/page.tsx`. The reusable `app/useWebMCP.ts` hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback, isolated registration errors, and `unregisterTool` cleanup. Tool handlers update the same React state used by the human interface and return structured results to the agent. Search and planning update local state directly. Project drafts need approval through a separate UI control before being saved to the device-local catalogue; pledges cannot be submitted.
 
 ### Device-local storage
 
 Patchwork saves the current search, category filter, Weekend Plan, and human-approved community projects in the browser's `localStorage`. Human edits and plans created through `build_action_plan` use the same persistence path, so leaving, refreshing, or reopening the site in the same browser restores the shared workspace. The interface shows **Saved on this device** and provides a **Clear plan** control. Stored values are validated before restoration, and malformed or outdated values fall back safely to the default state.
 
-This storage is intentionally local and contains only project selections and interface state—no credentials or personal information. It does not sync across browsers or devices and may be removed when site data is cleared or private browsing ends. Pledge drafts and approvals are never restored: every consequential commitment still requires fresh human confirmation. Agent-generated plan results include `persisted_on_device: true` so a compatible client can explain where the plan was saved.
+Stored data includes searches, filters, project selections, and approved project text. Avoid entering credentials or sensitive personal information: free-text fields are saved on this device. Storage does not sync across browsers or devices and may be removed when site data is cleared or private browsing ends. Approved projects persist; pending proposals and pledge drafts do not. The plan tool reports `persisted_on_device: true`, but storage writes happen afterward in a React effect; this is not a verified disk-write receipt.
 
 ## Why WebMCP
 
@@ -78,8 +78,8 @@ Patchwork defines four tools in `app/page.tsx` and registers them through the re
 
 | Tool | Purpose | Safety behavior |
 | --- | --- | --- |
-| `search_neighborhood_projects` | Search by free text and maximum hours | Read-only |
-| `build_action_plan` | Combine project IDs, calculate total time, update the UI, and save the plan on this device | Read-only |
+| `search_neighborhood_projects` | Search by free text and per-project maximum hours | Updates the local search state; no external commitment |
+| `build_action_plan` | Combine project IDs, calculate total time, update the UI, and save the plan on this device | Changes the local plan; no external commitment |
 | `propose_neighborhood_project` | Structure a new community need and display it for review | Returns `human_approval_required`; cannot publish |
 | `pledge_support` | Prepare a contribution pledge | Returns `confirmation_required`; does not submit |
 
@@ -99,7 +99,7 @@ Patchwork updates the shared visible interface
 Person reviews the result and approves any commitment
 ```
 
-The browser loads Patchwork and `useWebMCP` detects an available model context. It registers the four tools, validates and executes incoming calls, updates the same React state used by the human interface, and returns structured results to the agent. It also unregisters the tools when the page is removed. The hook supports both `document.modelContext` and the compatible `navigator.modelContext` surface.
+The browser loads Patchwork and `useWebMCP` detects an available model context. The hook registers the four tools and delegates calls to their handlers. Handlers normalize or validate selected input fields, update shared React state, and return structured results; the hook is not a general JSON Schema validator. It also unregisters the tools when the page is removed. The hook supports both `document.modelContext` and the compatible `navigator.modelContext` surface.
 
 The collaboration is intentionally divided by risk:
 
@@ -114,13 +114,14 @@ Try this prompt in a WebMCP-compatible browser:
 
 > Find neighbourhood projects related to gardening or food that take no more than two hours. Build me a weekend action plan, but ask me before pledging my time.
 
-The expected collaboration is **search → visible results → shared plan → confirmation request**.
+The expected collaboration is **search → visible results → shared plan**. Ask separately for a pledge draft to demonstrate `confirmation_required`; there is no pledge-submit action. The **Ask my agent** button only loads a predefined example plan, not a real agent call.
 
 ## Run locally
 
 ### Requirements
 
 - Node.js 22.13 or newer
+- pnpm available on PATH when using `PLAYWRIGHT_USE_LOCAL=1` (the test configuration starts `pnpm dev`)
 - npm 10 or newer
 
 ### Setup
@@ -159,7 +160,7 @@ Set `PLAYWRIGHT_USE_LOCAL=1` to let Playwright start and test the current source
 ### Production build
 
 ```bash
-npm run build
+npm run build:pages
 ```
 
 The application is designed for the Cloudflare runtime and is deployed to Cloudflare Pages for the challenge.
@@ -195,18 +196,19 @@ Run `/judge-swarm` in Claude Code for independent parallel reviews. The release 
 - [x] Public source with setup instructions
 - [x] Open-source license
 - [x] Public live URL verified in a WebMCP-compatible browser
-- [x] Public demo video under three minutes
+- [x] Owner supplied the final YouTube upload; local MP4 verified at 2:57
+- [ ] Confirm the final upload is Public, audible, and playable while logged out
 - [ ] Devpost text and links submitted
 
 ## Visual evidence
 
-These captures come from Playwright-controlled runs against the public Cloudflare Pages deployment at [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/). Screens 6 and 7 were produced by discovering and invoking the live WebMCP tool—not by manually preloading the draft state.
+Screens 1–5 are supplied screenshots of the public deployment and show visible UI states, not proof of native tool calls. Screens 6 and 7 came from a native WebMCP proposal call followed by a Playwright-controlled approval-button interaction. Additional native tool inputs/results are saved in [the evidence JSON](resources/video/demo-assets/webmcp-evidence.json).
 
 ### 1. Human-first discovery
 
 ![Patchwork hero and neighbourhood project discovery](resources/images/01-hero-search.png)
 
-Patchwork gives people a complete visual experience before an agent is involved: a clear prompt, live neighbourhood needs, and an explicit promise that the person approves every commitment.
+Patchwork gives people a complete visual experience before an agent is involved: a clear prompt, demonstration neighbourhood projects, and a visible review boundary.
 
 ### 2. Intent-aware project results
 
@@ -240,13 +242,13 @@ Reviewing a plan does not submit a pledge. Patchwork states both **“Nothing is
 
 ![Agent-drafted neighbourhood need awaiting review](resources/images/06-agent-drafted-need-review.png)
 
-The browser agent invoked `propose_neighborhood_project` with structured data. Patchwork returned `human_approval_required`, placed the complete draft in the shared interface, and kept it outside the public catalogue. Both **Reject draft** and **Approve and publish** remain person-controlled actions.
+The browser agent invoked `propose_neighborhood_project` with structured data. Patchwork returned `human_approval_required`, placed the complete draft in the shared interface, and kept it outside the device-local catalogue. Both **Reject draft** and **Approve and publish** remain person-controlled actions.
 
 ### 7. Human-approved community project
 
 ![Human-approved community project published into Patchwork](resources/images/07-human-approved-community-project.png)
 
-Only after a person selected **Approve and publish** did the new need join the visible catalogue and device-local plan. The card is labelled **Community approved** and **Approved by a person**, making provenance and agency legible to judges.
+The test exercised **Approve and publish** using browser automation, after which the new need joined the device-local catalogue and plan. The UI labels **Community approved** and **Approved by a person** express the intended workflow; this automated capture does not establish that a human personally clicked the control.
 
 ## How to demo it
 
@@ -268,22 +270,24 @@ Give the browser agent this exact prompt:
 
 The expected tool sequence is:
 
-1. `search_neighborhood_projects` finds relevant projects within the time budget.
-2. `build_action_plan` returns selected records and total hours.
-3. `propose_neighborhood_project` structures a new need but waits for a person to publish it.
-4. `pledge_support` prepares a draft and returns `confirmation_required`.
-5. Point out that the agent reduced discovery and planning work while the person retained control of publishing and commitment.
+1. `search_neighborhood_projects` finds relevant records. Its hour limit applies to each project, not the whole plan.
+2. The agent chooses a combination within the requested total budget; `build_action_plan` reports the selected records and total hours.
+3. Separately ask: **Draft a two-hour Community project in West Commons called Map accessible shade. Describe checking shaded benches and accessible cooling spaces. Do not publish it.** Verify the proposal review card.
+4. Approve or reject the proposal using the visible controls. Approval saves it only on this device.
+5. Separately ask: **Prepare a pledge draft for the pantry project, but do not submit it.** Verify `confirmation_required`; no pledge is sent.
 
 > **Browser-test note:** The exact ChatGPT in-app browser steps, Chrome WebMCP setup, Claude review instructions, evidence requirements, and pass criteria are maintained in [`resources/docs/browser-test.md`](resources/docs/browser-test.md).
 
-### Three-minute judging video
+### Under-three-minute judging video
 
 1. **0:00–0:25 — Problem:** local needs are fragmented and turning intent into a realistic plan takes work.
 2. **0:25–0:55 — Human UX:** run “help in a garden,” show the match and editable weekend plan.
 3. **0:55–1:50 — WebMCP proof:** use the exact agent prompt above and show the search and planning tools.
 4. **1:50–2:20 — Safety:** call `pledge_support` and emphasize `confirmation_required`.
 5. **2:20–2:45 — Implementation:** briefly show the tool definitions in `app/page.tsx` and registration lifecycle in `app/useWebMCP.ts`.
-6. **2:45–3:00 — Close:** “Agents reduce coordination work; people keep agency.”
+6. **2:45–2:57 — Close:** “Agents reduce coordination work; people keep agency.”
+
+This is an optional recording outline. The actual uploaded edited walkthrough has a [timestamped transcript and slide images](resources/video/DEMO_WALKTHROUGH.md); do not describe it as a continuous browser recording.
 
 ## License
 

@@ -4,11 +4,11 @@ Prepared: August 30, 2026.
 
 This is a local draft and owner checklist, not a Devpost submission receipt. Copy the public-facing answers into Devpost; do not copy the private preparation notes or TODO markers into your final description.
 
-## Note for Luis
+## Note for Leonardo Santos-Macias
 
 The implementation and evidence are ready for your final review. Prioritize completing the form and verifying the final submission confirmation over adding features. Devpost currently reports you as **registered** for the WebMCP Challenge, with no submitted relationship returned in the August 30 check. Verify the entry's final status directly before the deadline.
 
-You uploaded the revised demo as a [new YouTube video](https://youtu.be/FXqJG7dmdKg). The revised local MP4 is validated at 177.01 seconds (2:57) and includes the proposal workflow. The earlier Public/working confirmation applied to the previous upload; confirm the new video's Public visibility, audible playback, and captions while logged out.
+You uploaded the revised demo as a [new YouTube video](https://youtu.be/c_RzlVBHSpg). The revised local MP4 is validated at 177.01 seconds (2:57) and includes the proposal workflow. The earlier Public/working confirmation applied to the previous upload; confirm the new video's Public visibility, audible playback, and captions while logged out.
 
 Deadline in the organizer email: **Thursday, September 3, 2026, at 1:00 PM Pacific / 5:00 PM Atlantic (Halifax)**. Aim to finish earlier. The official Devpost website prevails if event details change.
 
@@ -26,7 +26,7 @@ READY means an artifact exists or evidence was recorded; it does not mean every 
 | Core prototype flow | READY | Search, shared planning, proposal review, human-approved device-local publication, and persistence. |
 | Automated tests | READY — last verified August 28 | 39 checks passed locally and in [GitHub Actions](https://github.com/lsantos2000/patchwork-webmcp/actions/runs/33224017447). WebMCP automated tests use a controlled shim; native browser evidence is separate. |
 | Public repository and license | READY from prior verification | [Repository](https://github.com/lsantos2000/patchwork-webmcp) and [MIT license](LICENSE). TODO: final logged-out visual check that GitHub displays the license. |
-| YouTube video | UPLOADED — owner supplied replacement link | [Watch the revised video](https://youtu.be/FXqJG7dmdKg). TODO: confirm Public visibility and logged-out playback for this new upload. |
+| YouTube video | UPLOADED — owner supplied replacement link | [Watch the revised video](https://youtu.be/c_RzlVBHSpg). TODO: confirm Public visibility and logged-out playback for this new upload. |
 | Video duration and audio | PARTIAL | README records 2:57. TODO: check the YouTube player remains below 3:00 and narration is audible throughout the relevant demonstration. |
 | Project description | READY — draft below | Covers fit, experience, human-agent collaboration, and implementation. |
 | Screenshots and testing instructions | READY | [Visual evidence](README.md#visual-evidence), [resource index](resources/README.md), and [browser guide](resources/docs/browser-test.md). |
@@ -77,7 +77,7 @@ Patchwork demonstrates an open-web interaction pattern in which a site remains u
 
 Patchwork does not embed its own model or chatbot. It exposes browser-local WebMCP tools that a compatible external agent can discover and invoke. Codex was used to develop the React application, implement WebMCP registration and handlers, debug styling and persistence, expand the Playwright tests, prepare documentation, and capture browser evidence. The live proposal workflow was tested through WebMCP discovery and invocation in the Codex in-app browser, followed by a Playwright-controlled approval-button interaction.
 
-Owner TODO: add other AI products only if you actually used them, including any tool used to make or narrate the video. Claude instructions in the repository are not evidence that Claude executed the application tools.
+Video production also used Piper synthetic narration and local FFmpeg encoding. Owner TODO: add other AI products only if you actually used them. Claude instructions in the repository are not evidence that Claude executed the application tools.
 
 ## Key features
 
@@ -96,7 +96,7 @@ React and TypeScript provide the UI and shared state. Vinext builds the applicat
 
 - Live application: https://patchwork-webmcp.pages.dev/
 - Public source repository: https://github.com/lsantos2000/patchwork-webmcp
-- Public YouTube demo: https://youtu.be/FXqJG7dmdKg
+- Public YouTube demo: https://youtu.be/c_RzlVBHSpg
 - Browser testing guide: https://github.com/lsantos2000/patchwork-webmcp/blob/main/resources/docs/browser-test.md
 - Screenshots: https://github.com/lsantos2000/patchwork-webmcp#visual-evidence
 
@@ -123,11 +123,11 @@ Field labels and options below were fetched from Devpost on August 30, 2026. The
 | If applicable, testing instructions for application | Paste the testing instructions above and linked browser guide. No app credentials required. | READY |
 | URL to your PUBLIC Code Repo (on Github, Gitlab, or Bitbucket) | https://github.com/lsantos2000/patchwork-webmcp | READY |
 | Which agent(s) or client(s) did you test your WebMCP tools with? | Codex in-app browser with native WebMCP discovery and invocation; Playwright Chromium tests with a controlled model-context shim for automated regression coverage. Add Chrome or ChatGPT testing only after independently performing it. | READY — factual draft |
-| Which AI tools have you leveraged while working on this project? | Codex for implementation, debugging, testing, documentation, and browser evidence. TODO: add the actual video/narration tools or other AI tools you used. | PARTIAL |
+| Which AI tools have you leveraged while working on this project? | Codex for implementation, debugging, testing, documentation, and video production; Piper for synthetic female narration. Add any other tools only if actually used. | READY — factual draft |
 | Describe the level of learning you/your team derived from the project | TODO: choose None, Moderate, or Significant based on your experience. | OWNER ANSWER |
 | Did you gain AI value that you can use in your career? | TODO: choose Yes or No based on your experience. | OWNER ANSWER |
 
-## Screenshot evidence — ready
+## Screenshot evidence — available
 
 Use the existing assets; no new screenshots are required merely to fill this worksheet.
 
@@ -141,11 +141,11 @@ Still images show visible states, not an entire tool-execution sequence. Pair th
 
 ## Demo video
 
-UPLOADED: owner supplied the [new YouTube video](https://youtu.be/FXqJG7dmdKg). Confirm Public visibility and logged-out playback for this replacement upload. [Repository MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4) is available as a supporting asset, not a replacement for the YouTube link.
+UPLOADED: owner supplied the [new YouTube video](https://youtu.be/c_RzlVBHSpg). Confirm Public visibility and logged-out playback for this replacement upload. [Repository MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4) is available as a supporting asset, not a replacement for the YouTube link.
 
-Revised local demo: [Narrated MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4), [script and captions](resources/video/DEMO_PRODUCTION.md), and [technical validation](resources/video/demo-validation.json). It covers native WebMCP search, planning, proposal review, automated exercise of the approval control, reload persistence, and draft-only pledges. It uses edited still-frame evidence and local Piper synthetic narration, not continuous screen recording. This is an **individual submission**, with no teammates.
+Final demo (owner-supplied YouTube link above): [Narrated MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4), [script and captions](resources/video/DEMO_PRODUCTION.md), and [technical validation](resources/video/demo-validation.json). It covers native WebMCP search, planning, proposal review, automated exercise of the approval control, reload persistence, and draft-only pledges. It uses edited still-frame evidence and local Piper synthetic narration, not continuous screen recording. This is an **individual submission**, with no teammates.
 
-TODO: watch and listen to the uploaded revision, check captions and Public visibility while logged out, and use https://youtu.be/FXqJG7dmdKg in the Devpost submission. Local repository references now point to the new video. Include Piper synthetic narration and Codex-assisted video production in the AI-tools answer.
+TODO: watch and listen to the uploaded revision, check captions and Public visibility while logged out, and use https://youtu.be/c_RzlVBHSpg in the Devpost submission. Local repository references now point to the new video. Include Piper synthetic narration and Codex-assisted video production in the AI-tools answer.
 
 Optional replacement outline, targeting 2:45 to leave timing margin:
 
@@ -169,7 +169,7 @@ Optional replacement outline, targeting 2:45 to leave timing margin:
 
 - [ ] Run a fresh-session end-to-end test in a WebMCP-capable browser, ideally on another machine. Record date, client, and result: TODO.
 - [ ] Open GitHub while logged out and confirm the repository and MIT license display correctly.
-- [x] Upload the revised YouTube video — owner supplied https://youtu.be/FXqJG7dmdKg.
+- [x] Upload the revised YouTube video — owner supplied https://youtu.be/c_RzlVBHSpg.
 - [ ] Confirm the replacement upload is Public and works while logged out.
 - [ ] Verify audible narration and final YouTube duration below 3:00.
 - [x] Refresh the video with the proposal workflow and upload the revision.

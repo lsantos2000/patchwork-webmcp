@@ -1,33 +1,32 @@
 # Current submission readiness
 
-Verified on August 26, 2026 against the working repository and public services.
+Updated August 30, 2026. This is a source/artifact audit, not a submission receipt.
 
-## Verified
+## Current artifacts
 
-- Live application: https://patchwork-webmcp.pages.dev/ returns HTTP 200.
-- Cloudflare Pages production deployment completed successfully from the public `main` branch.
-- Public repository: https://github.com/lsantos2000/patchwork-webmcp
-- Repository visibility is public and the default branch is `main`.
-- GitHub detects the MIT license.
-- `app/page.tsx` defines `search_neighborhood_projects`, `build_action_plan`, and `pledge_support`.
-- Tool handlers update the shared visible React state.
-- `pledge_support` returns `confirmation_required` and does not finalize a commitment.
-- `app/useWebMCP.ts` supports model-context discovery, tool registration, registration error isolation, and cleanup through `unregisterTool`.
-- README contains local setup, human demo, agent demo, safety explanation, and a timed video outline.
-- Production CSS is served successfully as `text/css`.
+- Creator: **Leonardo Santos-Macias**. Individual submission; no teammates.
+- Four tools: `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support`.
+- Tools update shared React state. Search and plans also affect device-local storage; they are not read-only.
+- Approved project records persist locally. Pending proposals and pledge drafts do not.
+- Proposal publication requires a separate UI approval action; pledges have no submission backend.
+- Registration, compatibility fallback, isolated registration failures, and cleanup are implemented.
+- The suite contains 39 tests, including domain tests and shim-based browser tests.
+- Native WebMCP inputs/results and capture metadata are in [webmcp-evidence.json](../../../../resources/video/demo-assets/webmcp-evidence.json).
+- The proposal approval control was exercised by browser automation; do not describe that click as a human action.
+- [Final video](https://youtu.be/c_RzlVBHSpg): owner supplied the upload. The local MP4 is 177.01 seconds, female-narrated, with the corrected creator name and cleaned-up slides.
+- [Illustrated transcript](../../../../resources/video/DEMO_WALKTHROUGH.md) and [media copy](../../../../resources/media/Patchwork_WebMCP_Judges_Demo.mp4) are available.
+- [Submission worksheet](../../../../DEVPOST_SUBMISSION.md) holds the current owner checklist.
 
-## Still requires participant evidence
+## Prior external evidence
 
-- Run the complete three-tool sequence in ChatGPT's in-app browser or WebMCP-enabled Chrome and capture evidence.
-- Capture polished screenshots after the live interaction is verified.
-- Record and publish the public YouTube demonstration with audio in under three minutes.
-- Add the final YouTube URL and tested-client answer to the Devpost form.
-- Submit the final entry to Devpost.
+The Cloudflare deployment, public repository, and GitHub-detected MIT license were verified in prior audits. Native tool calls were recorded on the deployed site on August 30. The edited demo is not continuous screen-recording evidence. Source checks and shim tests do not replace native compatibility testing.
 
-## Corrections to the original draft
+## Owner checks still required
 
-- The live application URL is no longer missing.
-- The production build is independently confirmed by Cloudflare Pages.
-- The public repository and MIT license are independently confirmed through GitHub.
-- Browser-level WebMCP behavior remains source-verified but not yet evidenced by a recorded compatible-browser run.
-- Do not claim that Codex registered the participant or completed Devpost submission steps unless there is separate evidence for those external actions.
+- Confirm the final YouTube upload is Public, audible, and works logged out.
+- Run the final task in a fresh supported browser session, ideally on another machine.
+- Confirm country, eligibility, New/Existing status, learning, and career-value answers directly.
+- Use the final video URL in Devpost, finish submission, and retain its confirmation.
+- Do not describe a saved draft or registration as a completed submission.
+
+The original [source draft](source-draft.md) is historical context, not current implementation truth.

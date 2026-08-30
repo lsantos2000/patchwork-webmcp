@@ -35,7 +35,8 @@ The safety boundary is explicit: an agent can search and organize, but it cannot
 
 1. `search_neighborhood_projects` searches projects using free text and a maximum-hour constraint, then shows results in the shared interface.
 2. `build_action_plan` combines project identifiers, calculates total time, and updates the visible weekend plan.
-3. `pledge_support` prepares a contribution draft but returns `confirmation_required`; it never submits or commits.
+3. `propose_neighborhood_project` drafts a local need for separate UI approval before device-local publication.
+4. `pledge_support` prepares a contribution draft but returns `confirmation_required`; it never submits or commits.
 
 ### Architecture claims to verify
 
@@ -43,8 +44,8 @@ The safety boundary is explicit: an agent can search and organize, but it cannot
 - TypeScript, Vite, Vinext, and the Cloudflare Vite plugin.
 - Shared React state for human controls and WebMCP handlers.
 - `app/useWebMCP.ts` performs discovery, registration, error handling, and cleanup.
-- `app/page.tsx` defines the three tool operations and structured schemas.
-- No external database or persistent storage is required for the demonstration.
+- `app/page.tsx` defines the four tool operations and structured schemas.
+- Browser-local persistence is implemented; no external database is used.
 - Cloudflare Pages hosts the public deployment.
 
 ### Testing flow
@@ -65,8 +66,8 @@ Expected sequence:
 
 1. `search_neighborhood_projects` returns matching projects and updates the interface.
 2. `build_action_plan` returns selected records and total hours.
-3. `pledge_support` returns `confirmation_required`.
-4. No commitment is finalized.
+3. Ask separately for a new project draft to exercise `propose_neighborhood_project`; approve or reject it through the UI.
+4. Ask separately for a pledge draft; `pledge_support` returns `confirmation_required`. No commitment is finalized.
 
 ### Demo video outline
 
@@ -75,7 +76,7 @@ Expected sequence:
 3. **0:55–1:50 — WebMCP proof:** Use the agent prompt and demonstrate search and planning tools.
 4. **1:50–2:20 — Safety:** Call `pledge_support` and emphasize `confirmation_required`.
 5. **2:20–2:45 — Implementation:** Show tool definitions and the registration lifecycle.
-6. **2:45–3:00 — Close:** “Agents reduce coordination work; people keep agency.”
+6. **2:45–2:57 — Close:** “Agents reduce coordination work; people keep agency.”
 
 ### Screenshot shot list
 
@@ -88,25 +89,25 @@ Expected sequence:
 ### Known limitations
 
 - The neighbourhood data is a small in-memory demonstration dataset.
-- Pledges are drafts only; there is no persistence or external organization integration.
+- Pledges are drafts only; plans and approved projects persist locally, without external organization integration.
 - Browser-level WebMCP behavior requires verification in a compatible browser.
-- No automated application test suite is currently present.
+- There are 39 Playwright checks, including domain tests and shim-based browser tests. Native WebMCP evidence is separate.
 
 ### Form-field grounding
 
 - Submitter Type: Individual
-- Country: Canada
+- Country: owner must confirm directly in Devpost
 - Organization: Not applicable
-- App Status: New
+- App Status: New only after the owner confirms no pre-existing app
 - Public repository: https://github.com/lsantos2000/patchwork-webmcp/
 - Live URL: https://patchwork-webmcp.pages.dev/
-- AI tools: Codex and Claude Code
-- Learning derived: Significant
-- Career value: Yes
+- AI tools: Codex and Piper synthetic narration; repository Claude instructions do not prove Claude was used
+- Learning derived: owner answer required
+- Career value: owner answer required
 
 ### Judging alignment
 
-- **WebMCP Leverage:** Three non-trivial operations share state with the human interface and implement a deliberate safety boundary.
+- **WebMCP Leverage:** Four structured operations share state with the human interface and implement a deliberate safety boundary.
 - **Execution:** A coherent responsive product flow rather than a generic chatbot or isolated tool demonstration.
 - **Potential Impact:** Reduces coordination friction for people who want to contribute to local projects.
 - **Creativity & Ambition:** Applies WebMCP to civic coordination and demonstrates graduated authority.

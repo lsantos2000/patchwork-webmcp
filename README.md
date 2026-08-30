@@ -280,16 +280,23 @@ The expected tool sequence is:
 
 > **Browser-test note:** The exact ChatGPT in-app browser steps, Chrome WebMCP setup, Claude review instructions, evidence requirements, and pass criteria are maintained in [`resources/docs/browser-test.md`](resources/docs/browser-test.md).
 
-### Under-three-minute judging video
+### Final judging video — 2:57
 
-1. **0:00–0:25 — Problem:** local needs are fragmented and turning intent into a realistic plan takes work.
-2. **0:25–0:55 — Human UX:** run “help in a garden,” show the match and editable weekend plan.
-3. **0:55–1:50 — WebMCP proof:** use the exact agent prompt above and show the search and planning tools.
-4. **1:50–2:20 — Safety:** call `pledge_support` and emphasize `confirmation_required`.
-5. **2:20–2:45 — Implementation:** briefly show the tool definitions in `app/page.tsx` and registration lifecycle in `app/useWebMCP.ts`.
-6. **2:45–2:57 — Close:** “Agents reduce coordination work; people keep agency.”
+Watch the [final Patchwork WebMCP demo](https://youtu.be/c_RzlVBHSpg), created by **Leonardo Santos-Macias**. This sequence follows the final narrated walkthrough; timestamps below are rounded to the nearest second.
 
-This is an optional recording outline. The actual uploaded edited walkthrough has a [timestamped transcript and slide images](resources/video/DEMO_WALKTHROUGH.md); do not describe it as a continuous browser recording.
+1. **0:00 — Introduction:** Small actions. Shared momentum. An individual project exploring people and agents working together.
+2. **0:13 — The problem:** turn good intentions into a practical neighbourhood plan, using a clearly identified demonstration catalogue.
+3. **0:28 — Why WebMCP:** four structured tools, an external browser agent, and captured native tool results.
+4. **0:44 — Search:** `search_neighborhood_projects` returns orchard and pantry records for a gardening-and-food request.
+5. **1:01 — Shared plan:** `build_action_plan` selects two projects totaling three hours in the shared React interface.
+6. **1:17 — Propose a local need:** the agent drafts **Map accessible shade**; `propose_neighborhood_project` returns `human_approval_required` and `published: false`.
+7. **1:32 — Review and restore:** browser automation exercises the separate approval control, then verifies device-local persistence after reload.
+8. **1:48 — Pledge safety:** `pledge_support` returns `confirmation_required`. No pledge is submitted and no organizer is contacted.
+9. **2:05 — Implementation:** React, TypeScript, Vinext, Cloudflare Pages, tool registration and cleanup, and local storage.
+10. **2:22 — Testing and open source:** the video describes the earlier 39-check validated run, distinguishes shim tests from native evidence, and explains Codex's contribution. The current suite has since expanded to 44 checks.
+11. **2:41–2:57 — Closing:** try the live app, inspect the public source and MIT license, and keep the final decision with the person.
+
+The video uses edited still-frame browser evidence and synthetic narration; it is not a continuous screen recording. See the [complete audio transcript with all 11 slide images and precise timestamps](resources/video/DEMO_WALKTHROUGH.md), [captions](resources/video/Patchwork_WebMCP_Judges_Demo.srt), and [saved MP4](resources/media/Patchwork_WebMCP_Judges_Demo.mp4).
 
 ## License
 

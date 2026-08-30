@@ -21,6 +21,8 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm exec tsc --noEmit
+      - run: pnpm run build:pages
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm test:e2e
         env:

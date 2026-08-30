@@ -91,6 +91,16 @@ Keep credentials, personal notifications, profiles, and unrelated tabs out of th
 
 ## Pass criteria
 
+### Search synchronization regression
+
+1. Select **Skills** manually, then ask the agent to search for food projects taking at most one hour each.
+2. Confirm **All** becomes the active category and the visible card is **Restock the little pantry**, matching the tool result.
+3. Ask for all projects taking at most one hour each. Confirm the visible cards are **Sunday repair table** and **Restock the little pantry**.
+4. Refresh. Confirm the one-hour limit and both cards remain. Select **Clear time limit** (the **Up to 1 hr per project** button) to restore all four demonstration projects in a fresh catalogue.
+5. Search for garden projects taking at most one hour each. Confirm no results, then select **Show every project** to clear the query, category, and time limit.
+
+The hour limit applies to each project, not the combined plan total.
+
 - [ ] Public Pages URL loads with production CSS.
 - [ ] All four tool names are discoverable or visibly invoked.
 - [ ] Search and planning update shared visible state.

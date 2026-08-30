@@ -10,7 +10,7 @@ Updated August 30, 2026. This is a source/artifact audit, not a submission recei
 - Approved project records persist locally. Pending proposals and pledge drafts do not.
 - Proposal publication requires a separate UI approval action; pledges have no submission backend.
 - Registration, compatibility fallback, isolated registration failures, and cleanup are implemented.
-- The suite contains 39 tests, including domain tests and shim-based browser tests.
+- The suite contains 44 tests, including domain tests and shim-based browser tests. Five regression checks cover shared search constraints and persisted time-limit validation.
 - Native WebMCP inputs/results and capture metadata are in [webmcp-evidence.json](../../../../resources/video/demo-assets/webmcp-evidence.json).
 - The proposal approval control was exercised by browser automation; do not describe that click as a human action.
 - [Final video](https://youtu.be/c_RzlVBHSpg): owner supplied the upload. The local MP4 is 177.01 seconds, female-narrated, with the corrected creator name and cleaned-up slides.

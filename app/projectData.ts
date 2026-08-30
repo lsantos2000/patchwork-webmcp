@@ -51,6 +51,9 @@ export const isSavedFilter = (value: unknown): value is ProjectFilter =>
 export const isSavedQuery = (value: unknown): value is string =>
   typeof value === 'string' && value.length <= 300;
 
+export const isSavedMaxHours = (value: unknown): value is number =>
+  typeof value === 'number' && Number.isFinite(value) && value >= 1 && value <= 8;
+
 export const isSavedPlan = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((id) => typeof id === 'string' && (PROJECT_IDS.has(id) || /^community-[a-z0-9-]+$/.test(id)));
 

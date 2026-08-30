@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { createActionPlan, isSavedFilter, isSavedPlan, isSavedProjects, isSavedQuery, PROJECTS, searchProjects } from '../../app/projectData';
+import { createActionPlan, isSavedFilter, isSavedMaxHours, isSavedPlan, isSavedProjects, isSavedQuery, PROJECTS, searchProjects } from '../../app/projectData';
 
 test.describe('project domain rules', () => {
   test('exposes four stable neighbourhood projects', () => {
@@ -36,6 +36,11 @@ test.describe('project domain rules', () => {
     expect(isSavedQuery('garden')).toBe(true);
     expect(isSavedQuery('x'.repeat(301))).toBe(false);
     expect(isSavedQuery(42)).toBe(false);
+  });
+
+  test('validates persisted per-project time limits', () => {
+    for (const value of [1, 1.5, 8]) expect(isSavedMaxHours(value)).toBe(true);
+    for (const value of [0, 9, NaN, Infinity, -Infinity, null, '1']) expect(isSavedMaxHours(value)).toBe(false);
   });
 
   test('accepts only arrays of known project IDs as saved plans', () => {

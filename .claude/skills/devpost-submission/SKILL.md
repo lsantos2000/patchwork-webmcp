@@ -69,14 +69,9 @@ Expected sequence:
 3. Ask separately for a new project draft to exercise `propose_neighborhood_project`; approve or reject it through the UI.
 4. Ask separately for a pledge draft; `pledge_support` returns `confirmation_required`. No commitment is finalized.
 
-### Demo video outline
+### Final demo video
 
-1. **0:00–0:25 — Problem:** Local needs are fragmented, and turning intent into a realistic plan takes work.
-2. **0:25–0:55 — Human UX:** Run “help in a garden,” show the match, and edit the weekend plan.
-3. **0:55–1:50 — WebMCP proof:** Use the agent prompt and demonstrate search and planning tools.
-4. **1:50–2:20 — Safety:** Call `pledge_support` and emphasize `confirmation_required`.
-5. **2:20–2:45 — Implementation:** Show tool definitions and the registration lifecycle.
-6. **2:45–2:57 — Close:** “Agents reduce coordination work; people keep agency.”
+Use the [final 2:57 video](https://youtu.be/c_RzlVBHSpg) and its [timestamped transcript with 11 slides](../../../resources/video/DEMO_WALKTHROUGH.md). Do not reuse the old six-part outline. The recorded 39-test statement describes a historical run, not the current suite. The video predates the visible pledge-review card and storage-failure improvements; use the browser guide for current behavior.
 
 ### Screenshot shot list
 
@@ -91,7 +86,7 @@ Expected sequence:
 - The neighbourhood data is a small in-memory demonstration dataset.
 - Pledges are drafts only; plans and approved projects persist locally, without external organization integration.
 - Browser-level WebMCP behavior requires verification in a compatible browser.
-- There are 39 Playwright checks, including domain tests and shim-based browser tests. Native WebMCP evidence is separate.
+- There are 50 Playwright checks, including domain tests and shim-based browser tests. Native WebMCP evidence is separate.
 
 ### Form-field grounding
 
@@ -101,7 +96,7 @@ Expected sequence:
 - App Status: New only after the owner confirms no pre-existing app
 - Public repository: https://github.com/lsantos2000/patchwork-webmcp/
 - Live URL: https://patchwork-webmcp.pages.dev/
-- AI tools: Codex and Piper synthetic narration; repository Claude instructions do not prove Claude was used
+- AI tools: Codex, Google Gemini (owner-confirmed), and Piper synthetic narration; repository Claude instructions do not prove Claude was used
 - Learning derived: owner answer required
 - Career value: owner answer required
 

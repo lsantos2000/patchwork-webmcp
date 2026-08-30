@@ -28,6 +28,13 @@ test('category controls filter project cards', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Sunday repair table' })).toBeHidden();
 });
 
+test('example plan is clearly distinguished from a real agent call', async ({ page }) => {
+  await expect(page.getByText('Demonstration neighbourhood projects', { exact: false })).toBeVisible();
+  await page.getByRole('button', { name: /Try an example plan/ }).click();
+  await expect(page.getByText('Example plan loaded — no agent was called.')).toBeVisible();
+  await expect(page.getByText('3h total')).toBeVisible();
+});
+
 test('empty results offer a recovery path', async ({ page }) => {
   await page.getByLabel('Search projects').fill('astronaut training');
   await expect(page.getByRole('heading', { name: 'No exact match—yet.' })).toBeVisible();

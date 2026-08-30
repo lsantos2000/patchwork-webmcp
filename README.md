@@ -16,6 +16,7 @@ Patchwork and its WebMCP implementation were created during the August 25–Sept
 
 ## Quick links
 
+- **Creator's LinkedIn announcement:** [Leonardo Santos-Macias on Patchwork WebMCP](https://lnkd.in/p/gtW7_PhS)
 - **Live application:** [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/)
 - **Demo video:** [YouTube](https://youtu.be/c_RzlVBHSpg) · [repository copy](resources/video/Patchwork_WebMCP_Judges_Demo.mp4)
 - **Revised demo:** [Narrated MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4) · [script, captions, and upload checklist](resources/video/DEMO_PRODUCTION.md). Individual submission; edited browser evidence, not a continuous recording. Uploaded to [YouTube](https://youtu.be/c_RzlVBHSpg); owner supplied the new link.
@@ -56,7 +57,7 @@ Patchwork defines `search_neighborhood_projects`, `build_action_plan`, `propose_
 
 Patchwork saves the current search, category filter, Weekend Plan, and human-approved community projects in the browser's `localStorage`. Human edits and plans created through `build_action_plan` use the same persistence path, so leaving, refreshing, or reopening the site in the same browser restores the shared workspace. The interface shows **Saved on this device** and provides a **Clear plan** control. Stored values are validated before restoration, and malformed or outdated values fall back safely to the default state.
 
-Stored data includes searches, filters, project selections, and approved project text. Avoid entering credentials or sensitive personal information: free-text fields are saved on this device. Storage does not sync across browsers or devices and may be removed when site data is cleared or private browsing ends. Approved projects persist; pending proposals and pledge drafts do not. The plan tool reports `persisted_on_device: true`, but storage writes happen afterward in a React effect; this is not a verified disk-write receipt.
+Stored data includes searches, filters, project selections, and approved project text. Avoid entering credentials or sensitive personal information: free-text fields are saved on this device. Storage does not sync across browsers or devices and may be removed when site data is cleared or private browsing ends. Approved projects persist; pending proposals and pledge drafts do not. The plan tool returns `persisted_on_device: false` and `storage_status: pending` because storage writes happen afterward. The UI reports **Saved on this device** only after successful writes, or a session-only warning when storage is blocked or full.
 
 ## Why WebMCP
 
@@ -71,6 +72,12 @@ The critical boundary is deliberate: the agent can prepare a pledge, but `pledge
 - Turn several opportunities into one achievable weekend plan.
 - Draft a contribution while preserving a clear human confirmation step.
 - See and edit the same plan whether it was assembled manually or by an agent.
+
+### Pledge review and AI-tool disclosure
+
+A valid `pledge_support` request displays the project and contribution in a review card. **Mark draft reviewed** acknowledges it locally; **Dismiss pledge draft** removes it. Neither action submits a pledge. Unknown projects, blank contributions, and contributions over 1,000 characters are rejected. Drafts and review status disappear on reload.
+
+Development used **OpenAI Codex**, **Google Gemini** (owner-confirmed), and **Piper TTS** for video narration. These development tools are distinct from the browser client used for recorded native WebMCP testing.
 
 ## WebMCP tools
 
@@ -116,7 +123,7 @@ Try this prompt in a WebMCP-compatible browser:
 
 > Find neighbourhood projects related to gardening or food that take no more than two hours. Build me a weekend action plan, but ask me before pledging my time.
 
-The expected collaboration is **search → visible results → shared plan**. Ask separately for a pledge draft to demonstrate `confirmation_required`; there is no pledge-submit action. The **Ask my agent** button only loads a predefined example plan, not a real agent call.
+The expected collaboration is **search → visible results → shared plan**. Ask separately for a pledge draft to demonstrate `confirmation_required`; there is no pledge-submit action. The **Try an example plan** button loads a predefined example plan and explicitly states that no agent was called.
 
 ## Run locally
 
@@ -149,7 +156,7 @@ For exact prompts, expected tool calls, Claude review instructions, recording re
 
 ### Playwright tests
 
-The `tests/` folder contains 44 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all four WebMCP registrations through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, proposal approval and rejection, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
+The `tests/` folder contains 50 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all four WebMCP registrations through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, proposal approval and rejection, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
 
 ```bash
 npm install
@@ -158,6 +165,8 @@ npm run test:e2e
 ```
 
 Set `PLAYWRIGHT_USE_LOCAL=1` to let Playwright start and test the current source, or set `PLAYWRIGHT_BASE_URL` to test another deployment. GitHub Actions tests the checked-out source on pushes and pull requests to `main`, retaining its HTML report when the job completes. With neither variable set, the suite targets the public Cloudflare Pages URL.
+
+Six additional offline PowerShell cases exercise the publishing helper without running real Git or GitHub commands: clean and dirty trees, mismatched remotes, inaccessible repositories, commit failures, and push failures. Run `pwsh -NoProfile -File tests/scripts/publish-github.test.ps1`; CI runs these separately from Playwright.
 
 ### Production build
 
@@ -175,7 +184,7 @@ The included PowerShell helper checks the staged source for common credential pa
 .\scripts\publish-github.ps1 -RepoName patchwork-webmcp -Owner lsantos2000
 ```
 
-It requires GitHub CLI (`gh`) and will request authorization if needed. The repository is created as public by default. No token is stored in the script or repository.
+It requires GitHub CLI (`gh`) and will request authorization if needed. It pushes the current branch, validates the destination remote, and stops on failed Git commands. Creating a new public repository requires the explicit `-CreateRepository` switch. No token is stored in the script or repository.
 
 ## Claude Code workspace
 
@@ -293,7 +302,7 @@ Watch the [final Patchwork WebMCP demo](https://youtu.be/c_RzlVBHSpg), created b
 7. **1:32 — Review and restore:** browser automation exercises the separate approval control, then verifies device-local persistence after reload.
 8. **1:48 — Pledge safety:** `pledge_support` returns `confirmation_required`. No pledge is submitted and no organizer is contacted.
 9. **2:05 — Implementation:** React, TypeScript, Vinext, Cloudflare Pages, tool registration and cleanup, and local storage.
-10. **2:22 — Testing and open source:** the video describes the earlier 39-check validated run, distinguishes shim tests from native evidence, and explains Codex's contribution. The current suite has since expanded to 44 checks.
+10. **2:22 — Testing and open source:** the video describes the earlier 39-check validated run, distinguishes shim tests from native evidence, and explains Codex's contribution. The current suite has since expanded; see the Playwright tests section for current coverage.
 11. **2:41–2:57 — Closing:** try the live app, inspect the public source and MIT license, and keep the final decision with the person.
 
 The video uses edited still-frame browser evidence and synthetic narration; it is not a continuous screen recording. See the [complete audio transcript with all 11 slide images and precise timestamps](resources/video/DEMO_WALKTHROUGH.md), [captions](resources/video/Patchwork_WebMCP_Judges_Demo.srt), and [saved MP4](resources/media/Patchwork_WebMCP_Judges_Demo.mp4).

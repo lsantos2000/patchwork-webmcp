@@ -36,7 +36,7 @@ Use this guide to verify Patchwork's public deployment, human interface, WebMCP 
 
    > Prepare a pledge for one selected project, but do not submit it.
 
-10. Verify that `pledge_support` returns `confirmation_required` and Patchwork states that nothing was submitted.
+10. Verify that `pledge_support` returns `confirmation_required` and displays the project and contribution in a review card. Select **Mark draft reviewed**; confirm **Draft reviewed locally. No pledge sent.** Reload and confirm the draft and its review status are gone. This does not submit a pledge.
 
 ## Chrome WebMCP testing
 
@@ -75,6 +75,10 @@ Claude products support standard MCP integrations, but that does not by itself p
 3. Preserve the live recording as the browser-level evidence.
 
 Do not describe a source review, ordinary browser automation, or standard MCP-server connection as a successful WebMCP test.
+
+## Current behavior versus recorded demo
+
+The final video is an edited historical walkthrough. It predates the visible pledge-review card, storage-unavailable warning, and **Try an example plan** label. Its reference to 39 passing tests remains accurate for that recorded run; consult current CI for the expanded suite. Native tool inputs/results are evidence for the recorded version, not an automatic certification of every later change.
 
 ## Evidence recording
 

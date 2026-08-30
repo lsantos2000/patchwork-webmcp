@@ -22,9 +22,9 @@ READY means an artifact exists or evidence was recorded; it does not mean every 
 | --- | --- | --- |
 | Challenge registration | READY — checked August 30 | Devpost returned the registered relationship for The WebMCP Challenge. |
 | Live application | READY — last verified August 28 | [Cloudflare Pages application](https://patchwork-webmcp.pages.dev/). |
-| Registered WebMCP tools and actual agent call | READY — last verified August 28 | Four tools discovered in the Codex in-app browser; the proposal tool was invoked on the public URL. |
+| Registered WebMCP tools and actual agent call | READY — native evidence recorded August 30 | All four tools have recorded inputs/results in [native evidence](resources/video/demo-assets/webmcp-evidence.json). This is separate from current automated regression coverage. |
 | Core prototype flow | READY | Search, shared planning, proposal review, human-approved device-local publication, and persistence. |
-| Automated tests | READY — last verified August 28 | 39 checks passed locally and in [GitHub Actions](https://github.com/lsantos2000/patchwork-webmcp/actions/runs/33224017447). WebMCP automated tests use a controlled shim; native browser evidence is separate. |
+| Automated tests | HISTORICAL — August 28 run | 39 checks passed locally and in [GitHub Actions](https://github.com/lsantos2000/patchwork-webmcp/actions/runs/33224017447). WebMCP automated tests use a controlled shim; native browser evidence is separate. |
 | Public repository and license | READY from prior verification | [Repository](https://github.com/lsantos2000/patchwork-webmcp) and [MIT license](LICENSE). TODO: final logged-out visual check that GitHub displays the license. |
 | YouTube video | UPLOADED — owner supplied replacement link | [Watch the revised video](https://youtu.be/c_RzlVBHSpg). TODO: confirm Public visibility and logged-out playback for this new upload. |
 | Video duration and audio | PARTIAL | README records 2:57. TODO: check the YouTube player remains below 3:00 and narration is audible throughout the relevant demonstration. |
@@ -77,7 +77,7 @@ Patchwork demonstrates an open-web interaction pattern in which a site remains u
 
 Patchwork does not embed its own model or chatbot. It exposes browser-local WebMCP tools that a compatible external agent can discover and invoke. Codex was used to develop the React application, implement WebMCP registration and handlers, debug styling and persistence, expand the Playwright tests, prepare documentation, and capture browser evidence. The live proposal workflow was tested through WebMCP discovery and invocation in the Codex in-app browser, followed by a Playwright-controlled approval-button interaction.
 
-Video production also used Piper synthetic narration and local FFmpeg encoding. Owner TODO: add other AI products only if you actually used them. Claude instructions in the repository are not evidence that Claude executed the application tools.
+Video production also used Piper synthetic narration and local FFmpeg encoding. Google Gemini was also used, as confirmed by the owner. Its specific role has not been documented; do not invent one. Claude instructions in the repository are not evidence that Claude executed the application tools.
 
 ## Key features
 
@@ -86,7 +86,7 @@ Video production also used Piper synthetic narration and local FFmpeg encoding. 
 - Agent-authored project drafts with explicit approval or rejection.
 - Browser-local persistence for plans and approved community projects.
 - Structured WebMCP results and a draft-only pledge boundary.
-- Documented browser testing and 39 automated checks.
+- Documented browser testing and 50 automated checks; consult the latest CI run for validation status.
 
 ## Architecture
 
@@ -123,7 +123,7 @@ Field labels and options below were fetched from Devpost on August 30, 2026. The
 | If applicable, testing instructions for application | Paste the testing instructions above and linked browser guide. No app credentials required. | READY |
 | URL to your PUBLIC Code Repo (on Github, Gitlab, or Bitbucket) | https://github.com/lsantos2000/patchwork-webmcp | READY |
 | Which agent(s) or client(s) did you test your WebMCP tools with? | Codex in-app browser with native WebMCP discovery and invocation; Playwright Chromium tests with a controlled model-context shim for automated regression coverage. Add Chrome or ChatGPT testing only after independently performing it. | READY — factual draft |
-| Which AI tools have you leveraged while working on this project? | Codex for implementation, debugging, testing, documentation, and video production; Piper for synthetic female narration. Add any other tools only if actually used. | READY — factual draft |
+| Which AI tools have you leveraged while working on this project? | Codex for implementation, debugging, testing, documentation, and video production; Google Gemini (owner-confirmed use); Piper for synthetic female narration. | READY — factual draft |
 | Describe the level of learning you/your team derived from the project | TODO: choose None, Moderate, or Significant based on your experience. | OWNER ANSWER |
 | Did you gain AI value that you can use in your career? | TODO: choose Yes or No based on your experience. | OWNER ANSWER |
 
@@ -147,14 +147,7 @@ Final demo (owner-supplied YouTube link above): [Narrated MP4](resources/video/P
 
 TODO: watch and listen to the uploaded revision, check captions and Public visibility while logged out, and use https://youtu.be/c_RzlVBHSpg in the Devpost submission. Local repository references now point to the new video. Include Piper synthetic narration and Codex-assisted video production in the AI-tools answer.
 
-Optional replacement outline, targeting 2:45 to leave timing margin:
-
-- 0:00–0:20: problem and intended user.
-- 0:20–0:50: human browsing and plan editing.
-- 0:50–1:30: actual WebMCP search and plan calls reflected in the UI.
-- 1:30–2:05: proposal tool call, review card, and human approval.
-- 2:05–2:30: draft-only pledge boundary and device-local storage limitation.
-- 2:30–2:45: implementation, live URL, and open-source repository.
+The final video follows the [11-slide timestamped transcript](resources/video/DEMO_WALKTHROUGH.md), not the earlier optional recording outlines. Its 39-test reference is historical. The current application additionally displays pledge details for local review, warns when storage is unavailable, and labels its example-plan button explicitly.
 
 ## Known limitations — keep these claims accurate
 

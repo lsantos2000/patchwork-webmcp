@@ -7,10 +7,11 @@ Updated August 30, 2026. This is a source/artifact audit, not a submission recei
 - Creator: **Leonardo Santos-Macias**. Individual submission; no teammates.
 - Four tools: `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support`.
 - Tools update shared React state. Search and plans also affect device-local storage; they are not read-only.
-- Approved project records persist locally. Pending proposals and pledge drafts do not.
+- Approved project records persist locally when storage is available. Storage failures leave the app usable in memory with a warning. Pending proposals, pledge drafts, and pledge-review status do not persist.
+- Pledge details are displayed and can be marked reviewed locally; no organizer is contacted. These UI additions postdate the recorded video.
 - Proposal publication requires a separate UI approval action; pledges have no submission backend.
 - Registration, compatibility fallback, isolated registration failures, and cleanup are implemented.
-- The suite contains 44 tests, including domain tests and shim-based browser tests. Five regression checks cover shared search constraints and persisted time-limit validation.
+- The suite contains 50 tests, including domain tests and shim-based browser tests. Coverage includes shared search constraints, persisted time-limit validation, storage failures, pledge review, and explicit example-plan labeling.
 - Native WebMCP inputs/results and capture metadata are in [webmcp-evidence.json](../../../../resources/video/demo-assets/webmcp-evidence.json).
 - The proposal approval control was exercised by browser automation; do not describe that click as a human action.
 - [Final video](https://youtu.be/c_RzlVBHSpg): owner supplied the upload. The local MP4 is 177.01 seconds, female-narrated, with the corrected creator name and cleaned-up slides.

@@ -69,7 +69,7 @@ test('manual categories refine a limited search and a new agent search resets it
 
 test('agent creates a deduplicated, ordered, visible action plan', async ({ page }) => {
   const result = await executeTool(page, 'build_action_plan', { project_ids: ['pantry', 'missing', 'orchard', 'pantry'] });
-  expect(result).toMatchObject({ total_hours: 3, shared_ui_updated: true, persisted_on_device: true });
+  expect(result).toMatchObject({ total_hours: 3, shared_ui_updated: true, persisted_on_device: false, storage_status: 'pending' });
   expect((result as { plan: { id: string }[] }).plan.map((project) => project.id)).toEqual(['orchard', 'pantry']);
   await expect(page.getByText('2 good ways to help')).toBeVisible();
   await expect(page.getByText('3h total')).toBeVisible();
@@ -89,6 +89,41 @@ test('pledge tool returns a draft but never a submission', async ({ page }) => {
     shared_ui_updated: true,
   });
   await expect(page.getByText(/Human confirmation is required; nothing was submitted/)).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Review your contribution draft.' })).toBeVisible();
+  await expect(page.getByText('Two hours Saturday', { exact: true })).toBeVisible();
+});
+
+test('pledge review is local, dismissible, and never restored as approved', async ({ page }) => {
+  await executeTool(page, 'pledge_support', { project_id: 'pantry', contribution: 'Bring rice on Saturday' });
+  await page.getByRole('button', { name: 'Mark draft reviewed' }).click();
+  await expect(page.getByText('Draft reviewed locally. No pledge sent.')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Mark draft reviewed' })).toBeDisabled();
+  await page.reload();
+  await expect(page.getByRole('heading', { name: 'Review your contribution draft.' })).toHaveCount(0);
+  await executeTool(page, 'pledge_support', { project_id: 'pantry', contribution: 'Bring rice on Saturday' });
+  await expect(page.getByRole('button', { name: 'Mark draft reviewed' })).toBeEnabled();
+  await page.getByRole('button', { name: 'Dismiss pledge draft' }).click();
+  await expect(page.getByRole('heading', { name: 'Review your contribution draft.' })).toHaveCount(0);
+});
+
+test('invalid pledge requests cannot create a review draft', async ({ page }) => {
+  for (const input of [
+    { project_id: 'missing', contribution: 'One hour' },
+    { project_id: 'pantry', contribution: '   ' },
+    { project_id: 'pantry', contribution: 'x'.repeat(1001) },
+  ]) {
+    expect(await executeTool(page, 'pledge_support', input)).toEqual({ status: 'invalid_input', shared_ui_updated: false });
+  }
+  await expect(page.getByRole('heading', { name: 'Review your contribution draft.' })).toHaveCount(0);
+});
+
+test('replacing a reviewed pledge requires a fresh review', async ({ page }) => {
+  await executeTool(page, 'pledge_support', { project_id: 'pantry', contribution: 'Bring rice' });
+  await page.getByRole('button', { name: 'Mark draft reviewed' }).click();
+  await executeTool(page, 'pledge_support', { project_id: 'orchard', contribution: 'Help prune trees' });
+  await expect(page.getByText('Help prune trees', { exact: true })).toBeVisible();
+  await expect(page.getByText('Bring rice', { exact: true })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Mark draft reviewed' })).toBeEnabled();
 });
 
 test('human controls still work after an agent changes the plan', async ({ page }) => {

@@ -41,6 +41,8 @@ export async function openPatchwork(page: Page, storage: StorageSeed = {}) {
 }
 
 export async function executeTool(page: Page, name: string, input: Record<string, unknown>) {
+  // Reload returns before React effects necessarily re-register WebMCP tools.
+  await page.waitForFunction((toolName) => typeof window.__patchworkTools?.[toolName]?.execute === 'function', name);
   return page.evaluate(
     async ({ toolName, toolInput }) => window.__patchworkTools[toolName].execute(toolInput),
     { toolName: name, toolInput: input },

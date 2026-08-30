@@ -74,6 +74,8 @@ The critical boundary is deliberate: the agent can prepare a pledge, but `pledge
 
 ## WebMCP tools
 
+Agent searches reset the category to **All** and apply the same per-project time limit to both tool results and visible cards. An active limit appears as an **Up to … hr per project** button; click it to clear the limit. Manual category changes refine those results. **Show every project** clears all search constraints. The time limit is saved on this device alongside the query and category.
+
 Patchwork defines four tools in `app/page.tsx` and registers them through the reusable `app/useWebMCP.ts` hook using `document.modelContext.registerTool(...)`:
 
 | Tool | Purpose | Safety behavior |
@@ -147,7 +149,7 @@ For exact prompts, expected tool calls, Claude review instructions, recording re
 
 ### Playwright tests
 
-The `tests/` folder contains 39 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all four WebMCP registrations through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, proposal approval and rejection, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
+The `tests/` folder contains 44 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all four WebMCP registrations through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, proposal approval and rejection, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
 
 ```bash
 npm install

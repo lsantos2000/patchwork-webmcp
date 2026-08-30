@@ -25,6 +25,48 @@ test('agent search safely defaults malformed optional inputs', async ({ page }) 
   expect((result as { projects: unknown[] }).projects).toHaveLength(4);
 });
 
+test('agent search replaces a conflicting human category filter', async ({ page }) => {
+  await page.getByRole('button', { name: 'Skills', exact: true }).click();
+  const result = await executeTool(page, 'search_neighborhood_projects', { query: 'food', max_hours: 1 });
+  expect(result).toMatchObject({ projects: [{ id: 'pantry' }] });
+  await expect(page.getByRole('button', { name: 'All', exact: true })).toHaveClass(/active/);
+  await expect(page.locator('.project-grid .card h3')).toHaveText(['Restock the little pantry']);
+});
+
+test('agent time limit matches visible cards, survives reload, and can be cleared', async ({ page }) => {
+  const result = await executeTool(page, 'search_neighborhood_projects', { query: '', max_hours: 1 });
+  expect((result as { projects: { id: string }[] }).projects.map(project => project.id)).toEqual(['repair', 'pantry']);
+  await expect(page.locator('.project-grid .card h3')).toHaveText(['Sunday repair table', 'Restock the little pantry']);
+  await expect(page.getByRole('heading', { name: '2 local matches' })).toBeVisible();
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('patchwork.max-hours.v1'))).toBe('1');
+  await page.reload();
+  await expect(page.locator('.project-grid .card h3')).toHaveText(['Sunday repair table', 'Restock the little pantry']);
+  await expect(page.getByRole('button', { name: 'Clear time limit' })).toContainText('Up to 1 hr per project');
+  await page.getByRole('button', { name: 'Clear time limit' }).click();
+  await expect(page.locator('.project-grid .card')).toHaveCount(4);
+  await expect.poll(() => page.evaluate(() => localStorage.getItem('patchwork.max-hours.v1'))).toBe('8');
+});
+
+test('show every project clears query, category, and agent time limit', async ({ page }) => {
+  const result = await executeTool(page, 'search_neighborhood_projects', { query: 'garden', max_hours: 1 });
+  expect(result).toMatchObject({ projects: [] });
+  await expect(page.locator('.project-grid .card')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Show every project' }).click();
+  await expect(page.locator('.project-grid .card')).toHaveCount(4);
+  await expect(page.getByRole('button', { name: 'Clear time limit' })).toHaveCount(0);
+});
+
+test('manual categories refine a limited search and a new agent search resets its constraints', async ({ page }) => {
+  await executeTool(page, 'search_neighborhood_projects', { query: '', max_hours: 1 });
+  await page.getByRole('button', { name: 'Food', exact: true }).click();
+  await expect(page.locator('.project-grid .card h3')).toHaveText(['Restock the little pantry']);
+  const result = await executeTool(page, 'search_neighborhood_projects', { query: '' });
+  expect((result as { projects: unknown[] }).projects).toHaveLength(4);
+  await expect(page.locator('.project-grid .card')).toHaveCount(4);
+  await expect(page.getByRole('button', { name: 'All', exact: true })).toHaveClass(/active/);
+  await expect(page.getByRole('button', { name: 'Clear time limit' })).toHaveCount(0);
+});
+
 test('agent creates a deduplicated, ordered, visible action plan', async ({ page }) => {
   const result = await executeTool(page, 'build_action_plan', { project_ids: ['pantry', 'missing', 'orchard', 'pantry'] });
   expect(result).toMatchObject({ total_hours: 3, shared_ui_updated: true, persisted_on_device: true });

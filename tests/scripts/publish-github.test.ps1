@@ -46,3 +46,6 @@ try {
   Set-Location $originalLocation
   Remove-Variable patchworkPublishTestCommands,patchworkPublishTestScenario -Scope Global -ErrorAction SilentlyContinue
 }
+# Reached only after every assertion passed. Do not leak a deliberately mocked
+# native failure into GitHub Actions' PowerShell exit-code wrapper.
+$global:LASTEXITCODE = 0

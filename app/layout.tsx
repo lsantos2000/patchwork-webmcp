@@ -3,6 +3,7 @@ import './globals.css';
 import './persistence.css';
 import './focus.css';
 import './proposal.css';
+import './negotiation.css';
 
 export const metadata: Metadata = {
   title: 'Patchwork — Small actions, shared momentum',

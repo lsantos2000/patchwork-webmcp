@@ -31,6 +31,10 @@ Local opportunity sites contain valuable information, but people still have to s
 
 The safety boundary is explicit: an agent can search and organize, but it cannot commit the person's time. The `pledge_support` tool returns `confirmation_required` and does not finalize a pledge.
 
+### Additional tabs
+
+The original capabilities below remain in Discover. Plan together and Action history add a separate session-only negotiated workspace with `get_workspace` and `propose_plan_revision`. See [workflow guide](../../../resources/docs/negotiated-planning.md). The earlier native recordings do not verify these new tools.
+
 ### WebMCP capabilities
 
 1. `search_neighborhood_projects` searches projects using free text and a maximum-hour constraint, then shows results in the shared interface.
@@ -86,7 +90,7 @@ Use the [final 2:57 video](https://youtu.be/c_RzlVBHSpg) and its [timestamped tr
 - The neighbourhood data is a small in-memory demonstration dataset.
 - Pledges are drafts only; plans and approved projects persist locally, without external organization integration.
 - Browser-level WebMCP behavior requires verification in a compatible browser.
-- There are 50 Playwright checks, including domain tests and shim-based browser tests. Native WebMCP evidence is separate.
+- There are 64 Playwright checks, including domain tests and shim-based browser tests. Native WebMCP evidence is separate.
 
 ### Form-field grounding
 

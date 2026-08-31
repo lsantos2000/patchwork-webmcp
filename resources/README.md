@@ -28,6 +28,9 @@ The video demonstrates the public Patchwork deployment, project discovery, share
 
 ## Documentation
 
+- [Negotiated-planning tabs and test scenarios](docs/negotiated-planning.md) — new workflow, not covered by the earlier video.
+
+
 - [Browser and WebMCP test guide](docs/browser-test.md)
 - [Main project README](../README.md)
 - [Claude workspace instructions](../CLAUDE.md)

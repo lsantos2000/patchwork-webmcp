@@ -7,7 +7,11 @@ Use this guide to verify Patchwork's public deployment, human interface, WebMCP 
 - Live application: https://patchwork-webmcp.pages.dev/
 - Public repository: https://github.com/lsantos2000/patchwork-webmcp
 
-## Expected WebMCP tools
+## Additional workflow tabs
+
+This guide's four-tool sequence applies to the default **Discover** tab. The separate **Plan together** and **Action history** tabs expose `get_workspace` and `propose_plan_revision` instead. Follow [the negotiated-planning guide](negotiated-planning.md) to test pins, revisions, total budgets, approval, and undo. Rediscover tools after switching tabs.
+
+## Expected Discover WebMCP tools
 
 | Tool | Expected result |
 | --- | --- |

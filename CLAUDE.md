@@ -23,6 +23,14 @@ Patchwork demonstrates a humane future for the open web: agents can discover and
 - Creator: Leonardo Santos-Macias; individual submission
 - Persistence: browser-local search, category, per-project time limit, plan, and approved project records; not a shared database
 
+## Additional workflow tabs
+
+- Discover preserves the original four tools and browser-local saved plan.
+- Plan together and Action history share a separate session-only workspace in `app/negotiationStore.ts` and `app/NegotiationWorkspace.tsx`.
+- Two tools (`get_workspace`, `propose_plan_revision`) are registered only while a new tab is active. Six tools exist across workflows, not simultaneously.
+- Preserve pinned choices, validate combined time limits, and check the revision on both proposal creation and acceptance. Never let the agent directly accept its own proposal.
+- History records entry paths, not verified identities or hidden model reasoning. Do not label the deterministic example as an agent invocation.
+
 ## WebMCP contract
 
 - Tool names are stable public API. Do not rename them without updating the README and demo.

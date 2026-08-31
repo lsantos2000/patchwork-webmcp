@@ -27,6 +27,12 @@ Patchwork and its WebMCP implementation were created during the August 25–Sept
 - **Claude workspace instructions:** [CLAUDE.md](CLAUDE.md)
 - **Open-source license:** [MIT License](LICENSE)
 
+## New workflows — original experience preserved
+
+The default **Discover** tab retains the original application and saved plan. **Plan together** adds a separate negotiated workspace: pin projects, set a combined time budget, ask an agent for a proposed revision, compare the diff, accept or reject, and undo. **Action history** shows actual tool and UI events from that workspace.
+
+The new workspace is session-only and never overwrites the Discover plan. Its two tools, `get_workspace` and `propose_plan_revision`, are available while either new tab is active; Discover keeps its original four tools. See [the complete negotiated-planning guide](resources/docs/negotiated-planning.md) for the demo, conflict cases, and evidence limitations. The existing video predates these workflows.
+
 ## Judge it in 60 seconds
 
 1. Open the [live application](https://patchwork-webmcp.pages.dev/) in ChatGPT's in-app browser or WebMCP-enabled Chrome.
@@ -156,7 +162,7 @@ For exact prompts, expected tool calls, Claude review instructions, recording re
 
 ### Playwright tests
 
-The `tests/` folder contains 50 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all four WebMCP registrations through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, proposal approval and rejection, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
+The `tests/` folder contains 64 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all four WebMCP registrations through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, proposal approval and rejection, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
 
 ```bash
 npm install

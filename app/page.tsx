@@ -4,8 +4,26 @@ import { useWebMCP, type WebMCPTool } from './useWebMCP';
 import { usePersistentState } from './usePersistentState';
 import { ProposalReview } from './ProposalReview';
 import { PledgeReview, type PledgeDraft } from './PledgeReview';
+import { NegotiationWorkspace } from './NegotiationWorkspace';
 import { createActionPlan, FILTERS as filters, isSavedFilter, isSavedMaxHours, isSavedPlan, isSavedProjects, isSavedQuery, PROJECTS as projects, searchProjects, type Project, type ProjectCategory } from './projectData';
-export default function Home(){
+const workflowTabs = ['Discover', 'Plan together', 'Action history'];
+
+export default function Home() {
+ const [tab, setTab] = useState(0);
+ return <>
+  <div className="workflow-tabs" role="tablist" aria-label="Patchwork workflows">
+   {workflowTabs.map((name, index) => <button key={name} id={`workflow-tab-${index}`} role="tab" aria-selected={tab===index} aria-controls={`workflow-panel-${index}`} tabIndex={tab===index?0:-1} onClick={()=>setTab(index)} onKeyDown={event=>{
+    const next=event.key==='ArrowRight'?(index+1)%3:event.key==='ArrowLeft'?(index+2)%3:event.key==='Home'?0:event.key==='End'?2:null;
+    if(next!==null){event.preventDefault();setTab(next);document.getElementById(`workflow-tab-${next}`)?.focus()}
+   }}>{name}</button>)}
+  </div>
+  <div id="workflow-panel-0" role="tabpanel" aria-labelledby="workflow-tab-0" hidden={tab!==0}><Discovery active={tab===0}/></div>
+  <div id={`workflow-panel-${tab===2?2:1}`} role="tabpanel" aria-labelledby={`workflow-tab-${tab===2?2:1}`} hidden={tab===0}><NegotiationWorkspace active={tab!==0} history={tab===2}/></div>
+  <div id={`workflow-panel-${tab===2?1:2}`} role="tabpanel" aria-labelledby={`workflow-tab-${tab===2?1:2}`} hidden/>
+ </>;
+}
+
+function Discovery({active}: {active: boolean}){
  const[filter,setFilter]=usePersistentState('patchwork.filter.v1','All',isSavedFilter);
  const[query,setQuery]=usePersistentState('patchwork.query.v1','',isSavedQuery);
  const[maxHours,setMaxHours]=usePersistentState('patchwork.max-hours.v1',8,isSavedMaxHours);
@@ -23,7 +41,7 @@ export default function Home(){
   {name:'propose_neighborhood_project',description:'Structure a community need as a project draft and display it for explicit human approval before it can join the neighbourhood catalog.',inputSchema:{type:'object',properties:{title:{type:'string',minLength:3,maxLength:100},area:{type:'string',minLength:2,maxLength:80},type:{type:'string',enum:['Outdoors','Skills','Food','Community']},hours:{type:'number',minimum:1,maximum:8},description:{type:'string',minLength:10,maxLength:300}},required:['title','area','type','hours','description']},execute:async(input)=>{const title=typeof input.title==='string'?input.title.trim().slice(0,100):'';const area=typeof input.area==='string'?input.area.trim().slice(0,80):'';const type=(['Outdoors','Skills','Food','Community'].includes(String(input.type))?input.type:'Community') as ProjectCategory;const time=typeof input.hours==='number'?Math.min(8,Math.max(1,Math.round(input.hours))):1;const desc=typeof input.description==='string'?input.description.trim().slice(0,300):'';if(title.length<3||area.length<2||desc.length<10)return{status:'invalid_input',human_approval_required:true,shared_ui_updated:false};const slug=title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,42)||'local-need';const draft:Project={id:`community-${slug}-${Date.now().toString(36)}`,title,area,type,time,people:0,color:'violet',keywords:`${title} ${area} ${type}`,desc,communityCreated:true};setPendingProposal(draft);setToast('Agent drafted a local need. Human approval is required before publishing.');return{status:'human_approval_required',draft,shared_ui_updated:true,published:false}}},
   {name:'pledge_support',description:'Draft a support pledge and show it for human review. Never submit or commit without explicit human confirmation.',inputSchema:{type:'object',properties:{project_id:{type:'string'},contribution:{type:'string',minLength:1,maxLength:1000}},required:['project_id','contribution']},execute:async(input)=>{const projectId=typeof input.project_id==='string'?input.project_id:'';const contribution=typeof input.contribution==='string'?input.contribution.trim():'';const project=catalog.find(p=>p.id===projectId);if(!project||!contribution||contribution.length>1000)return{status:'invalid_input',shared_ui_updated:false};setPledgeDraft({project_id:projectId,project_title:project.title,contribution});setPledgeReviewed(false);setToast('Agent prepared a pledge draft. Human confirmation is required; nothing was submitted.');return{status:'confirmation_required',draft:{project_id:projectId,contribution},shared_ui_updated:true}}}
  ],[catalog,setQuery,setFilter,setMaxHours,setSelected]);
- useWebMCP(webMCPTools);
+ useWebMCP(active?webMCPTools:[]);
  const total=selected.reduce((s,id)=>s+(catalog.find(p=>p.id===id)?.time||0),0);
  return <main><nav className="nav"><a className="brand" href="#top"><span>p</span>patchwork</a><div className="navlinks"><a href="#projects">Find a project</a><a href="#how">How it works</a></div><button className="agent-pill" onClick={()=>{setSelected(['orchard','pantry']);setToast('Example plan loaded — no agent was called.')}}>⌁ Try an example plan</button></nav>
  <section className="hero" id="top"><div className="eyebrow"><i/> PEOPLE + AGENTS, ON COMMON GROUND</div><h1>Small actions.<br/><em>Shared momentum.</em></h1><p className="lede">Patchwork turns local needs into clear, doable plans. Explore with your own eyes—or let your agent find the right way to pitch in.</p><form className="search" onSubmit={e=>{e.preventDefault();document.querySelector('#projects')?.scrollIntoView({behavior:'smooth'});if(visible.length){setSelected(s=>s.includes(visible[0].id)?s:[...s,visible[0].id]);setToast(`${visible.length} match${visible.length===1?'':'es'} found. ${visible[0].title} was added to your plan.`)}else setToast('No exact match yet — try garden, repair, food, or safety.')}}><span>⌕</span><input aria-label="Search projects" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Try “help in a garden” or “donate food”"/><button type="submit">Explore <b>→</b></button></form><div className="trust"><span>● Demonstration neighbourhood projects</span><span>✓ You approve every commitment</span><span>⌁ Agent-ready via WebMCP</span></div><div className="orbit orbit-a">garden</div><div className="orbit orbit-b">repair</div><div className="orbit orbit-c">share</div></section>

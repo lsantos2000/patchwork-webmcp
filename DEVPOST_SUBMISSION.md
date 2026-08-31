@@ -35,6 +35,12 @@ READY means an artifact exists or evidence was recorded; it does not mean every 
 | Personal form answers | TODO | Complete the fields identified below; do not infer residence or personal learning outcomes. |
 | Final Devpost submission | TODO | Complete the form and retain its confirmation and public project URL. A saved draft is not sufficient. |
 
+## New workflow extension — after the recorded video
+
+Discover remains the original experience. Plan together and Action history add a separate, session-only workspace with `get_workspace` and `propose_plan_revision`: pinned projects, a combined time budget, before/after proposals, revision-conflict protection, explicit UI acceptance/rejection, and undo. The current suite contains 64 application checks plus six offline publishing-script cases. See [workflow testing instructions](resources/docs/negotiated-planning.md).
+
+There are six tool definitions across the app: four registered in Discover, two in the new tabs. The recorded video and native evidence cover the earlier four-tool experience, not this extension. TODO: capture native calls for the two new tools before claiming browser-level evidence for them.
+
 ## Title
 
 Patchwork WebMCP
@@ -67,7 +73,7 @@ An agent can translate an intention such as helping with food access and outdoor
 
 ### How WebMCP is implemented
 
-Patchwork defines four tools: `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support`. A reusable React hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback and unregister cleanup. The handlers validate or normalize inputs, update shared UI state, and return structured results. The proposal tool returns `human_approval_required` with `published: false`; only the visible human approval control adds its draft to the device-local catalogue. The pledge tool returns `confirmation_required` and does not submit a pledge.
+The original Discover workflow defines four tools: `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support`. A reusable React hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback and unregister cleanup. The handlers validate or normalize inputs, update shared UI state, and return structured results. The proposal tool returns `human_approval_required` with `published: false`; only the visible human approval control adds its draft to the device-local catalogue. The pledge tool returns `confirmation_required` and does not submit a pledge.
 
 ### Why this matters
 
@@ -86,7 +92,7 @@ Video production also used Piper synthetic narration and local FFmpeg encoding. 
 - Agent-authored project drafts with explicit approval or rejection.
 - Browser-local persistence for plans and approved community projects.
 - Structured WebMCP results and a draft-only pledge boundary.
-- Documented browser testing and 50 automated checks; consult the latest CI run for validation status.
+- Documented browser testing and 64 automated checks; consult the latest CI run for validation status.
 
 ## Architecture
 

@@ -1,14 +1,14 @@
 # Patchwork — narrated demo walkthrough
 
-Individual project by Leonardo Santos-Macias. Duration: approximately **2:57** (under 3 minutes).
+Individual project by Leonardo Santos-Macias. Duration: approximately **2:31** (under 3 minutes).
 
 This document pairs all 11 corrected video slides with the complete spoken narration. Slide numbering runs from 01 to 11; section labels do not use a competing counter. Images load from `../images/demo-walkthrough/`.
 
-This is edited still-frame browser evidence with synthetic narration, not a continuous screen recording. Native WebMCP result excerpts were captured from the live application; the separate approval control was exercised using browser automation.
+This is edited still-frame browser evidence with synthetic narration, not a continuous screen recording. Native WebMCP result excerpts were captured from the deployed application; automated UI captures are identified separately.
 
-[Watch the MP4](Patchwork_WebMCP_Judges_Demo.mp4) · [Captions](Patchwork_WebMCP_Judges_Demo.srt) · [Production notes](DEMO_PRODUCTION.md) · [Technical validation](demo-validation.json)
+[Watch the refreshed local MP4](Patchwork_WebMCP_Judges_Demo.mp4) · [Captions](Patchwork_WebMCP_Judges_Demo.srt) · [Production notes](DEMO_PRODUCTION.md) · [Technical validation](demo-validation.json)
 
-The owner uploaded the final female-narrated video to [YouTube](https://youtu.be/c_RzlVBHSpg). It credits Leonardo Santos-Macias and uses the cleaned-up slides. Use this link for the submission; confirm Public visibility and logged-out playback.
+The refreshed negotiated-planning cut is a local upload candidate. The existing [public YouTube video](https://youtu.be/c_RzlVBHSpg) is the earlier Discover-focused cut and remains the submission link until the owner uploads this replacement and supplies its new URL.
 
 
 ## 01 / 11 — PATCHWORK / WEBMCP CHALLENGE
@@ -19,127 +19,127 @@ Starts at `00:00:00,000`.
 
 ### Audio transcript
 
-Patchwork turns good intentions into a practical neighbourhood plan. I built this individual project to explore an open web where agents help people organize and create, while the person keeps the final decision.
+Patchwork is a WebMCP-powered neighbourhood action exchange, created by Leonardo Santos-Macias. It helps people and browser agents turn good intentions into realistic plans while keeping consequential decisions explicitly human-controlled.
 
 
 ## 02 / 11 — THE PROBLEM
 
-Starts at `00:00:12,667`.
+Starts at `00:00:15,667`.
 
-![Slide 02: Start with a real problem.](../images/demo-walkthrough/scene-02.png)
-
-### Audio transcript
-
-Finding a way to help means comparing opportunities, understanding the time involved, and deciding what to do next. Patchwork brings those steps into one visual workspace. The starter catalogue uses demonstration projects, not a verified live neighbourhood feed.
-
-
-## 03 / 11 — WHY WEBMCP
-
-Starts at `00:00:27,833`.
-
-![Slide 03: Declared tools. Visible results.](../images/demo-walkthrough/scene-03.png)
+![Slide 02: Good intentions need coordination.](../images/demo-walkthrough/scene-02.png)
 
 ### Audio transcript
 
-The website exposes four structured Web M C P tools to an external browser agent. There is no embedded chatbot. These tools were discovered and called on the public Cloudflare site. This video is an edited walkthrough of the captured results, not a continuous screen recording.
+Finding a useful way to help still means searching listings, comparing time, and translating intent into a practical next step. Patchwork provides one visible workspace backed by structured demonstration records.
 
 
-## 04 / 11 — ACTUAL TOOL CALL
+## 03 / 11 — DISCOVER
 
-Starts at `00:00:44,125`.
+Starts at `00:00:28,500`.
 
-![Slide 04: Intent becomes a grounded search.](../images/demo-walkthrough/scene-04.png)
-
-### Audio transcript
-
-For a gardening and food request, the agent calls search neighborhood projects with a three hour per-project limit. The website returns the orchard and pantry records and updates the visible search. The agent works with project identifiers and structured data, rather than guessing where to click.
-
-
-## 05 / 11 — SHARED REACT STATE
-
-Starts at `00:01:00,958`.
-
-![Slide 05: One plan. Two ways to help.](../images/demo-walkthrough/scene-05.png)
+![Slide 03: The original flow stays intact.](../images/demo-walkthrough/scene-03.png)
 
 ### Audio transcript
 
-Next, build action plan selects the orchard and pantry: two projects, three hours total. The tool updates the same React state used by the page. The person can inspect or remove projects manually. The agent chooses the combination; the tool reports its total.
+Discover keeps the original experience. Four WebMCP tools let an external browser agent search projects, assemble a visible plan, draft a neighbourhood need, and prepare a pledge without embedding another chatbot.
 
 
-## 06 / 11 — PROPOSE A LOCAL NEED
+## 04 / 11 — PLAN TOGETHER
 
-Starts at `00:01:16,708`.
+Starts at `00:00:42,042`.
 
-![Slide 06: Agents can create. People decide.](../images/demo-walkthrough/scene-06.png)
-
-### Audio transcript
-
-The agent can also draft a new need: Map accessible shade. The proposal tool returns human approval required, with published set to false. Patchwork shows the draft beside Reject and Approve controls. A tool call alone does not add it to the catalogue.
-
-
-## 07 / 11 — REVIEW AND RESTORE
-
-Starts at `00:01:31,708`.
-
-![Slide 07: Approval is a separate step.](../images/demo-walkthrough/scene-07.png)
+![Slide 04: A second workflow negotiates constraints.](../images/demo-walkthrough/scene-04.png)
 
 ### Audio transcript
 
-For this demonstration, browser automation exercises the separate approval button. The draft then joins the local catalogue and plan. After a reload, it is still there. Publishing here means saving on this browser and device, not sharing with other users or a community database.
+Plan together adds a separate session workspace. The person can pin projects, set a combined time budget, and ask the agent to revise around those constraints without changing the saved Discover plan.
 
 
-## 08 / 11 — SAFETY BOUNDARY
+## 05 / 11 — SCOPED NATIVE WEBMCP
 
-Starts at `00:01:48,250`.
+Starts at `00:00:53,833`.
 
-![Slide 08: A pledge draft. Not a commitment.](../images/demo-walkthrough/scene-08.png)
-
-### Audio transcript
-
-The pledge tool prepares a contribution draft and returns confirmation required. It does not submit anything or contact an organizer. This prototype deliberately stops at drafting. That limitation is explicit, so neither the agent nor the demonstration implies a real-world commitment was made.
-
-
-## 09 / 11 — IMPLEMENTATION
-
-Starts at `00:02:04,792`.
-
-![Slide 09: Small interface. Clear contract.](../images/demo-walkthrough/scene-09.png)
+![Slide 05: Only relevant tools are exposed.](../images/demo-walkthrough/scene-05.png)
 
 ### Audio transcript
 
-Implementation uses React and TypeScript, built with Vinext for Cloudflare Pages. A reusable hook registers tool names, descriptions, input schemas, and handlers, with a navigator compatibility fallback and cleanup. Tool handlers update shared state; validated local storage restores supported data.
+In the deployed branch, the Codex in-app browser natively discovered exactly two tools after the tab switch: get workspace and propose plan revision. AbortSignal cleanup prevents tools from an inactive workflow remaining advertised.
 
 
-## 10 / 11 — TESTING AND OPEN SOURCE
+## 06 / 11 — BEFORE / AFTER DIFF
 
-Starts at `00:02:22,042`.
+Starts at `00:01:08,583`.
 
-![Slide 10: Evidence, not just a feature list.](../images/demo-walkthrough/scene-10.png)
+![Slide 06: The agent proposes. The person decides.](../images/demo-walkthrough/scene-06.png)
 
 ### Audio transcript
 
-Thirty-nine automated checks passed in the previous validated run, covering state, persistence, approval, and interface behavior. Those tests use a model-context shim. Native browser tool calls provide separate compatibility evidence. Codex helped with implementation, debugging, testing, documentation, and this walkthrough.
+The agent reads revision two, preserves the pinned pantry, and proposes replacing the orchard with the one-hour repair table. Patchwork shows the full before-and-after difference. Nothing changes until Accept revision is selected.
+
+
+## 07 / 11 — ACTION HISTORY
+
+Starts at `00:01:22,167`.
+
+![Slide 07: Every action has an honest source.](../images/demo-walkthrough/scene-07.png)
+
+### Audio transcript
+
+Action history distinguishes WebMCP tool calls from interface actions and records the workspace revision. It is intentionally described as a bounded local history, not proof of identity or a tamper-proof audit log.
+
+
+## 08 / 11 — CONSTRAINT CONFLICT
+
+Starts at `00:01:36,000`.
+
+![Slide 08: Impossible requests fail clearly.](../images/demo-walkthrough/scene-08.png)
+
+### Audio transcript
+
+When the two-hour orchard is pinned inside a one-hour budget, the tool reports a constraint conflict. It does not silently remove the person's choice or claim that an impossible plan succeeded.
+
+
+## 09 / 11 — HUMAN SAFETY BOUNDARY
+
+Starts at `00:01:47,333`.
+
+![Slide 09: Consequential actions still stop at review.](../images/demo-walkthrough/scene-09.png)
+
+### Audio transcript
+
+The original safety boundary remains. Pledge support returns confirmation required and never contacts an organizer. Proposed community needs also require a separate visible approval action before device-local publication.
+
+
+## 10 / 11 — IMPLEMENTATION / EVIDENCE
+
+Starts at `00:02:01,292`.
+
+![Slide 10: Tested as behavior, not theater.](../images/demo-walkthrough/scene-10.png)
+
+### Audio transcript
+
+The project uses React, TypeScript, and Vinext on Cloudflare Pages. Sixty-four application checks cover both workflows. Native browser records remain separate from shim-based automation, and the branch deployment and live smoke test passed.
 
 
 ## 11 / 11 — PATCHWORK / TRY IT YOURSELF
 
-Starts at `00:02:40,875`.
+Starts at `00:02:17,375`.
 
 ![Slide 11: Less coordination. More human agency.](../images/demo-walkthrough/scene-11.png)
 
 ### Audio transcript
 
-Open the live site in a Web M C P capable browser and try the documented prompts. The source, MIT license, and testing guide are public. Patchwork shows how agents can reduce coordination work while people keep the final decision. Small actions. Shared momentum.
+Patchwork shows a future open web where agents reduce coordination work without taking away human agency. Open the live site, inspect the public source, and try both documented workflows. Small actions. Shared momentum.
 
 
 ## Watch the complete video
 
-[![Watch the Patchwork demo on YouTube](Patchwork_WebMCP_Judges_Demo_Poster.png)](https://youtu.be/c_RzlVBHSpg)
+![Patchwork refreshed demo poster](Patchwork_WebMCP_Judges_Demo_Poster.png)
 
-- [Watch on YouTube](https://youtu.be/c_RzlVBHSpg)
-- [Open or download the saved MP4](../media/Patchwork_WebMCP_Judges_Demo.mp4)
-- [Download captions](Patchwork_WebMCP_Judges_Demo.srt)
+- [Open or download the refreshed local MP4](../media/Patchwork_WebMCP_Judges_Demo.mp4)
+- [Download refreshed captions](Patchwork_WebMCP_Judges_Demo.srt)
+- [Watch the earlier public Discover-focused cut](https://youtu.be/c_RzlVBHSpg)
 
-Duration: **2:57**. The `resources/media/` copy preserves the latest locally rendered, numbering- and creator-name-corrected video; it is not a download of YouTube's transcoded version. Markdown viewers may offer playback or download; use YouTube for reliable streaming.
+Duration: **2:31**. The `resources/media/` copy is the refreshed negotiated-planning upload candidate; it is not yet the file streamed at the existing YouTube URL.
 
-The video is an edited screenshot walkthrough with synthetic narration and actual WebMCP result excerpts, not a continuous screen recording. The local opening slide now credits Leonardo Santos-Macias. The final female-narrated version is available at https://youtu.be/c_RzlVBHSpg (owner-supplied upload).
+The refreshed video is an edited screenshot walkthrough with synthetic narration and native WebMCP result excerpts, not a continuous screen recording. It credits Leonardo Santos-Macias. Review it locally, upload it as a new public YouTube video, then replace the earlier link throughout the documentation.

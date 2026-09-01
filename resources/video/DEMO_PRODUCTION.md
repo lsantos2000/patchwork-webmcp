@@ -1,8 +1,8 @@
 # Revised judging demo
 
-Prepared August 30, 2026, for Leonardo Santos-Macias's **individual submission**. No teammates or invitations are involved.
+Refreshed September 1, 2026, for Leonardo Santos-Macias's **individual submission**. No teammates or invitations are involved.
 
-The local video and images have been regenerated to credit **Leonardo Santos-Macias**. The owner has uploaded the corrected, female-narrated MP4 to https://youtu.be/c_RzlVBHSpg. Use this final video link for submission.
+The local video and images have been regenerated to credit **Leonardo Santos-Macias** and cover the negotiated-planning extension. The refreshed female-narrated MP4 is approximately 2:31 and has not yet been uploaded. The existing https://youtu.be/c_RzlVBHSpg link points to the earlier Discover-focused cut until the owner uploads the replacement.
 
 ## Deliverables
 
@@ -16,7 +16,7 @@ The local video and images have been regenerated to credit **Leonardo Santos-Mac
 
 This is an **edited still-frame browser-evidence walkthrough with synthetic narration**, not a continuous screen recording. Captured website states and actual native WebMCP result excerpts demonstrate search, shared planning, proposal review, local persistence, and draft-only pledges. The approval button was exercised with browser automation; this is not evidence that a human personally clicked it. The opening catalogue screenshots come from the existing resource set; the new workflow captures and tool results were recorded on August 30.
 
-The owner uploaded this revision as a [new YouTube video](https://youtu.be/c_RzlVBHSpg). This is now the submission video link. The [original MP4](Patchwork_WebMCP.mp4) is retained only as an archive.
+The [original MP4](Patchwork_WebMCP.mp4) is retained only as an archive. Upload the refreshed `Patchwork_WebMCP_Judges_Demo.mp4` as a new public YouTube video after review, then update every documentation and Devpost reference with the new URL.
 
 ## Owner review and upload
 
@@ -24,8 +24,8 @@ The owner uploaded this revision as a [new YouTube video](https://youtu.be/c_Rzl
 2. Review the SRT captions: timings are approximated from narration chunks, not forced-aligned to speech.
 3. Confirm the final duration is below 3:00. The validation JSON records the encoded duration and audio-volume measurements; it is not a substitute for listening.
 4. If you want stronger continuous evidence, record a short uninterrupted browser segment showing an agent invoking the tools and the page changing. Replace the corresponding still-frame scenes while retaining the time limit.
-5. The revision has been uploaded: https://youtu.be/c_RzlVBHSpg. Confirm **Public** visibility, audible narration, and captions; open this new link logged out.
-6. Use https://youtu.be/c_RzlVBHSpg in the Devpost submission. Repository references have been updated locally; the Devpost form must still be checked separately.
+5. Upload the refreshed 2:31 MP4 as a new public YouTube video after completing the local review.
+6. Confirm **Public** visibility, audible narration, captions, and logged-out playback. Then replace the earlier https://youtu.be/c_RzlVBHSpg link in the repository and Devpost submission.
 
 Suggested title: **Patchwork WebMCP — People and Agents, Shared Plans**.
 

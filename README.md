@@ -89,7 +89,7 @@ Development used **OpenAI Codex**, **Google Gemini** (owner-confirmed), and **Pi
 
 Agent searches reset the category to **All** and apply the same per-project time limit to both tool results and visible cards. An active limit appears as an **Up to … hr per project** button; click it to clear the limit. Manual category changes refine those results. **Show every project** clears all search constraints. The time limit is saved on this device alongside the query and category.
 
-Patchwork defines four tools in `app/page.tsx` and registers them through the reusable `app/useWebMCP.ts` hook using `document.modelContext.registerTool(...)`:
+The default Discover workflow defines four tools in `app/page.tsx`. Plan together and Action history define two additional, workflow-scoped tools in `app/NegotiationWorkspace.tsx`. The reusable `app/useWebMCP.ts` hook registers only the active workflow through `document.modelContext.registerTool(...)`:
 
 | Tool | Purpose | Safety behavior |
 | --- | --- | --- |
@@ -97,6 +97,11 @@ Patchwork defines four tools in `app/page.tsx` and registers them through the re
 | `build_action_plan` | Combine project IDs, calculate total time, update the UI, and save the plan on this device | Changes the local plan; no external commitment |
 | `propose_neighborhood_project` | Structure a new community need and display it for review | Returns `human_approval_required`; cannot publish |
 | `pledge_support` | Prepare a contribution pledge | Returns `confirmation_required`; does not submit |
+
+| Negotiated-planning tool | Purpose | Safety behavior |
+| --- | --- | --- |
+| `get_workspace` | Read the current revision, plan, pins, budget, catalog, pending proposal, and recent actions | Reads the separate session workspace; does not alter Discover or make a commitment |
+| `propose_plan_revision` | Propose a revision against an explicit workspace revision | Enforces pins and total budget; returns a visible proposal that requires a separate UI decision |
 
 ## How the agent works
 
@@ -114,7 +119,7 @@ Patchwork updates the shared visible interface
 Person reviews the result and approves any commitment
 ```
 
-The browser loads Patchwork and `useWebMCP` detects an available model context. The hook registers the four tools and delegates calls to their handlers. Handlers normalize or validate selected input fields, update shared React state, and return structured results; the hook is not a general JSON Schema validator. It also unregisters the tools when the page is removed. The hook supports both `document.modelContext` and the compatible `navigator.modelContext` surface.
+The browser loads Patchwork and `useWebMCP` detects an available model context. The hook registers the active workflow's tools and delegates calls to their handlers. Handlers normalize or validate selected input fields, update shared React state, and return structured results; the hook is not a general JSON Schema validator. An `AbortSignal` unregisters the active tool set when the workflow changes or the component is removed, with a named-unregistration fallback for early clients. The hook supports both `document.modelContext` and the compatible `navigator.modelContext` surface.
 
 The collaboration is intentionally divided by risk:
 
@@ -122,6 +127,8 @@ The collaboration is intentionally divided by risk:
 - `build_action_plan` lets the agent assemble project IDs into a shared weekend plan and calculate its total time. The person can continue editing that plan manually.
 - `propose_neighborhood_project` lets the agent structure a local need, but the draft remains outside the catalog until a person explicitly approves it.
 - `pledge_support` may prepare a proposed contribution, but it cannot finalize it. It returns `confirmation_required` and asks the person to approve the consequential action.
+- `get_workspace` lets an agent read the person's current pins, budget, plan, revision, and recent workspace actions before proposing a change.
+- `propose_plan_revision` can suggest a revision, but it cannot drop pinned choices, exceed the budget, apply stale work, or approve its own proposal.
 
 In other words, an agent may search and organize, but it may not commit a person's time without that person's confirmation. The website defines the available operations and their schemas, so the agent does not need to scrape text, guess coordinates, or imitate button clicks.
 
@@ -162,7 +169,7 @@ For exact prompts, expected tool calls, Claude review instructions, recording re
 
 ### Playwright tests
 
-The `tests/` folder contains 64 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all four WebMCP registrations through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, proposal approval and rejection, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
+The `tests/` folder contains 64 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all six WebMCP definitions across their scoped workflows through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, negotiated proposals and conflicts, approval, rejection and undo, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
 
 ```bash
 npm install
@@ -213,7 +220,8 @@ Run `/judge-swarm` in Claude Code for independent parallel reviews. The release 
 - [x] Public source with setup instructions
 - [x] Open-source license
 - [x] Public live URL verified in a WebMCP-compatible browser
-- [x] Owner supplied the final YouTube upload; local MP4 verified at 2:57
+- [x] Current Discover-focused YouTube upload is public and 2:57
+- [ ] Review and upload the refreshed 2:31 negotiated-planning candidate, then replace the public link
 - [ ] Confirm the final upload is Public, audible, and playable while logged out
 - [ ] Devpost text and links submitted
 
@@ -319,23 +327,23 @@ The expected tool sequence is:
 
 > **Browser-test note:** The exact ChatGPT in-app browser steps, Chrome WebMCP setup, Claude review instructions, evidence requirements, and pass criteria are maintained in [`resources/docs/browser-test.md`](resources/docs/browser-test.md).
 
-### Final judging video — 2:57
+### Refreshed judging video candidate — 2:31
 
-Watch the [final Patchwork WebMCP demo](https://youtu.be/c_RzlVBHSpg), created by **Leonardo Santos-Macias**. This sequence follows the final narrated walkthrough; timestamps below are rounded to the nearest second.
+The [saved MP4](resources/media/Patchwork_WebMCP_Judges_Demo.mp4), created by **Leonardo Santos-Macias**, is the refreshed negotiated-planning upload candidate. The current [public YouTube video](https://youtu.be/c_RzlVBHSpg) is the earlier 2:57 Discover-focused cut and remains the submission link until this replacement is reviewed and uploaded.
 
-1. **0:00 — Introduction:** Small actions. Shared momentum. An individual project exploring people and agents working together.
-2. **0:13 — The problem:** turn good intentions into a practical neighbourhood plan, using a clearly identified demonstration catalogue.
-3. **0:28 — Why WebMCP:** four structured tools, an external browser agent, and captured native tool results.
-4. **0:44 — Search:** `search_neighborhood_projects` returns orchard and pantry records for a gardening-and-food request.
-5. **1:01 — Shared plan:** `build_action_plan` selects two projects totaling three hours in the shared React interface.
-6. **1:17 — Propose a local need:** the agent drafts **Map accessible shade**; `propose_neighborhood_project` returns `human_approval_required` and `published: false`.
-7. **1:32 — Review and restore:** browser automation exercises the separate approval control, then verifies device-local persistence after reload.
-8. **1:48 — Pledge safety:** `pledge_support` returns `confirmation_required`. No pledge is submitted and no organizer is contacted.
-9. **2:05 — Implementation:** React, TypeScript, Vinext, Cloudflare Pages, tool registration and cleanup, and local storage.
-10. **2:22 — Testing and open source:** the video describes the earlier 39-check validated run, distinguishes shim tests from native evidence, and explains Codex's contribution. The current suite has since expanded; see the Playwright tests section for current coverage.
-11. **2:41–2:57 — Closing:** try the live app, inspect the public source and MIT license, and keep the final decision with the person.
+1. **0:00 — Introduction:** Patchwork, the challenge, creator credit, and human decision boundary.
+2. **0:16 — Problem:** turn fragmented opportunities into a practical plan.
+3. **0:29 — Discover:** preserve the original four-tool workflow.
+4. **0:42 — Plan together:** pins, combined budget, and isolated session workspace.
+5. **0:54 — Scoped native WebMCP:** exactly two active tools and AbortSignal cleanup.
+6. **1:09 — Before/after proposal:** preserve the pantry and fit a two-hour budget without applying the change.
+7. **1:22 — Action history:** distinguish tool calls from UI actions.
+8. **1:36 — Constraint conflict:** reject an impossible pinned choice and budget combination clearly.
+9. **1:47 — Safety:** pledge and project-publication boundaries remain human-controlled.
+10. **2:01 — Implementation and evidence:** 64 application checks, native evidence, Cloudflare deployment, and live smoke test.
+11. **2:17–2:31 — Close:** six capabilities, two scoped workflows, and one clear decision boundary.
 
-The video uses edited still-frame browser evidence and synthetic narration; it is not a continuous screen recording. See the [complete audio transcript with all 11 slide images and precise timestamps](resources/video/DEMO_WALKTHROUGH.md), [captions](resources/video/Patchwork_WebMCP_Judges_Demo.srt), and [saved MP4](resources/media/Patchwork_WebMCP_Judges_Demo.mp4).
+The refreshed video uses edited still-frame evidence and synthetic narration; it is not a continuous screen recording. See the [complete audio transcript with all 11 slide images](resources/video/DEMO_WALKTHROUGH.md), [captions](resources/video/Patchwork_WebMCP_Judges_Demo.srt), and [technical validation](resources/video/demo-validation.json).
 
 ## License
 

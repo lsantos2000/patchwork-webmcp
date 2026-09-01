@@ -33,7 +33,7 @@ The safety boundary is explicit: an agent can search and organize, but it cannot
 
 ### Additional tabs
 
-The original capabilities below remain in Discover. Plan together and Action history add a separate session-only negotiated workspace with `get_workspace` and `propose_plan_revision`. See [workflow guide](../../../resources/docs/negotiated-planning.md). The earlier native recordings do not verify these new tools.
+The original capabilities below remain in Discover. Plan together and Action history add a separate session-only negotiated workspace with `get_workspace` and `propose_plan_revision`. See [workflow guide](../../../resources/docs/negotiated-planning.md). The earlier August 30 recordings do not verify these new tools; use the separate [September 1 native evidence](../../../resources/evidence/negotiated-planning-native.json).
 
 ### WebMCP capabilities
 
@@ -41,6 +41,8 @@ The original capabilities below remain in Discover. Plan together and Action his
 2. `build_action_plan` combines project identifiers, calculates total time, and updates the visible weekend plan.
 3. `propose_neighborhood_project` drafts a local need for separate UI approval before device-local publication.
 4. `pledge_support` prepares a contribution draft but returns `confirmation_required`; it never submits or commits.
+5. `get_workspace` reads the current negotiated workspace revision, selection, pins, budget, catalog, proposal, and recent actions.
+6. `propose_plan_revision` validates revision freshness, pinned choices, known project IDs, and the combined budget before displaying a proposal for a separate UI decision.
 
 ### Architecture claims to verify
 
@@ -75,7 +77,7 @@ Expected sequence:
 
 ### Final demo video
 
-Use the [final 2:57 video](https://youtu.be/c_RzlVBHSpg) and its [timestamped transcript with 11 slides](../../../resources/video/DEMO_WALKTHROUGH.md). Do not reuse the old six-part outline. The recorded 39-test statement describes a historical run, not the current suite. The video predates the visible pledge-review card and storage-failure improvements; use the browser guide for current behavior.
+The [current public 2:57 video](https://youtu.be/c_RzlVBHSpg) is the earlier Discover-focused cut. Prefer the refreshed [2:31 negotiated-planning candidate](../../../resources/media/Patchwork_WebMCP_Judges_Demo.mp4) after owner review and a new public upload. Its [timestamped transcript has 11 slides](../../../resources/video/DEMO_WALKTHROUGH.md). Never claim the refreshed cut is public until the owner supplies and verifies its new URL.
 
 ### Screenshot shot list
 
@@ -84,13 +86,17 @@ Use the [final 2:57 video](https://youtu.be/c_RzlVBHSpg) and its [timestamped tr
 3. Human-editable weekend action plan and total hours.
 4. Agent-created plan reflected in the visible interface.
 5. `pledge_support` showing that human confirmation is required.
+6. Plan together with a pinned project and total-hour budget.
+7. Before/after revision proposal awaiting acceptance.
+8. Action history distinguishing WebMCP calls from UI actions.
+9. A pinned-choice budget conflict that the agent cannot silently override.
 
 ### Known limitations
 
 - The neighbourhood data is a small in-memory demonstration dataset.
 - Pledges are drafts only; plans and approved projects persist locally, without external organization integration.
-- Browser-level WebMCP behavior requires verification in a compatible browser.
-- There are 64 Playwright checks, including domain tests and shim-based browser tests. Native WebMCP evidence is separate.
+- Browser-level WebMCP behavior requires a compatible browser; both workflows now have separate native evidence records.
+- There are 64 Playwright checks, including domain tests and shim-based browser tests. Native WebMCP evidence remains separate from automated coverage.
 
 ### Form-field grounding
 
@@ -106,7 +112,7 @@ Use the [final 2:57 video](https://youtu.be/c_RzlVBHSpg) and its [timestamped tr
 
 ### Judging alignment
 
-- **WebMCP Leverage:** Four structured operations share state with the human interface and implement a deliberate safety boundary.
+- **WebMCP Leverage:** Six structured operations across two scoped workflows share state with the human interface and implement deliberate safety and negotiation boundaries.
 - **Execution:** A coherent responsive product flow rather than a generic chatbot or isolated tool demonstration.
 - **Potential Impact:** Reduces coordination friction for people who want to contribute to local projects.
 - **Creativity & Ambition:** Applies WebMCP to civic coordination and demonstrates graduated authority.

@@ -5,54 +5,54 @@ Edited browser-evidence walkthrough with synthetic narration.
 
 ## 00:00:00,000 — PATCHWORK / WEBMCP CHALLENGE
 
-Patchwork turns good intentions into a practical neighbourhood plan. I built this individual project to explore an open web where agents help people organize and create, while the person keeps the final decision.
+Patchwork is a WebMCP-powered neighbourhood action exchange, created by Leonardo Santos-Macias. It helps people and browser agents turn good intentions into realistic plans while keeping consequential decisions explicitly human-controlled.
 
 
-## 00:00:12,667 — THE PROBLEM
+## 00:00:15,667 — THE PROBLEM
 
-Finding a way to help means comparing opportunities, understanding the time involved, and deciding what to do next. Patchwork brings those steps into one visual workspace. The starter catalogue uses demonstration projects, not a verified live neighbourhood feed.
-
-
-## 00:00:27,833 — WHY WEBMCP
-
-The website exposes four structured Web M C P tools to an external browser agent. There is no embedded chatbot. These tools were discovered and called on the public Cloudflare site. This video is an edited walkthrough of the captured results, not a continuous screen recording.
+Finding a useful way to help still means searching listings, comparing time, and translating intent into a practical next step. Patchwork provides one visible workspace backed by structured demonstration records.
 
 
-## 00:00:44,125 — ACTUAL TOOL CALL
+## 00:00:28,500 — DISCOVER
 
-For a gardening and food request, the agent calls search neighborhood projects with a three hour per-project limit. The website returns the orchard and pantry records and updates the visible search. The agent works with project identifiers and structured data, rather than guessing where to click.
-
-
-## 00:01:00,958 — SHARED REACT STATE
-
-Next, build action plan selects the orchard and pantry: two projects, three hours total. The tool updates the same React state used by the page. The person can inspect or remove projects manually. The agent chooses the combination; the tool reports its total.
+Discover keeps the original experience. Four WebMCP tools let an external browser agent search projects, assemble a visible plan, draft a neighbourhood need, and prepare a pledge without embedding another chatbot.
 
 
-## 00:01:16,708 — PROPOSE A LOCAL NEED
+## 00:00:42,042 — PLAN TOGETHER
 
-The agent can also draft a new need: Map accessible shade. The proposal tool returns human approval required, with published set to false. Patchwork shows the draft beside Reject and Approve controls. A tool call alone does not add it to the catalogue.
-
-
-## 00:01:31,708 — REVIEW AND RESTORE
-
-For this demonstration, browser automation exercises the separate approval button. The draft then joins the local catalogue and plan. After a reload, it is still there. Publishing here means saving on this browser and device, not sharing with other users or a community database.
+Plan together adds a separate session workspace. The person can pin projects, set a combined time budget, and ask the agent to revise around those constraints without changing the saved Discover plan.
 
 
-## 00:01:48,250 — SAFETY BOUNDARY
+## 00:00:53,833 — SCOPED NATIVE WEBMCP
 
-The pledge tool prepares a contribution draft and returns confirmation required. It does not submit anything or contact an organizer. This prototype deliberately stops at drafting. That limitation is explicit, so neither the agent nor the demonstration implies a real-world commitment was made.
-
-
-## 00:02:04,792 — IMPLEMENTATION
-
-Implementation uses React and TypeScript, built with Vinext for Cloudflare Pages. A reusable hook registers tool names, descriptions, input schemas, and handlers, with a navigator compatibility fallback and cleanup. Tool handlers update shared state; validated local storage restores supported data.
+In the deployed branch, the Codex in-app browser natively discovered exactly two tools after the tab switch: get workspace and propose plan revision. AbortSignal cleanup prevents tools from an inactive workflow remaining advertised.
 
 
-## 00:02:22,042 — TESTING AND OPEN SOURCE
+## 00:01:08,583 — BEFORE / AFTER DIFF
 
-Thirty-nine automated checks passed in the previous validated run, covering state, persistence, approval, and interface behavior. Those tests use a model-context shim. Native browser tool calls provide separate compatibility evidence. Codex helped with implementation, debugging, testing, documentation, and this walkthrough.
+The agent reads revision two, preserves the pinned pantry, and proposes replacing the orchard with the one-hour repair table. Patchwork shows the full before-and-after difference. Nothing changes until Accept revision is selected.
 
 
-## 00:02:40,875 — PATCHWORK / TRY IT YOURSELF
+## 00:01:22,167 — ACTION HISTORY
 
-Open the live site in a Web M C P capable browser and try the documented prompts. The source, MIT license, and testing guide are public. Patchwork shows how agents can reduce coordination work while people keep the final decision. Small actions. Shared momentum.
+Action history distinguishes WebMCP tool calls from interface actions and records the workspace revision. It is intentionally described as a bounded local history, not proof of identity or a tamper-proof audit log.
+
+
+## 00:01:36,000 — CONSTRAINT CONFLICT
+
+When the two-hour orchard is pinned inside a one-hour budget, the tool reports a constraint conflict. It does not silently remove the person's choice or claim that an impossible plan succeeded.
+
+
+## 00:01:47,333 — HUMAN SAFETY BOUNDARY
+
+The original safety boundary remains. Pledge support returns confirmation required and never contacts an organizer. Proposed community needs also require a separate visible approval action before device-local publication.
+
+
+## 00:02:01,292 — IMPLEMENTATION / EVIDENCE
+
+The project uses React, TypeScript, and Vinext on Cloudflare Pages. Sixty-four application checks cover both workflows. Native browser records remain separate from shim-based automation, and the branch deployment and live smoke test passed.
+
+
+## 00:02:17,375 — PATCHWORK / TRY IT YOURSELF
+
+Patchwork shows a future open web where agents reduce coordination work without taking away human agency. Open the live site, inspect the public source, and try both documented workflows. Small actions. Shared momentum.

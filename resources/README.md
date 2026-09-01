@@ -35,6 +35,7 @@ The four negotiated-planning images are reproducible 1920-pixel-wide Playwright 
 ## Documentation
 
 - [Negotiated-planning tabs and test scenarios](docs/negotiated-planning.md) — new workflow, not covered by the earlier video.
+- [Native negotiated-planning WebMCP evidence](evidence/negotiated-planning-native.json) — scoped discovery and both tool results from the deployed branch.
 
 
 - [Browser and WebMCP test guide](docs/browser-test.md)

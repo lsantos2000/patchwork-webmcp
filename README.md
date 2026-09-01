@@ -219,7 +219,7 @@ Run `/judge-swarm` in Claude Code for independent parallel reviews. The release 
 
 ## Visual evidence
 
-Screens 1–5 are supplied screenshots of the public deployment and show visible UI states, not proof of native tool calls. Screens 6 and 7 came from a native WebMCP proposal call followed by a Playwright-controlled approval-button interaction. Screens 8–11 are 1920-pixel-wide Playwright captures of the deployed negotiated-planning branch; they verify visible behavior but are not presented as native discovery evidence. Additional native tool inputs/results are saved in [the evidence JSON](resources/video/demo-assets/webmcp-evidence.json).
+Screens 1–5 are supplied screenshots of the public deployment and show visible UI states, not proof of native tool calls. Screens 6 and 7 came from a native WebMCP proposal call followed by a Playwright-controlled approval-button interaction. Screens 8–11 are 1920-pixel-wide Playwright captures of the deployed negotiated-planning branch; they verify visible behavior but are not presented as native discovery evidence. Native tool inputs/results are saved in the [Discover evidence](resources/video/demo-assets/webmcp-evidence.json) and [negotiated-planning evidence](resources/evidence/negotiated-planning-native.json).
 
 ### 1. Human-first discovery
 

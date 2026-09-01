@@ -39,7 +39,7 @@ READY means an artifact exists or evidence was recorded; it does not mean every 
 
 Discover remains the original experience. Plan together and Action history add a separate, session-only workspace with `get_workspace` and `propose_plan_revision`: pinned projects, a combined time budget, before/after proposals, revision-conflict protection, explicit UI acceptance/rejection, and undo. The current suite contains 64 application checks plus six offline publishing-script cases. See [workflow testing instructions](resources/docs/negotiated-planning.md).
 
-There are six tool definitions across the app: four registered in Discover, two in the new tabs. The recorded video and native evidence cover the earlier four-tool experience, not this extension. TODO: capture native calls for the two new tools before claiming browser-level evidence for them.
+There are six tool definitions across the app: four registered in Discover and two in the new tabs. The recorded video covers the earlier four-tool experience. The deployed negotiated-planning branch was subsequently tested with native discovery and invocation in the Codex in-app browser: exactly the two scoped tools were advertised, and both returned structured results. See [the native evidence record](resources/evidence/negotiated-planning-native.json).
 
 ## Title
 

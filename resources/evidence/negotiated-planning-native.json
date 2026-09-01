@@ -1,0 +1,41 @@
+{
+  "captured_at": "2026-09-01",
+  "deployment": "https://codex-negotiated-planning-ta.patchwork-webmcp.pages.dev/",
+  "client": "Codex in-app browser",
+  "capture_method": "Native WebMCP discovery and invocation",
+  "active_tab": "Plan together",
+  "discovered_tools": [
+    "get_workspace",
+    "propose_plan_revision"
+  ],
+  "get_workspace_result": {
+    "workspace": "negotiation",
+    "revision": 0,
+    "project_ids": ["orchard", "pantry"],
+    "pinned_project_ids": [],
+    "total_hours": 3,
+    "budget_hours": 3,
+    "storage": "session_only",
+    "approval": "separate_ui_action"
+  },
+  "propose_plan_revision_input": {
+    "base_revision": 0,
+    "project_ids": ["pantry", "repair"],
+    "reason": "Keep food access in the plan and fit the work into two hours; propose only."
+  },
+  "propose_plan_revision_result": {
+    "status": "approval_required",
+    "applied": false,
+    "total_hours": 2,
+    "proposal": {
+      "base_revision": 0,
+      "project_ids": ["pantry", "repair"],
+      "source": "WebMCP tool"
+    }
+  },
+  "verification_notes": [
+    "Only the two negotiated-planning tools were advertised after switching tabs.",
+    "The proposal updated the visible comparison surface but did not apply the revision.",
+    "No pledge, booking, organizer message, or external submission was made."
+  ]
+}

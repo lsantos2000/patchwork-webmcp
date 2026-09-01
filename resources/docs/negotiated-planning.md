@@ -46,7 +46,9 @@ Without a connected agent, **Preview an example revision** exercises the same ch
 
 The action history is a local, bounded record of the latest 50 operations—not tamper-proof audit storage or proof of human identity. “UI action” can include browser automation; “WebMCP tool” identifies the handler entry path. These features are implemented after the final recorded video; that video remains evidence for the earlier Discover workflow, not a demonstration of these tabs.
 
-Automated domain and shim-based browser tests cover pins, total-budget enforcement, stale revisions, acceptance, rejection, undo, duplicate proposals, history attribution, tab isolation, keyboard navigation, and mobile layout. A fresh native WebMCP browser run is still needed before claiming compatibility evidence for these two new tools.
+Automated domain and shim-based browser tests cover pins, total-budget enforcement, stale revisions, acceptance, rejection, undo, duplicate proposals, history attribution, tab isolation, keyboard navigation, and mobile layout.
+
+On September 1, 2026, the deployed branch was tested in the Codex in-app browser using native WebMCP discovery and invocation. After switching to **Plan together**, the browser advertised exactly `get_workspace` and `propose_plan_revision`. Both were called successfully; the second returned `approval_required`, `applied: false`, and a two-hour proposal while leaving acceptance to the visible UI. The structured record is in [negotiated-planning-native.json](../evidence/negotiated-planning-native.json).
 
 ## Reproduce the visual evidence
 

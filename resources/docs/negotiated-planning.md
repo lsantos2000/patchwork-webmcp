@@ -47,3 +47,15 @@ Without a connected agent, **Preview an example revision** exercises the same ch
 The action history is a local, bounded record of the latest 50 operations—not tamper-proof audit storage or proof of human identity. “UI action” can include browser automation; “WebMCP tool” identifies the handler entry path. These features are implemented after the final recorded video; that video remains evidence for the earlier Discover workflow, not a demonstration of these tabs.
 
 Automated domain and shim-based browser tests cover pins, total-budget enforcement, stale revisions, acceptance, rejection, undo, duplicate proposals, history attribution, tab isolation, keyboard navigation, and mobile layout. A fresh native WebMCP browser run is still needed before claiming compatibility evidence for these two new tools.
+
+## Reproduce the visual evidence
+
+Run the full suite against the intended deployment, then generate the four high-resolution captures:
+
+```powershell
+$env:PLAYWRIGHT_BASE_URL='https://your-deployment.example'
+pnpm test:e2e
+pnpm capture:evidence
+```
+
+The generated files are stored in [`resources/images/negotiated-planning`](../images/negotiated-planning). The capture script installs a controlled model-context shim so it can invoke handlers deterministically. These screenshots are automated UI evidence, not a substitute for a native compatible-browser tool-discovery record.

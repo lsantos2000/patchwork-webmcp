@@ -25,6 +25,12 @@ The video demonstrates the public Patchwork deployment, project discovery, share
 - [Human confirmation required](images/05-human-confirmation-required.png)
 - [Agent-drafted need awaiting human review](images/06-agent-drafted-need-review.png)
 - [Human-approved community project](images/07-human-approved-community-project.png)
+- [Negotiated workspace and tabs](images/negotiated-planning/01-workflow-tabs-and-workspace.png)
+- [Agent proposal before approval](images/negotiated-planning/02-agent-proposal-before-approval.png)
+- [Action history after approval](images/negotiated-planning/03-action-history-after-approval.png)
+- [Pinned-choice budget conflict](images/negotiated-planning/04-pinned-choice-budget-conflict.png)
+
+The four negotiated-planning images are reproducible 1920-pixel-wide Playwright captures from a deployed URL. Run `PLAYWRIGHT_BASE_URL=<deployment> pnpm capture:evidence` (PowerShell: `$env:PLAYWRIGHT_BASE_URL='<deployment>'; pnpm capture:evidence`). They verify visible application behavior; native WebMCP discovery is recorded separately.
 
 ## Documentation
 

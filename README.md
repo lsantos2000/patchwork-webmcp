@@ -219,7 +219,7 @@ Run `/judge-swarm` in Claude Code for independent parallel reviews. The release 
 
 ## Visual evidence
 
-Screens 1–5 are supplied screenshots of the public deployment and show visible UI states, not proof of native tool calls. Screens 6 and 7 came from a native WebMCP proposal call followed by a Playwright-controlled approval-button interaction. Additional native tool inputs/results are saved in [the evidence JSON](resources/video/demo-assets/webmcp-evidence.json).
+Screens 1–5 are supplied screenshots of the public deployment and show visible UI states, not proof of native tool calls. Screens 6 and 7 came from a native WebMCP proposal call followed by a Playwright-controlled approval-button interaction. Screens 8–11 are 1920-pixel-wide Playwright captures of the deployed negotiated-planning branch; they verify visible behavior but are not presented as native discovery evidence. Additional native tool inputs/results are saved in [the evidence JSON](resources/video/demo-assets/webmcp-evidence.json).
 
 ### 1. Human-first discovery
 
@@ -266,6 +266,30 @@ The browser agent invoked `propose_neighborhood_project` with structured data. P
 ![Human-approved community project published into Patchwork](resources/images/07-human-approved-community-project.png)
 
 The test exercised **Approve and publish** using browser automation, after which the new need joined the device-local catalogue and plan. The UI labels **Community approved** and **Approved by a person** express the intended workflow; this automated capture does not establish that a human personally clicked the control.
+
+### 8. Separate negotiated-planning workspace
+
+![Plan Together tab with constraints and comparison workspace](resources/images/negotiated-planning/01-workflow-tabs-and-workspace.png)
+
+The original Discover experience remains available while **Plan together** opens a session-only workspace with explicit pins, a combined time budget, and a separate approval surface.
+
+### 9. Agent proposal before approval
+
+![Agent proposal preserving a pinned project and fitting a two-hour budget](resources/images/negotiated-planning/02-agent-proposal-before-approval.png)
+
+The proposal preserves the pinned pantry, replaces the two-hour orchard with the one-hour repair table, and displays the before/after difference. The existing plan remains unchanged until **Accept revision** is selected.
+
+### 10. Honest action history
+
+![Action history distinguishing WebMCP tool calls from UI actions](resources/images/negotiated-planning/03-action-history-after-approval.png)
+
+The session history distinguishes `WebMCP tool` activity from `UI action` activity and records the accepted revision with **No pledge sent**. It is a bounded local activity record, not proof of human identity or tamper-proof auditing.
+
+### 11. Constraint conflict instead of silent compromise
+
+![Pinned two-hour project conflicting with a one-hour total budget](resources/images/negotiated-planning/04-pinned-choice-budget-conflict.png)
+
+When a pinned two-hour project cannot fit a one-hour budget, Patchwork reports the conflict and keeps the person’s pin. It does not silently discard the constraint or pretend the request succeeded.
 
 ## How to demo it
 

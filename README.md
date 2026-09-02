@@ -30,7 +30,7 @@ Patchwork and its WebMCP implementation were created during the August 25–Sept
 
 The default **Discover** tab retains the original application and saved plan. **Plan together** adds a separate negotiated workspace: pin projects, set a combined time budget, ask an agent for a proposed revision, compare the diff, accept or reject, and undo. **Action history** shows actual tool and UI events from that workspace.
 
-The new workspace is session-only and never overwrites the Discover plan. Its two tools, `get_workspace` and `propose_plan_revision`, are available while either new tab is active; Discover keeps its original four tools. See [the complete negotiated-planning guide](resources/docs/negotiated-planning.md) for the demo, conflict cases, and evidence limitations. The existing video predates these workflows.
+The new workspace is session-only and never overwrites the Discover plan. Its two tools, `get_workspace` and `propose_plan_revision`, are available while either new tab is active; Discover keeps its original four tools. See [the complete negotiated-planning guide](resources/docs/negotiated-planning.md) for the demo, conflict cases, and evidence limitations. The published demo video is the refreshed negotiated-planning cut and covers both workflows.
 
 ## Judge it in 60 seconds
 
@@ -56,7 +56,13 @@ Before WebMCP, an agent would typically need to read rendered text, infer contro
 
 ### How WebMCP is implemented
 
-Patchwork defines `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support` in `app/page.tsx`. The reusable `app/useWebMCP.ts` hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback, isolated registration errors, and `unregisterTool` cleanup. Tool handlers update the same React state used by the human interface and return structured results to the agent. Search and planning update local state directly. Project drafts need approval through a separate UI control before being saved to the device-local catalogue; pledges cannot be submitted.
+Six tools across two independent workflows, all registered through `document.modelContext.registerTool({...})` by the reusable `app/useWebMCP.ts` hook, with a `navigator.modelContext` compatibility fallback, isolated registration errors, and `AbortController`-based cleanup.
+
+Discover defines `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support` in `app/page.tsx`. The negotiated-planning workspace defines `get_workspace` (a structured read of revision, pins, budget, catalogue, pending proposal, and any current constraint issue) and `propose_plan_revision` (a guarded write) in `app/NegotiationWorkspace.tsx`.
+
+They are never all live at once. Registration is scoped to the active workflow — `useWebMCP(active ? tools : [])` — so an agent inspecting **Plan together** is offered exactly two tools rather than a menu of six.
+
+`app/negotiationStore.ts` enforces the guarantees that make co-editing safe, each covered by unit tests: `propose_plan_revision` requires a `base_revision` and returns `stale_revision` if a person edited the workspace first; pinned projects and the time budget are re-validated at acceptance as well as at proposal, returning `constraint_conflict` with a stated reason instead of a silent compromise; and `accept()` is reachable only from a UI action, so the agent cannot apply its own proposal. Tool handlers update the same React state the human interface renders. Project drafts need approval through a separate UI control before joining the device-local catalogue; pledges cannot be submitted.
 
 ### Device-local storage
 
@@ -218,12 +224,18 @@ Run `/judge-swarm` in Claude Code for independent parallel reviews. The release 
 - [x] Public source with setup instructions
 - [x] Open-source license
 - [x] Public live URL verified in a WebMCP-compatible browser
-- [x] Current Discover-focused YouTube upload is public and 2:57
-- [ ] Review and upload the refreshed 2:31 negotiated-planning candidate, then replace the public link
-- [ ] Confirm the final upload is Public, audible, and playable while logged out
+- [x] Refreshed 2:31 negotiated-planning cut uploaded and linked as the public demo — "Patchwork WebMCP Short Presentation - Judges Demo (Sep 1, 2026)"
+- [ ] Confirm that upload is listed **Public** rather than Unlisted, is audible, and plays while logged out
 - [ ] Devpost text and links submitted
 
 ## Visual evidence
+
+Screens 1-11 below are the original supplied captures. A separate, regenerable set covering
+negotiated planning — agent proposals, the `stale_revision` and `constraint_conflict`
+refusals, and the honest action history — lives in
+[`resources/screens/`](resources/screens/README.md) with a table of what each frame proves.
+Regenerate it with `PLAYWRIGHT_USE_LOCAL=1 pnpm run capture:screens`.
+
 
 Screens 1–5 are supplied screenshots of the public deployment and show visible UI states, not proof of native tool calls. Screens 6 and 7 came from a native WebMCP proposal call followed by a Playwright-controlled approval-button interaction. Screens 8–11 are 1920-pixel-wide Playwright captures of the deployed negotiated-planning branch; they verify visible behavior but are not presented as native discovery evidence. Native tool inputs/results are saved in the [Discover evidence](resources/video/demo-assets/webmcp-evidence.json) and [negotiated-planning evidence](resources/evidence/negotiated-planning-native.json).
 

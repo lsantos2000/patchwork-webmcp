@@ -12,5 +12,6 @@
     "mean_volume: -18.8 dB",
     "max_volume: -0.0 dB"
   ],
-  "review_required": "This refreshed negotiated-planning cut is a local upload candidate. Review it with sound, upload it as a new public YouTube video, and replace the earlier https://youtu.be/c_RzlVBHSpg references with the new URL."
+  "public_url": "https://youtu.be/so9sDOxzeJY",
+  "review_required": "Confirm the public YouTube video remains audible, captioned, under three minutes, and playable while logged out."
 }

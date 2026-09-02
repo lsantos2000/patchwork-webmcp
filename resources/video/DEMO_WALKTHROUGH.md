@@ -8,7 +8,7 @@ This is edited still-frame browser evidence with synthetic narration, not a cont
 
 [Watch the refreshed local MP4](Patchwork_WebMCP_Judges_Demo.mp4) · [Captions](Patchwork_WebMCP_Judges_Demo.srt) · [YouTube description](YOUTUBE_DESCRIPTION.md) · [Production notes](DEMO_PRODUCTION.md) · [Technical validation](demo-validation.json)
 
-The refreshed negotiated-planning cut is a local upload candidate. The existing [public YouTube video](https://youtu.be/c_RzlVBHSpg) is the earlier Discover-focused cut and remains the submission link until the owner uploads this replacement and supplies its new URL.
+The final negotiated-planning cut is public at [https://youtu.be/so9sDOxzeJY](https://youtu.be/so9sDOxzeJY) and preserved as the repository MP4 linked above.
 
 
 ## 01 / 11 — PATCHWORK / WEBMCP CHALLENGE
@@ -136,10 +136,10 @@ Patchwork shows a future open web where agents reduce coordination work without 
 
 ![Patchwork refreshed demo poster](Patchwork_WebMCP_Judges_Demo_Poster.png)
 
-- [Open or download the refreshed local MP4](../media/Patchwork_WebMCP_Judges_Demo.mp4)
+- [Open or download the final repository MP4](Patchwork_WebMCP_Judges_Demo.mp4)
 - [Download refreshed captions](Patchwork_WebMCP_Judges_Demo.srt)
-- [Watch the earlier public Discover-focused cut](https://youtu.be/c_RzlVBHSpg)
+- [Watch the final public video](https://youtu.be/so9sDOxzeJY)
 
-Duration: **2:31**. The `resources/media/` copy is the refreshed negotiated-planning upload candidate; it is not yet the file streamed at the existing YouTube URL.
+Duration: **2:31**. `resources/video/Patchwork_WebMCP_Judges_Demo.mp4` is the canonical repository copy of the published cut.
 
-The refreshed video is an edited screenshot walkthrough with synthetic narration and native WebMCP result excerpts, not a continuous screen recording. It credits Leonardo Santos-Macias. Review it locally, upload it as a new public YouTube video, then replace the earlier link throughout the documentation.
+The final video is an edited screenshot walkthrough with synthetic narration and native WebMCP result excerpts, not a continuous screen recording. It credits Leonardo Santos-Macias.

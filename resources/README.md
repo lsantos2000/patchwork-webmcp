@@ -4,14 +4,13 @@ Public submission and judging resources are grouped here by media type.
 
 ## Video
 
-- [Refreshed negotiated-planning upload candidate — 2:31](media/Patchwork_WebMCP_Judges_Demo.mp4)
-- [Current public YouTube demo — earlier 2:57 Discover-focused cut](https://youtu.be/c_RzlVBHSpg)
-- [Repository copy of the refreshed MP4](video/Patchwork_WebMCP_Judges_Demo.mp4)
+- [Final public YouTube demo — 2:31](https://youtu.be/so9sDOxzeJY)
+- [Canonical repository MP4](video/Patchwork_WebMCP_Judges_Demo.mp4)
 - [Revision production notes, narration, captions, and upload checklist](video/DEMO_PRODUCTION.md)
 - [Copy-ready YouTube description](video/YOUTUBE_DESCRIPTION.md)
 - [Complete narrated walkthrough with all 11 slide images](video/DEMO_WALKTHROUGH.md)
 
-The refreshed 2:31 revision is an edited browser-evidence walkthrough, not a continuous screen recording. It adds Plan together, scoped native tools, proposal comparison, action history, and conflict handling. Review it locally, upload it as a new public YouTube video, then replace the earlier link throughout the repository and Devpost draft.
+The final 2:31 video is an edited browser-evidence walkthrough, not a continuous screen recording. It adds Plan together, scoped native tools, proposal comparison, action history, and conflict handling.
 
 ## Images
 

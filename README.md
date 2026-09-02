@@ -4,7 +4,7 @@
 
 ## Patchwork WebMCP
 
-This [2:57 public demo video](https://youtu.be/c_RzlVBHSpg) showcases the [Patchwork public repository](https://github.com/lsantos2000/patchwork-webmcp) in response to the [WebMCP Challenge on Devpost](https://webmcp.devpost.com/?ref_feature=challenge).
+This [2:31 public demo video](https://youtu.be/so9sDOxzeJY) showcases the [Patchwork public repository](https://github.com/lsantos2000/patchwork-webmcp) in response to the [WebMCP Challenge on Devpost](https://webmcp.devpost.com/?ref_feature=challenge).
 
 Created by **Leonardo Santos-Macias** as an individual project. Patchwork is a WebMCP-powered neighbourhood planning prototype using demonstration projects. Agents prepare plans and project drafts; people review them. Pledges remain drafts, with no submission backend.
 
@@ -18,8 +18,7 @@ Patchwork and its WebMCP implementation were created during the August 25–Sept
 
 - **Creator's LinkedIn announcement:** [Leonardo Santos-Macias on Patchwork WebMCP](https://lnkd.in/p/gtW7_PhS)
 - **Live application:** [patchwork-webmcp.pages.dev](https://patchwork-webmcp.pages.dev/)
-- **Demo video:** [YouTube](https://youtu.be/c_RzlVBHSpg) · [repository copy](resources/video/Patchwork_WebMCP_Judges_Demo.mp4)
-- **Revised demo:** [Narrated MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4) · [script, captions, and upload checklist](resources/video/DEMO_PRODUCTION.md). Individual submission; edited browser evidence, not a continuous recording. Uploaded to [YouTube](https://youtu.be/c_RzlVBHSpg); owner supplied the new link.
+- **Final demo video:** [YouTube](https://youtu.be/so9sDOxzeJY) · [repository MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4) · [script, captions, and production notes](resources/video/DEMO_PRODUCTION.md). Individual submission; edited browser evidence with synthetic narration, not a continuous recording.
 - **Browser and WebMCP testing:** [resources/docs/browser-test.md](resources/docs/browser-test.md)
 - **Visual evidence:** [resources/images](resources/images)
 - **Full demo transcript with slides:** [Narrated walkthrough](resources/video/DEMO_WALKTHROUGH.md)
@@ -327,9 +326,9 @@ The expected tool sequence is:
 
 > **Browser-test note:** The exact ChatGPT in-app browser steps, Chrome WebMCP setup, Claude review instructions, evidence requirements, and pass criteria are maintained in [`resources/docs/browser-test.md`](resources/docs/browser-test.md).
 
-### Refreshed judging video candidate — 2:31
+### Final judging video — 2:31
 
-The [saved MP4](resources/media/Patchwork_WebMCP_Judges_Demo.mp4), created by **Leonardo Santos-Macias**, is the refreshed negotiated-planning upload candidate. The current [public YouTube video](https://youtu.be/c_RzlVBHSpg) is the earlier 2:57 Discover-focused cut and remains the submission link until this replacement is reviewed and uploaded.
+The [repository MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4), created by **Leonardo Santos-Macias**, is the final negotiated-planning demo published at [https://youtu.be/so9sDOxzeJY](https://youtu.be/so9sDOxzeJY).
 
 1. **0:00 — Introduction:** Patchwork, the challenge, creator credit, and human decision boundary.
 2. **0:16 — Problem:** turn fragmented opportunities into a practical plan.

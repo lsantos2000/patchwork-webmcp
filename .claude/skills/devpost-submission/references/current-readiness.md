@@ -14,8 +14,8 @@ Updated September 1, 2026. This is a source/artifact audit, not a submission rec
 - The suite contains 64 application tests, including domain tests and shim-based browser tests. Coverage includes shared search constraints, persisted time-limit validation, storage failures, pledge review, and explicit example-plan labeling.
 - Native Discover WebMCP inputs/results and capture metadata are in [webmcp-evidence.json](../../../../resources/video/demo-assets/webmcp-evidence.json).
 - The proposal approval control was exercised by browser automation; do not describe that click as a human action.
-- [Final video](https://youtu.be/c_RzlVBHSpg): owner supplied the upload. The local MP4 is 177.01 seconds, female-narrated, with the corrected creator name and cleaned-up slides.
-- [Illustrated transcript](../../../../resources/video/DEMO_WALKTHROUGH.md) and [media copy](../../../../resources/media/Patchwork_WebMCP_Judges_Demo.mp4) are available.
+- [Final video](https://youtu.be/so9sDOxzeJY): the refreshed negotiated-planning cut, "Patchwork WebMCP Short Presentation - Judges Demo (Sep 1, 2026)", verified Public by the owner on September 1. The local master is 151.38 seconds, female synthetic narration, covering both workflows.
+- [Illustrated transcript](../../../../resources/video/DEMO_WALKTHROUGH.md) and [repository copy](../../../../resources/video/Patchwork_WebMCP_Judges_Demo.mp4) are available.
 - [Submission worksheet](../../../../DEVPOST_SUBMISSION.md) holds the current owner checklist.
 
 ## Negotiated-planning extension

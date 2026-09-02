@@ -77,7 +77,7 @@ Expected sequence:
 
 ### Final demo video
 
-The [current public 2:57 video](https://youtu.be/c_RzlVBHSpg) is the earlier Discover-focused cut. Prefer the refreshed [2:31 negotiated-planning candidate](../../../resources/media/Patchwork_WebMCP_Judges_Demo.mp4) after owner review and a new public upload. Its [timestamped transcript has 11 slides](../../../resources/video/DEMO_WALKTHROUGH.md). Never claim the refreshed cut is public until the owner supplies and verifies its new URL.
+The public demo video is the refreshed 2:31 negotiated-planning cut at [https://youtu.be/so9sDOxzeJY](https://youtu.be/so9sDOxzeJY), titled "Patchwork WebMCP Short Presentation - Judges Demo (Sep 1, 2026)". The owner verified its visibility is Public on September 1. The repository copy is [Patchwork_WebMCP_Judges_Demo.mp4](../../../resources/video/Patchwork_WebMCP_Judges_Demo.mp4) and its [timestamped transcript has 11 slides](../../../resources/video/DEMO_WALKTHROUGH.md). The earlier Discover-only cut is superseded; do not cite it.
 
 ### Screenshot shot list
 

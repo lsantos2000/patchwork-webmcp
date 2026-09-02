@@ -82,7 +82,7 @@ Do not describe a source review, ordinary browser automation, or standard MCP-se
 
 ## Current behavior versus recorded demo
 
-The final video is an edited historical walkthrough. It predates the visible pledge-review card, storage-unavailable warning, and **Try an example plan** label. Its reference to 39 passing tests remains accurate for that recorded run; consult current CI for the expanded suite. Native tool inputs/results are evidence for the recorded version, not an automatic certification of every later change.
+The published demo video is the September 1 negotiated-planning cut (2:31). It is an edited still-frame walkthrough with synthetic narration, not a continuous screen recording, and it covers both workflows: the four Discover tools and the two scoped negotiated-planning tools. Its on-screen figure of 64 application checks matches the current suite. Native tool inputs and results are recorded separately in [`resources/evidence/`](../evidence/) and [`resources/video/demo-assets/`](../video/demo-assets/); they are evidence for the runs that produced them, not an automatic certification of every later change.
 
 ## Evidence recording
 

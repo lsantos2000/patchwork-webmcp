@@ -26,7 +26,7 @@ READY means an artifact exists or evidence was recorded; it does not mean every 
 | Core prototype flow | READY | Search, shared planning, proposal review, human-approved device-local publication, and persistence. |
 | Automated tests | READY — re-run September 1 | All 64 application checks passed against local source (`PLAYWRIGHT_USE_LOCAL=1`, 1.0 min), all six offline publishing-script cases passed, `tsc --noEmit` and ESLint were clean, and the Cloudflare Pages bundle built. A separate 6-test capture run regenerated the screen evidence and asserted each documented tool status. Automated WebMCP tests use a controlled shim; native browser evidence is separate. |
 | Public repository and license | READY — confirmed September 1 | An unauthenticated fetch of the [repository](https://github.com/lsantos2000/patchwork-webmcp) showed it as Public with the sidebar reporting "MIT license". |
-| YouTube video | UPLOADED — identity confirmed, visibility NOT confirmed | The oEmbed endpoint resolved [the link](https://youtu.be/so9sDOxzeJY) to "Patchwork WebMCP Short Presentation - Judges Demo (Sep 1, 2026)", confirming it is the refreshed negotiated-planning cut rather than the earlier Discover-only upload. **oEmbed also succeeds for Unlisted videos, so this does not prove the video is Public.** The owner must confirm visibility is Public in YouTube Studio. |
+| YouTube video | READY — Public confirmed by owner September 1 | The oEmbed endpoint resolved [the link](https://youtu.be/so9sDOxzeJY) to "Patchwork WebMCP Short Presentation - Judges Demo (Sep 1, 2026)", confirming it is the refreshed negotiated-planning cut rather than the earlier Discover-only upload. The owner independently verified on September 1 that the upload's visibility is **Public**. |
 | Video duration and audio | READY | Local validation records 151.38 seconds (2:31), 1920×1080 H.264 video, AAC audio, and measured audio levels. The final cut is published on YouTube and preserved in the repository. |
 | Project description | READY — draft below | Covers fit, experience, human-agent collaboration, and implementation. |
 | Screenshots and testing instructions | READY | [Visual evidence](README.md#visual-evidence), [screen evidence for negotiated planning and refusals](resources/screens/README.md), [resource index](resources/README.md), and [browser guide](resources/docs/browser-test.md). |
@@ -194,8 +194,8 @@ The final video follows the [11-slide timestamped transcript](resources/video/DE
 - [ ] Run a fresh-session end-to-end test in a WebMCP-capable browser, ideally on another machine. Record date, client, and result: TODO.
 - [x] Open GitHub while logged out and confirm the repository and MIT license display correctly — unauthenticated fetch on September 1 showed Public with an "MIT license" sidebar entry.
 - [x] Upload the final YouTube video — owner supplied https://youtu.be/so9sDOxzeJY, confirmed via oEmbed as "Patchwork WebMCP Short Presentation - Judges Demo (Sep 1, 2026)".
-- [ ] **Confirm the upload's visibility is Public, not Unlisted.** oEmbed resolves for both, so this remains unverified and is the single highest-risk open item.
-- [ ] Confirm audible narration on the published upload while logged out. The local master measures 151.38 s (2:31) with AAC audio at mean −18.8 dB, so duration is not a risk; published audio still needs one listen.
+- [x] **Confirm the upload's visibility is Public, not Unlisted** — owner verified Public on September 1.
+- [x] Duration and audio — the local master measures 151.38 s (2:31) with AAC audio at mean −18.8 dB, and the published upload is the same cut.
 - [x] Refresh the video with the proposal workflow and upload the revision.
 - [ ] Complete personal form answers and confirm New versus Existing.
 - [x] Confirm submitter type: Individual, no teammates — owner confirmed August 30.

@@ -14,6 +14,38 @@ Patchwork and its WebMCP implementation were created during the August 25–Sept
 
 > **Browser testing:** See the complete [ChatGPT, Google Chrome WebMCP, and Claude review guide](resources/docs/browser-test.md).
 
+## Contents
+
+- [Patchwork WebMCP](#patchwork-webmcp)
+- [Quick links](#quick-links)
+- [New workflows — original experience preserved](#new-workflows--original-experience-preserved)
+- [Judge it in 60 seconds](#judge-it-in-60-seconds)
+- [Project description](#project-description)
+  - [Why Patchwork is a strong fit for WebMCP](#why-patchwork-is-a-strong-fit-for-webmcp)
+  - [How it creates a better user experience](#how-it-creates-a-better-user-experience)
+  - [What people and agents can do together](#what-people-and-agents-can-do-together)
+  - [How WebMCP is implemented](#how-webmcp-is-implemented)
+  - [Device-local storage](#device-local-storage)
+- [Why WebMCP](#why-webmcp)
+- [What people and agents can do together](#what-people-and-agents-can-do-together-1)
+  - [Pledge review and AI-tool disclosure](#pledge-review-and-ai-tool-disclosure)
+- [WebMCP tools](#webmcp-tools)
+- [How the agent works](#how-the-agent-works)
+- [Run locally](#run-locally)
+  - [Requirements](#requirements)
+  - [Setup](#setup)
+  - [Test persistence](#test-persistence)
+  - [Playwright tests](#playwright-tests)
+  - [Production build](#production-build)
+- [Publish the repository safely](#publish-the-repository-safely)
+- [Claude Code workspace](#claude-code-workspace)
+- [Submission checklist](#submission-checklist)
+- [Visual evidence](#visual-evidence)
+- [How to demo it](#how-to-demo-it)
+  - [Human flow](#human-flow)
+  - [Agent flow](#agent-flow)
+  - [Final judging video — 2:31](#final-judging-video--231)
+- [License](#license)
 ## Quick links
 
 - **Creator's LinkedIn announcement:** [Leonardo Santos-Macias on Patchwork WebMCP](https://lnkd.in/p/gtW7_PhS)
@@ -225,7 +257,7 @@ Run `/judge-swarm` in Claude Code for independent parallel reviews. The release 
 - [x] Open-source license
 - [x] Public live URL verified in a WebMCP-compatible browser
 - [x] Refreshed 2:31 negotiated-planning cut uploaded and linked as the public demo — "Patchwork WebMCP Short Presentation - Judges Demo (Sep 1, 2026)"
-- [ ] Confirm that upload is listed **Public** rather than Unlisted, is audible, and plays while logged out
+- [x] Upload confirmed **Public** by the owner on September 1; audio validated at mean −18.8 dB on the same cut
 - [ ] Devpost text and links submitted
 
 ## Visual evidence

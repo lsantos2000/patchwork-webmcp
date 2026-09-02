@@ -1,0 +1,26 @@
+.workflow-tabs{display:flex;gap:8px;padding:14px 5vw;background:var(--cream);border-bottom:1px solid #18312830;flex-wrap:wrap}
+.workflow-tabs button,.negotiation button{font:inherit;font-weight:700;cursor:pointer;border:1px solid var(--ink);border-radius:8px;padding:11px 16px;background:white;color:var(--ink)}
+.workflow-tabs button[aria-selected=true],.negotiation button[aria-pressed=true]{background:var(--ink);color:var(--cream)}
+.negotiation button:disabled{cursor:not-allowed;opacity:.5}
+.negotiation{padding:45px 5vw;background:var(--cream);color:var(--ink);min-height:85vh}
+.negotiation-header{max-width:920px;margin-bottom:30px}
+.negotiation h1{font:500 clamp(38px,5vw,70px)/1.05 Georgia,serif;margin:15px 0}
+.negotiation h2{font:500 32px/1.1 Georgia,serif;margin-top:0}
+.negotiation p{line-height:1.6}
+.revision-badge{display:inline-block;border-radius:30px;padding:7px 14px;background:var(--lime);font-weight:700}
+.negotiation-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.negotiation-panel{background:#fff;border:1px solid #18312830;border-radius:12px;padding:28px;min-width:0;overflow-wrap:anywhere}
+.budget-label{display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-weight:700}
+.budget-label input{font:inherit;width:90px;padding:10px;border:1px solid var(--ink);border-radius:5px}
+.negotiation-projects article{padding:18px 0;border-top:1px solid #18312830}
+.negotiation-projects h3{margin:0 0 5px;font-size:17px}
+.negotiation-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.negotiation-note{font-size:13px;color:#42594f}
+.constraint-warning{padding:12px;background:#fff0dc;border-left:4px solid #ae542e}
+.negotiation blockquote{margin:16px 0;padding:18px;background:#eef1e7;border-left:4px solid var(--lime);line-height:1.6}
+.proposal-diff{border-top:2px solid var(--ink);margin-top:24px;padding-top:22px}
+.proposal-diff dt{font-weight:800;margin-top:14px}.proposal-diff dd{margin:5px 0;line-height:1.5}
+.negotiation-status{padding:16px;background:var(--ink);color:white;border-radius:8px}
+.action-events{padding:0;list-style:none}.action-events li{padding:18px 0;border-top:1px solid #18312830}.action-events h3{margin:8px 0}.action-events small{font-weight:700}
+@media(max-width:850px){.negotiation-grid{grid-template-columns:1fr}.negotiation{padding:30px 20px}.negotiation-panel{padding:20px}}
+[hidden]{display:none!important}

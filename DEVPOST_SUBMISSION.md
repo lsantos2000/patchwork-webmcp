@@ -8,7 +8,7 @@ This is a local draft and owner checklist, not a Devpost submission receipt. Cop
 
 The implementation and evidence are ready for your final review. Prioritize completing the form and verifying the final submission confirmation over adding features. Devpost currently reports you as **registered** for the WebMCP Challenge, with no submitted relationship returned in the August 30 check. Verify the entry's final status directly before the deadline.
 
-You uploaded the revised demo as a [new YouTube video](https://youtu.be/c_RzlVBHSpg). The revised local MP4 is validated at 177.01 seconds (2:57) and includes the proposal workflow. The earlier Public/working confirmation applied to the previous upload; confirm the new video's Public visibility, audible playback, and captions while logged out.
+The current [public YouTube video](https://youtu.be/c_RzlVBHSpg) is the earlier 2:57 Discover-focused cut. A refreshed 151.38-second negotiated-planning candidate now exists at [resources/media/Patchwork_WebMCP_Judges_Demo.mp4](resources/media/Patchwork_WebMCP_Judges_Demo.mp4). Review it with sound, upload it as a new public video, and replace all submission links with the new URL.
 
 Deadline in the organizer email: **Thursday, September 3, 2026, at 1:00 PM Pacific / 5:00 PM Atlantic (Halifax)**. Aim to finish earlier. The official Devpost website prevails if event details change.
 
@@ -21,19 +21,25 @@ READY means an artifact exists or evidence was recorded; it does not mean every 
 | Item | Status | Evidence or next action |
 | --- | --- | --- |
 | Challenge registration | READY — checked August 30 | Devpost returned the registered relationship for The WebMCP Challenge. |
-| Live application | READY — last verified August 28 | [Cloudflare Pages application](https://patchwork-webmcp.pages.dev/). |
-| Registered WebMCP tools and actual agent call | READY — native evidence recorded August 30 | All four tools have recorded inputs/results in [native evidence](resources/video/demo-assets/webmcp-evidence.json). This is separate from current automated regression coverage. |
+| Live application | READY — production release prepared September 1 | [Cloudflare Pages application](https://patchwork-webmcp.pages.dev/) is the canonical judging URL. The negotiated-planning extension has been reviewed for promotion to `main`; verify the production deployment after the merge finishes. |
+| Registered WebMCP tools and actual agent call | READY — native evidence recorded August 30 and September 1 | The four Discover tools have recorded inputs/results in [Discover evidence](resources/video/demo-assets/webmcp-evidence.json). The two negotiated-planning tools were separately discovered and invoked on the deployed branch; see [extension evidence](resources/evidence/negotiated-planning-native.json). |
 | Core prototype flow | READY | Search, shared planning, proposal review, human-approved device-local publication, and persistence. |
-| Automated tests | HISTORICAL — August 28 run | 39 checks passed locally and in [GitHub Actions](https://github.com/lsantos2000/patchwork-webmcp/actions/runs/33224017447). WebMCP automated tests use a controlled shim; native browser evidence is separate. |
+| Automated tests | READY — September 1 release run | All 64 application checks passed against the release candidate, the production build completed locally, six offline publishing-script cases remain documented separately, and Cloudflare and live-smoke checks passed. Automated WebMCP tests use a controlled shim; native browser evidence is separate. |
 | Public repository and license | READY from prior verification | [Repository](https://github.com/lsantos2000/patchwork-webmcp) and [MIT license](LICENSE). TODO: final logged-out visual check that GitHub displays the license. |
 | YouTube video | UPLOADED — owner supplied replacement link | [Watch the revised video](https://youtu.be/c_RzlVBHSpg). TODO: confirm Public visibility and logged-out playback for this new upload. |
-| Video duration and audio | PARTIAL | README records 2:57. TODO: check the YouTube player remains below 3:00 and narration is audible throughout the relevant demonstration. |
+| Video duration and audio | REFRESHED CANDIDATE READY | Local validation records 151.38 seconds (2:31), 1920×1080 H.264 video, AAC audio, and measured audio levels. TODO: owner playback review, new public YouTube upload, captions, and logged-out verification. |
 | Project description | READY — draft below | Covers fit, experience, human-agent collaboration, and implementation. |
 | Screenshots and testing instructions | READY | [Visual evidence](README.md#visual-evidence), [resource index](resources/README.md), and [browser guide](resources/docs/browser-test.md). |
-| Fresh browser / another-machine test | TODO | Run the complete task in a fresh WebMCP-capable session; record browser, date, and result. |
+| Fresh browser / another-machine test | PARTIAL | Native calls passed in the Codex in-app browser on September 1. A final logged-out or another-machine run is still recommended before submission. |
 | Submitter type and teammates | READY — owner confirmed August 30 | Individual submission; no teammates or invitations involved. |
 | Personal form answers | TODO | Complete the fields identified below; do not infer residence or personal learning outcomes. |
 | Final Devpost submission | TODO | Complete the form and retain its confirmation and public project URL. A saved draft is not sufficient. |
+
+## New workflow extension — after the recorded video
+
+Discover remains the original experience. Plan together and Action history add a separate, session-only workspace with `get_workspace` and `propose_plan_revision`: pinned projects, a combined time budget, before/after proposals, revision-conflict protection, explicit UI acceptance/rejection, and undo. The current suite contains 64 application checks plus six offline publishing-script cases. See [workflow testing instructions](resources/docs/negotiated-planning.md).
+
+There are six tool definitions across the app: four registered in Discover and two in the new tabs. The recorded video covers the earlier four-tool experience. The deployed negotiated-planning branch was subsequently tested with native discovery and invocation in the Codex in-app browser: exactly the two scoped tools were advertised, and both returned structured results. See [the native evidence record](resources/evidence/negotiated-planning-native.json).
 
 ## Title
 
@@ -67,7 +73,7 @@ An agent can translate an intention such as helping with food access and outdoor
 
 ### How WebMCP is implemented
 
-Patchwork defines four tools: `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support`. A reusable React hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback and unregister cleanup. The handlers validate or normalize inputs, update shared UI state, and return structured results. The proposal tool returns `human_approval_required` with `published: false`; only the visible human approval control adds its draft to the device-local catalogue. The pledge tool returns `confirmation_required` and does not submit a pledge.
+The original Discover workflow defines four tools: `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support`. A reusable React hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback and unregister cleanup. The handlers validate or normalize inputs, update shared UI state, and return structured results. The proposal tool returns `human_approval_required` with `published: false`; only the visible human approval control adds its draft to the device-local catalogue. The pledge tool returns `confirmation_required` and does not submit a pledge.
 
 ### Why this matters
 
@@ -86,7 +92,7 @@ Video production also used Piper synthetic narration and local FFmpeg encoding. 
 - Agent-authored project drafts with explicit approval or rejection.
 - Browser-local persistence for plans and approved community projects.
 - Structured WebMCP results and a draft-only pledge boundary.
-- Documented browser testing and 50 automated checks; consult the latest CI run for validation status.
+- Documented browser testing and 64 automated checks; consult the latest CI run for validation status.
 
 ## Architecture
 
@@ -143,9 +149,9 @@ Still images show visible states, not an entire tool-execution sequence. Pair th
 
 UPLOADED: owner supplied the [new YouTube video](https://youtu.be/c_RzlVBHSpg). Confirm Public visibility and logged-out playback for this replacement upload. [Repository MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4) is available as a supporting asset, not a replacement for the YouTube link.
 
-Final demo (owner-supplied YouTube link above): [Narrated MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4), [script and captions](resources/video/DEMO_PRODUCTION.md), and [technical validation](resources/video/demo-validation.json). It covers native WebMCP search, planning, proposal review, automated exercise of the approval control, reload persistence, and draft-only pledges. It uses edited still-frame evidence and local Piper synthetic narration, not continuous screen recording. This is an **individual submission**, with no teammates.
+Refreshed demo candidate: [Narrated MP4](resources/video/Patchwork_WebMCP_Judges_Demo.mp4), [script and captions](resources/video/DEMO_PRODUCTION.md), and [technical validation](resources/video/demo-validation.json). It covers Discover, scoped native negotiated-planning tools, before/after proposal review, action history, constraint conflicts, and draft-only pledges. It uses edited still-frame evidence and local Piper synthetic narration, not continuous screen recording. This is an **individual submission**, with no teammates.
 
-TODO: watch and listen to the uploaded revision, check captions and Public visibility while logged out, and use https://youtu.be/c_RzlVBHSpg in the Devpost submission. Local repository references now point to the new video. Include Piper synthetic narration and Codex-assisted video production in the AI-tools answer.
+TODO: watch and listen to the refreshed local revision, upload it as a new public YouTube video, check captions and logged-out playback, then replace https://youtu.be/c_RzlVBHSpg throughout the repository and Devpost submission. Include Piper synthetic narration and Codex-assisted video production in the AI-tools answer.
 
 The final video follows the [11-slide timestamped transcript](resources/video/DEMO_WALKTHROUGH.md), not the earlier optional recording outlines. Its 39-test reference is historical. The current application additionally displays pledge details for local review, warns when storage is unavailable, and labels its example-plan button explicitly.
 

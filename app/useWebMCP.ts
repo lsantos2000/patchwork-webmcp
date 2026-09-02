@@ -14,7 +14,7 @@ export interface WebMCPTool {
 }
 
 type ModelContext = {
-  registerTool: (tool: WebMCPTool) => void;
+  registerTool: (tool: WebMCPTool, options?: { signal?: AbortSignal }) => void;
   unregisterTool?: (name: string) => unknown;
 };
 
@@ -28,6 +28,7 @@ export function useWebMCP(tools: WebMCPTool[]) {
     const context = document.modelContext || navigator.modelContext;
     if (!context || typeof context.registerTool !== 'function') return;
 
+    const lifecycle = new AbortController();
     const registered: string[] = [];
     for (const tool of tools) {
       try {
@@ -47,9 +48,9 @@ export function useWebMCP(tools: WebMCPTool[]) {
             description: registration.description,
             inputSchema: registration.inputSchema,
             execute: registration.execute,
-          });
+          }, { signal: lifecycle.signal });
         } else {
-          context.registerTool(registration);
+          context.registerTool(registration, { signal: lifecycle.signal });
         }
         registered.push(tool.name);
       } catch (error) {
@@ -58,6 +59,9 @@ export function useWebMCP(tools: WebMCPTool[]) {
     }
 
     return () => {
+      // Current WebMCP unregisters imperative tools when this signal aborts.
+      // The named method remains as a compatibility fallback for early clients.
+      lifecycle.abort();
       if (typeof context.unregisterTool !== 'function') return;
       for (const name of registered) {
         try {

@@ -12,7 +12,8 @@
     "start": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "test:e2e": "playwright test",
-    "test:e2e:install": "playwright install chromium"
+    "test:e2e:install": "playwright install chromium",
+    "capture:evidence": "node scripts/capture-negotiated-evidence.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

@@ -4,16 +4,14 @@ Public submission and judging resources are grouped here by media type.
 
 ## Video
 
-- [Saved submission video in the media folder](media/Patchwork_WebMCP_Judges_Demo.mp4)
-- [Public YouTube demo — 2:57](https://youtu.be/c_RzlVBHSpg)
-- [Repository MP4](video/Patchwork_WebMCP_Judges_Demo.mp4)
-- [Revised narrated judging demo](video/Patchwork_WebMCP_Judges_Demo.mp4)
+- [Refreshed negotiated-planning upload candidate — 2:31](media/Patchwork_WebMCP_Judges_Demo.mp4)
+- [Current public YouTube demo — earlier 2:57 Discover-focused cut](https://youtu.be/c_RzlVBHSpg)
+- [Repository copy of the refreshed MP4](video/Patchwork_WebMCP_Judges_Demo.mp4)
 - [Revision production notes, narration, captions, and upload checklist](video/DEMO_PRODUCTION.md)
+- [Copy-ready YouTube description](video/YOUTUBE_DESCRIPTION.md)
 - [Complete narrated walkthrough with all 11 slide images](video/DEMO_WALKTHROUGH.md)
 
-The revision is an edited browser-evidence walkthrough, not a continuous screen recording. It is prepared for an individual submission. The owner uploaded it as a new YouTube video; use the link above for the submission.
-
-The video demonstrates the public Patchwork deployment, project discovery, shared planning, device-local persistence, and the human confirmation boundary.
+The refreshed 2:31 revision is an edited browser-evidence walkthrough, not a continuous screen recording. It adds Plan together, scoped native tools, proposal comparison, action history, and conflict handling. Review it locally, upload it as a new public YouTube video, then replace the earlier link throughout the repository and Devpost draft.
 
 ## Images
 
@@ -25,8 +23,18 @@ The video demonstrates the public Patchwork deployment, project discovery, share
 - [Human confirmation required](images/05-human-confirmation-required.png)
 - [Agent-drafted need awaiting human review](images/06-agent-drafted-need-review.png)
 - [Human-approved community project](images/07-human-approved-community-project.png)
+- [Negotiated workspace and tabs](images/negotiated-planning/01-workflow-tabs-and-workspace.png)
+- [Agent proposal before approval](images/negotiated-planning/02-agent-proposal-before-approval.png)
+- [Action history after approval](images/negotiated-planning/03-action-history-after-approval.png)
+- [Pinned-choice budget conflict](images/negotiated-planning/04-pinned-choice-budget-conflict.png)
+
+The four negotiated-planning images are reproducible 1920-pixel-wide Playwright captures from a deployed URL. Run `PLAYWRIGHT_BASE_URL=<deployment> pnpm capture:evidence` (PowerShell: `$env:PLAYWRIGHT_BASE_URL='<deployment>'; pnpm capture:evidence`). They verify visible application behavior; native WebMCP discovery is recorded separately.
 
 ## Documentation
+
+- [Negotiated-planning tabs and test scenarios](docs/negotiated-planning.md) — not covered by the current public video; covered by the refreshed local candidate.
+- [Native negotiated-planning WebMCP evidence](evidence/negotiated-planning-native.json) — scoped discovery and both tool results from the deployed branch.
+
 
 - [Browser and WebMCP test guide](docs/browser-test.md)
 - [Main project README](../README.md)

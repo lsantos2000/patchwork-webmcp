@@ -44,3 +44,6 @@ next-env.d.ts
 /work/
 *.token
 credentials.json
+
+# Local Claude project handoff skill; intentionally not committed.
+/.claude/skills/patchwork-project-handoff/

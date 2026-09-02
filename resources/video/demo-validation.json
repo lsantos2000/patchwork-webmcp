@@ -1,16 +1,16 @@
 {
   "file": "Patchwork_WebMCP_Judges_Demo.mp4",
-  "duration_seconds": 177.01,
+  "duration_seconds": 151.38,
   "under_three_minutes": true,
   "resolution": "1920x1080",
   "video_codec": "H.264",
   "audio_codec": "AAC",
   "voice": "Piper en_US-ljspeech-high, female synthetic narration; public-domain LJ Speech dataset",
   "scene_count": 11,
-  "format": "Edited still-frame walkthrough with actual WebMCP result excerpts, not a continuous screen recording",
+  "format": "Edited still-frame walkthrough with native WebMCP result excerpts and labeled automated UI captures, not a continuous screen recording",
   "audio_measurements": [
-    "mean_volume: -18.6 dB",
+    "mean_volume: -18.8 dB",
     "max_volume: -0.0 dB"
   ],
-  "review_required": "Owner supplied the uploaded video URL: https://youtu.be/c_RzlVBHSpg. Verify Public visibility, playback, and captions on YouTube; this script does not upload videos."
+  "review_required": "This refreshed negotiated-planning cut is a local upload candidate. Review it with sound, upload it as a new public YouTube video, and replace the earlier https://youtu.be/c_RzlVBHSpg references with the new URL."
 }

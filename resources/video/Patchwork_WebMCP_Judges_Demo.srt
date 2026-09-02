@@ -1,171 +1,131 @@
 1
-00:00:00,000 --> 00:00:04,242
-Patchwork turns good intentions into a practical neighbourhood plan. I built this
+00:00:00,000 --> 00:00:06,069
+Patchwork is a WebMCP-powered neighbourhood action exchange, created by Leonardo Santos-Macias. It
 
 2
-00:00:04,242 --> 00:00:08,485
-individual project to explore an open web where agents help people organize
+00:00:06,069 --> 00:00:12,138
+helps people and browser agents turn good intentions into realistic plans while
 
 3
-00:00:08,485 --> 00:00:11,667
-and create, while the person keeps the final decision.
+00:00:12,138 --> 00:00:14,667
+keeping consequential decisions explicitly human-controlled.
 
 4
-00:00:12,667 --> 00:00:17,140
-Finding a way to help means comparing opportunities, understanding the time involved,
+00:00:15,667 --> 00:00:20,400
+Finding a useful way to help still means searching listings, comparing time,
 
 5
-00:00:17,140 --> 00:00:21,614
-and deciding what to do next. Patchwork brings those steps into one
+00:00:20,400 --> 00:00:25,133
+and translating intent into a practical next step. Patchwork provides one visible
 
 6
-00:00:21,614 --> 00:00:26,088
-visual workspace. The starter catalogue uses demonstration projects, not a verified live
+00:00:25,133 --> 00:00:27,500
+workspace backed by structured demonstration records.
 
 7
-00:00:26,088 --> 00:00:26,833
-neighbourhood feed.
+00:00:28,500 --> 00:00:33,355
+Discover keeps the original experience. Four WebMCP tools let an external browser
 
 8
-00:00:27,833 --> 00:00:31,822
-The website exposes four structured Web M C P tools to an
+00:00:33,355 --> 00:00:38,210
+agent search projects, assemble a visible plan, draft a neighbourhood need, and
 
 9
-00:00:31,822 --> 00:00:35,812
-external browser agent. There is no embedded chatbot. These tools were discovered
+00:00:38,210 --> 00:00:41,042
+prepare a pledge without embedding another chatbot.
 
 10
-00:00:35,812 --> 00:00:39,801
-and called on the public Cloudflare site. This video is an edited
+00:00:42,042 --> 00:00:46,089
+Plan together adds a separate session workspace. The person can pin projects,
 
 11
-00:00:39,801 --> 00:00:43,125
-walkthrough of the captured results, not a continuous screen recording.
+00:00:46,089 --> 00:00:50,135
+set a combined time budget, and ask the agent to revise around
 
 12
-00:00:44,125 --> 00:00:48,255
-For a gardening and food request, the agent calls search neighborhood projects
+00:00:50,135 --> 00:00:52,833
+those constraints without changing the saved Discover plan.
 
 13
-00:00:48,255 --> 00:00:52,386
-with a three hour per-project limit. The website returns the orchard and
+00:00:53,833 --> 00:00:58,833
+In the deployed branch, the Codex in-app browser natively discovered exactly two
 
 14
-00:00:52,386 --> 00:00:56,516
-pantry records and updates the visible search. The agent works with project
+00:00:58,833 --> 00:01:03,833
+tools after the tab switch: get workspace and propose plan revision. AbortSignal
 
 15
-00:00:56,516 --> 00:00:59,958
-identifiers and structured data, rather than guessing where to click.
+00:01:03,833 --> 00:01:07,583
+cleanup prevents tools from an inactive workflow remaining advertised.
 
 16
-00:01:00,958 --> 00:01:05,075
-Next, build action plan selects the orchard and pantry: two projects, three
+00:01:08,583 --> 00:01:13,302
+The agent reads revision two, preserves the pinned pantry, and proposes replacing
 
 17
-00:01:05,075 --> 00:01:09,191
-hours total. The tool updates the same React state used by the
+00:01:13,302 --> 00:01:18,021
+the orchard with the one-hour repair table. Patchwork shows the full before-and-after
 
 18
-00:01:09,191 --> 00:01:13,307
-page. The person can inspect or remove projects manually. The agent chooses
+00:01:18,021 --> 00:01:21,167
+difference. Nothing changes until Accept revision is selected.
 
 19
-00:01:13,307 --> 00:01:15,708
-the combination; the tool reports its total.
+00:01:22,167 --> 00:01:26,979
+Action history distinguishes WebMCP tool calls from interface actions and records the
 
 20
-00:01:16,708 --> 00:01:20,615
-The agent can also draft a new need: Map accessible shade. The
+00:01:26,979 --> 00:01:31,792
+workspace revision. It is intentionally described as a bounded local history, not
 
 21
-00:01:20,615 --> 00:01:24,522
-proposal tool returns human approval required, with published set to false. Patchwork
+00:01:31,792 --> 00:01:35,000
+proof of identity or a tamper-proof audit log.
 
 22
-00:01:24,522 --> 00:01:28,429
-shows the draft beside Reject and Approve controls. A tool call alone
+00:01:36,000 --> 00:01:40,000
+When the two-hour orchard is pinned inside a one-hour budget, the tool
 
 23
-00:01:28,429 --> 00:01:30,708
-does not add it to the catalogue.
+00:01:40,000 --> 00:01:44,000
+reports a constraint conflict. It does not silently remove the person's choice
 
 24
-00:01:31,708 --> 00:01:35,947
-For this demonstration, browser automation exercises the separate approval button. The draft
+00:01:44,000 --> 00:01:46,333
+or claim that an impossible plan succeeded.
 
 25
-00:01:35,947 --> 00:01:40,186
-then joins the local catalogue and plan. After a reload, it is
+00:01:47,333 --> 00:01:52,887
+The original safety boundary remains. Pledge support returns confirmation required and never
 
 26
-00:01:40,186 --> 00:01:44,424
-still there. Publishing here means saving on this browser and device, not
+00:01:52,887 --> 00:01:58,440
+contacts an organizer. Proposed community needs also require a separate visible approval
 
 27
-00:01:44,424 --> 00:01:47,250
-sharing with other users or a community database.
+00:01:58,440 --> 00:02:00,292
+action before device-local publication.
 
 28
-00:01:48,250 --> 00:01:52,587
-The pledge tool prepares a contribution draft and returns confirmation required. It
+00:02:01,292 --> 00:02:06,777
+The project uses React, TypeScript, and Vinext on Cloudflare Pages. Sixty-four application
 
 29
-00:01:52,587 --> 00:01:56,924
-does not submit anything or contact an organizer. This prototype deliberately stops
+00:02:06,777 --> 00:02:12,261
+checks cover both workflows. Native browser records remain separate from shim-based automation,
 
 30
-00:01:56,924 --> 00:02:01,262
-at drafting. That limitation is explicit, so neither the agent nor the
+00:02:12,261 --> 00:02:16,375
+and the branch deployment and live smoke test passed.
 
 31
-00:02:01,262 --> 00:02:03,792
-demonstration implies a real-world commitment was made.
+00:02:17,375 --> 00:02:22,087
+Patchwork shows a future open web where agents reduce coordination work without
 
 32
-00:02:04,792 --> 00:02:09,667
-Implementation uses React and TypeScript, built with Vinext for Cloudflare Pages. A
+00:02:22,087 --> 00:02:26,799
+taking away human agency. Open the live site, inspect the public source,
 
 33
-00:02:09,667 --> 00:02:14,542
-reusable hook registers tool names, descriptions, input schemas, and handlers, with a
-
-34
-00:02:14,542 --> 00:02:19,417
-navigator compatibility fallback and cleanup. Tool handlers update shared state; validated local
-
-35
-00:02:19,417 --> 00:02:21,042
-storage restores supported data.
-
-36
-00:02:22,042 --> 00:02:27,392
-Thirty-nine automated checks passed in the previous validated run, covering state, persistence,
-
-37
-00:02:27,392 --> 00:02:32,742
-approval, and interface behavior. Those tests use a model-context shim. Native browser
-
-38
-00:02:32,742 --> 00:02:38,092
-tool calls provide separate compatibility evidence. Codex helped with implementation, debugging, testing,
-
-39
-00:02:38,092 --> 00:02:39,875
-documentation, and this walkthrough.
-
-40
-00:02:40,875 --> 00:02:44,989
-Open the live site in a Web M C P capable browser
-
-41
-00:02:44,989 --> 00:02:49,102
-and try the documented prompts. The source, MIT license, and testing guide
-
-42
-00:02:49,102 --> 00:02:53,216
-are public. Patchwork shows how agents can reduce coordination work while people
-
-43
-00:02:53,216 --> 00:02:55,958
-keep the final decision. Small actions. Shared momentum.
+00:02:26,799 --> 00:02:30,333
+and try both documented workflows. Small actions. Shared momentum.

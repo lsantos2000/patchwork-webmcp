@@ -27,8 +27,11 @@ export async function openPatchwork(page: Page, storage: StorageSeed = {}) {
     Object.defineProperty(document, 'modelContext', {
       configurable: true,
       value: {
-        registerTool(tool: RegisteredTool) {
+        registerTool(tool: RegisteredTool, options?: { signal?: AbortSignal }) {
           window.__patchworkTools[tool.name] = tool;
+          options?.signal?.addEventListener('abort', () => {
+            delete window.__patchworkTools[tool.name];
+          }, { once: true });
         },
         unregisterTool(name: string) {
           delete window.__patchworkTools[name];

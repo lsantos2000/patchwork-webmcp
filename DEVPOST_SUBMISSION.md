@@ -17,17 +17,23 @@ Created by **Leonardo Santos-Macias** as an individual submission to the WebMCP 
 
 ## Inspiration
 
-People often want to help their neighbourhood but must compare scattered opportunities, interpret time requirements, and translate a broad intention into a realistic plan. Conventional recommendation experiences often stop at a list of links, leaving the person to repeat the planning work elsewhere.
+People often want to help their neighbourhoods but struggle to turn good intentions into a practical plan. Finding opportunities, comparing them, and deciding what fits into a free afternoon takes effort.
 
-Patchwork explores a more useful open web: a website that remains welcoming and fully usable by people while exposing clear, structured capabilities to agents. The agent can reduce coordination work, but the person can always see, edit, accept, or reject the result.
+The push to actually build it was personal. Our newborn, Ellie Victoria, arrived premature—a fighter from the first day—and is growing into a wonderful child. Watching my wife become a mother, with our other children and our family around us, changed how I think about spare time: it stopped being an afternoon and became the gaps between feeds, school runs, and appointments.
+
+That is what most volunteering asks you to have, and what a new parent never does. So Patchwork starts from a smaller question: what if an agent did the searching, comparing, and fitting-it-together work, and handed back something small enough to actually do—while the person kept every decision that mattered?
+
+Small actions. Shared momentum.
 
 ## What it does
 
-Patchwork turns neighbourhood opportunities into a shared visual workspace. A person can browse and filter demonstration projects manually, or ask a compatible browser agent to search the same catalogue and assemble an achievable plan.
+Patchwork is a WebMCP-powered neighbourhood action prototype. People can explore example community projects, filter opportunities, and assemble a plan that fits their interests and available time.
 
-The original **Discover** experience supports intent-aware project discovery, an editable weekend plan, device-local persistence, community-project drafts, and draft-only pledges. The additional **Plan together** workspace demonstrates negotiated planning: the person sets a time budget, selects and pins projects, and reviews the agent's proposed before-and-after revision. **Action history** records accepted or rejected planning actions without pretending that a real-world pledge was sent.
+A compatible browser agent can work with the same project data and the same visible plan through structured tools. Instead of merely describing what someone could do, it can help organize those opportunities inside the application.
 
-An agent can also structure a new local need as a project draft. That draft stays outside the catalogue until the person explicitly approves it. Pledge preparation follows the same safety boundary: the agent can create a draft, but Patchwork never submits a commitment.
+The **Discover** tab covers intent-aware project search, an editable weekend plan, device-local persistence, community-project drafts, and draft-only pledges. **Plan together** adds negotiated planning: the person sets a time budget, selects and pins projects, and reviews the agent's proposed before-and-after revision. **Action history** records accepted and rejected planning actions without pretending a real-world pledge was sent.
+
+The boundary is deliberate: preparing a plan is not making a commitment. An agent can propose changes, draft a new local need, and prepare a pledge draft, while approval remains a separate step in the interface. The prototype does not send pledges to real organizations.
 
 ## Why WebMCP
 
@@ -37,54 +43,63 @@ Without WebMCP, an agent would need to infer meaning from visual pages, scrape t
 
 This creates a continuous human-agent experience. A person can inspect an agent-created plan, adjust it manually, preserve a pinned choice, reject a proposed revision, approve a community-project draft, or undo an accepted workspace change without transferring information between a chat response and another form.
 
-## How we built it
+## How I built it
 
-Patchwork uses React and TypeScript for the interface and shared application state. Vinext creates the Cloudflare Pages production build. Project-domain helpers provide deterministic catalogue search, planning, constraint checks, and persisted-data validation.
+I built Patchwork with React and TypeScript, using Vinext for the Cloudflare Pages production build. Project-domain helpers provide deterministic catalogue search, planning, constraint checks, and persisted-data validation.
 
-A reusable React hook registers WebMCP tools with `document.modelContext.registerTool({...})`, provides a `navigator.modelContext` compatibility fallback, and unregisters tools during cleanup. Each handler validates or normalizes inputs, calls the relevant domain helper, updates shared React state, and returns a structured response.
+A reusable React hook registers WebMCP tools with `document.modelContext.registerTool({...})`, falls back to `navigator.modelContext`, and unregisters tools during cleanup. Each handler validates or normalizes its input, calls the relevant domain helper, updates shared React state, and returns a structured response—so agent actions and manual interactions stay connected.
 
-The Discover workflow provides:
+The WebMCP integration exposes six tools, scoped to the active workflow. Discover provides:
 
 - `search_neighborhood_projects`
 - `build_action_plan`
 - `propose_neighborhood_project`
 - `pledge_support`
 
-The Plan together workspace provides:
+Plan together and Action history provide:
 
 - `get_workspace`
 - `propose_plan_revision`
 
-Tool availability is scoped to the active workflow. Proposal results include revision information and a before-and-after comparison. Stale revisions and impossible constraints produce explicit conflicts rather than silent compromises.
+Proposal results include revision information and a before-and-after comparison. Stale revisions and impossible constraints produce explicit conflicts rather than silent compromises.
 
-The human-control boundary is deliberate. `propose_neighborhood_project` returns `human_approval_required` with `published: false`; only the visible approval control adds the draft to the browser-local catalogue. `pledge_support` returns `confirmation_required` and never delivers a pledge.
+The human-control boundary is built into the results. `propose_neighborhood_project` returns `human_approval_required` with `published: false`; only the visible approval control adds the draft to the browser-local catalogue. `pledge_support` returns `confirmation_required` and never delivers a pledge.
 
-## Challenges we ran into
+Local browser storage preserves the Discover plan between visits on the same device. I also added automated tests, browser-testing instructions, screenshots, and submission documentation. The source is publicly available under the MIT license.
 
-The most important challenge was making agent actions feel native to the visual product rather than bolting a tool layer onto a separate interface. WebMCP handlers therefore update the same React state as human controls, so both participants share one visible source of truth.
+## Challenges I ran into
 
-State synchronization also required care. A plan must remain consistent when it is edited manually, created through a WebMCP tool, restored from local storage, or revised in the negotiated workspace. The implementation validates persisted records and uses workspace revision numbers to prevent stale agent proposals from overwriting newer human choices.
+One challenge was making agent actions understandable. A successful tool response is not enough—the person needs to see what changed and keep the ability to review it. WebMCP handlers therefore update the same React state as the human controls, so both participants share one visible source of truth.
 
-Another challenge was testing an emerging browser capability. The project combines native WebMCP discovery and invocation evidence with Playwright regression tests that use a controlled model-context shim. These forms of evidence are documented separately so automated coverage is not presented as native-browser proof.
+Another was distinguishing discovery from planning: finding projects that each fit a time limit does not automatically produce a combined plan within that limit.
 
-## Accomplishments
+State synchronization also required care. A plan must stay consistent when it is edited manually, created through a WebMCP tool, restored from local storage, or revised in the negotiated workspace. The implementation validates persisted records and uses workspace revision numbers so a stale agent proposal cannot overwrite a newer human choice.
 
-- A deployed, open-source WebMCP application that remains fully usable without an agent.
+I also fixed production styling problems and state disappearing after navigation. Throughout, I worked to distinguish actual browser evidence from automated tests and edited demonstrations.
+
+## Accomplishments I'm proud of
+
+I'm proud of building a shared interface where people and agents work with the same plan, rather than two separate experiences.
+
+Patchwork demonstrates why WebMCP is useful here: structured tools let an agent use the application's own data and actions without relying on fragile page scraping. Review and consent are part of the design, alongside persistence, testing, and documentation.
+
+- A deployed, open-source WebMCP application that stays fully usable without an agent.
 - Six structured tools across two scoped workflows.
-- Shared human-agent state instead of disconnected conversational recommendations.
-- Explicit approval, rejection, conflict, and undo behavior.
+- Explicit approval, rejection, conflict, and undo behaviour.
 - Device-local persistence with validation and graceful storage-unavailable messaging.
 - A responsive interface with production styling on Cloudflare Pages.
-- Comprehensive automated coverage plus recorded native WebMCP evidence.
+- Automated coverage plus separately recorded native WebMCP evidence.
 - Clear prototype boundaries: demonstration data, browser-local publication, and no real pledge delivery.
 
-## What we learned
+## What I learned
 
-WebMCP is most compelling when it exposes meaningful domain actions rather than recreating low-level clicks. Small, well-described tools give an agent enough structure to help while keeping application rules in the application.
+I learned that useful agent integration depends as much on clear boundaries as on capability. An agent should understand what an action changes, what stays a draft, and when approval is required.
 
-Human control works best when it is visible in both the protocol result and the interface. Returning `confirmation_required` is valuable, but pairing it with an editable on-page draft makes the safety boundary understandable.
+WebMCP is most compelling when it exposes meaningful domain actions rather than recreating low-level clicks. Small, well-described tools give an agent enough structure to help while keeping the application's rules in the application.
 
-We also learned that honest constraints can improve an agent experience. A structured conflict response is more useful than silently dropping a pinned project or exceeding a time budget, and revision tokens protect a person's newer decisions from stale proposals.
+Honest constraints also improve the agent experience. A structured conflict response is more useful than silently dropping a pinned project or exceeding a time budget, and revision tokens protect a person's newer decisions from stale proposals.
+
+I also learned that a convincing demonstration must make those distinctions visible. Good documentation and reproducible tests help explain both what works and what remains a prototype.
 
 ## How AI tools were used
 
@@ -176,6 +191,10 @@ WebMCP, React, TypeScript, Vinext, Cloudflare Pages, Playwright, Node.js, pnpm, 
 - Catalogue search uses deterministic text matching. Conversational interpretation comes from the external browser agent.
 - Automated WebMCP tests use a controlled model-context shim and complement, rather than replace, native-browser testing.
 
-## What's next
+## What's next for Patchwork WebMCP
 
-Future versions could connect to verified community organizations, provide shared accounts and cross-device storage, support organizer moderation, and add privacy-preserving project feeds. The same WebMCP approach could then let agents coordinate across multiple trusted local services while keeping every public action and real-world commitment explicitly human-approved.
+Next, I would connect Patchwork to real community organizers and verified opportunities, add optional cross-device storage, and build a backend for explicitly approved commitments.
+
+I would also expand accessibility testing and native WebMCP browser coverage.
+
+The goal stays the same: make it easier to contribute locally, with agents handling the planning work and people deciding what they commit to.

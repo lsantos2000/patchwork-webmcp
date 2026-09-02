@@ -4,11 +4,11 @@
 
 ## Patchwork WebMCP
 
-This [2:31 public demo video](https://youtu.be/so9sDOxzeJY) showcases the [Patchwork public repository](https://github.com/lsantos2000/patchwork-webmcp) in response to the [WebMCP Challenge on Devpost](https://webmcp.devpost.com/?ref_feature=challenge).
+This [2:31 public demo video](https://youtu.be/so9sDOxzeJY) showcases the [Patchwork public repository](https://github.com/lsantos2000/patchwork-webmcp) in response to the [WebMCP Challenge on Devpost](https://webmcp.devpost.com/).
 
 Created by **Leonardo Santos-Macias** as an individual project. Patchwork is a WebMCP-powered neighbourhood planning prototype using demonstration projects. Agents prepare plans and project drafts; people review them. Pledges remain drafts, with no submission backend.
 
-Built for the **WebMCP Challenge** (submissions close September 3 at 1:00 PM PT).
+Built for the [**WebMCP Challenge**](https://webmcp.devpost.com/) (submissions close September 3 at 1:00 PM PT).
 
 Patchwork and its WebMCP implementation were created during the August 25–September 3, 2026 submission period.
 

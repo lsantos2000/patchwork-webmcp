@@ -44,4 +44,4 @@ The four negotiated-planning images are reproducible 1920-pixel-wide Playwright 
 
 - Live application: https://patchwork-webmcp.pages.dev/
 - Public repository: https://github.com/lsantos2000/patchwork-webmcp
-- WebMCP Challenge: https://webmcp.devpost.com/?ref_feature=challenge
+- WebMCP Challenge: https://webmcp.devpost.com/

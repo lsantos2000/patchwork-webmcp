@@ -13,7 +13,7 @@ Patchwork is an open-source neighbourhood planning workspace where people and br
 - **Visual evidence:** [README.md#visual-evidence](README.md#visual-evidence)
 - **License:** [MIT](LICENSE)
 
-Created by **Leonardo Santos-Macias** as an individual submission to the WebMCP Challenge.
+Created by **Leonardo Santos-Macias** as an individual submission to the [WebMCP Challenge](https://webmcp.devpost.com/).
 
 ## Inspiration
 

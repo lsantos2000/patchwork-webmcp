@@ -142,14 +142,13 @@ The expected collaboration is **search → visible results → shared plan**. As
 ### Requirements
 
 - Node.js 22.13 or newer
-- pnpm available on PATH when using `PLAYWRIGHT_USE_LOCAL=1` (the test configuration starts `pnpm dev`)
-- npm 10 or newer
+- pnpm 11.19 or newer, on PATH (`npm install -g pnpm@11.19.0`; Node 25+ no longer ships corepack). Required for `PLAYWRIGHT_USE_LOCAL=1`, whose test configuration starts `pnpm dev`.
 
 ### Setup
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -171,9 +170,9 @@ For exact prompts, expected tool calls, Claude review instructions, recording re
 The `tests/` folder contains 64 focused TypeScript checks organized into `unit/`, `e2e/`, and reusable `fixtures/`. They verify project-domain rules, production styling, all six WebMCP definitions across their scoped workflows through a controlled model-context test shim, valid and malformed tool inputs, agent-to-UI state updates, negotiated proposals and conflicts, approval, rejection and undo, device-local restoration and corruption recovery, keyboard accessibility, responsive layouts, human plan controls, and the pledge confirmation boundary.
 
 ```bash
-npm install
-npm run test:e2e:install
-npm run test:e2e
+pnpm install
+pnpm run test:e2e:install
+pnpm test:e2e
 ```
 
 Set `PLAYWRIGHT_USE_LOCAL=1` to let Playwright start and test the current source, or set `PLAYWRIGHT_BASE_URL` to test another deployment. GitHub Actions tests the checked-out source on pushes and pull requests to `main`, retaining its HTML report when the job completes. With neither variable set, the suite targets the public Cloudflare Pages URL.
@@ -183,7 +182,7 @@ Six additional offline PowerShell cases exercise the publishing helper without r
 ### Production build
 
 ```bash
-npm run build:pages
+pnpm run build:pages
 ```
 
 The application is designed for the Cloudflare runtime and is deployed to Cloudflare Pages for the challenge.

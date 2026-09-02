@@ -6,7 +6,7 @@ This document pairs all 11 corrected video slides with the complete spoken narra
 
 This is edited still-frame browser evidence with synthetic narration, not a continuous screen recording. Native WebMCP result excerpts were captured from the deployed application; automated UI captures are identified separately.
 
-[Watch the refreshed local MP4](Patchwork_WebMCP_Judges_Demo.mp4) · [Captions](Patchwork_WebMCP_Judges_Demo.srt) · [Production notes](DEMO_PRODUCTION.md) · [Technical validation](demo-validation.json)
+[Watch the refreshed local MP4](Patchwork_WebMCP_Judges_Demo.mp4) · [Captions](Patchwork_WebMCP_Judges_Demo.srt) · [YouTube description](YOUTUBE_DESCRIPTION.md) · [Production notes](DEMO_PRODUCTION.md) · [Technical validation](demo-validation.json)
 
 The refreshed negotiated-planning cut is a local upload candidate. The existing [public YouTube video](https://youtu.be/c_RzlVBHSpg) is the earlier Discover-focused cut and remains the submission link until the owner uploads this replacement and supplies its new URL.
 

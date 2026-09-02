@@ -10,6 +10,7 @@ The local video and images have been regenerated to credit **Leonardo Santos-Mac
 - [Revised narrated MP4](Patchwork_WebMCP_Judges_Demo.mp4)
 - [Timestamped narration script](DEMO_NARRATION.md)
 - [Caption file](Patchwork_WebMCP_Judges_Demo.srt)
+- [Copy-ready YouTube description](YOUTUBE_DESCRIPTION.md)
 - [Technical validation](demo-validation.json)
 - [Scene source](demo-scenes.json)
 - [Native WebMCP inputs and results](demo-assets/webmcp-evidence.json)
@@ -29,7 +30,7 @@ The [original MP4](Patchwork_WebMCP.mp4) is retained only as an archive. Upload 
 
 Suggested title: **Patchwork WebMCP — People and Agents, Shared Plans**.
 
-Suggested description: Patchwork is an individual open-source project exploring how people and browser agents can search neighbourhood opportunities, build shared plans, and draft new needs for review. Live app: https://patchwork-webmcp.pages.dev/ — Source: https://github.com/lsantos2000/patchwork-webmcp — Challenge: https://webmcp.devpost.com/. This edited walkthrough uses captured browser states, actual WebMCP results, and synthetic narration. The prototype uses demo records and browser-local storage; pledges remain drafts.
+Use the complete, judge-facing [copy-ready YouTube description](YOUTUBE_DESCRIPTION.md). It covers the original Discover flow, negotiated planning, all six workflow-scoped tools, human approval boundaries, testing prompts, prototype limitations, and the required public links.
 
 ## Reproduce locally
 

@@ -21,25 +21,25 @@ READY means an artifact exists or evidence was recorded; it does not mean every 
 | Item | Status | Evidence or next action |
 | --- | --- | --- |
 | Challenge registration | READY — checked August 30 | Devpost returned the registered relationship for The WebMCP Challenge. |
-| Live application | READY — production release prepared September 1 | [Cloudflare Pages application](https://patchwork-webmcp.pages.dev/) is the canonical judging URL. The negotiated-planning extension has been reviewed for promotion to `main`; verify the production deployment after the merge finishes. |
+| Live application | READY — production content confirmed September 1 | [Cloudflare Pages application](https://patchwork-webmcp.pages.dev/) is the canonical judging URL. An unauthenticated fetch on September 1 returned the page titled "Patchwork — Small actions, shared momentum" with all three tabs present: Discover, Plan together, and Action history. This confirms production serves the negotiated-planning workflow; it is not a substitute for a native WebMCP browser run. |
 | Registered WebMCP tools and actual agent call | READY — native evidence recorded August 30 and September 1 | The four Discover tools have recorded inputs/results in [Discover evidence](resources/video/demo-assets/webmcp-evidence.json). The two negotiated-planning tools were separately discovered and invoked on the deployed branch; see [extension evidence](resources/evidence/negotiated-planning-native.json). |
 | Core prototype flow | READY | Search, shared planning, proposal review, human-approved device-local publication, and persistence. |
-| Automated tests | READY — September 1 release run | All 64 application checks passed against the release candidate, the production build completed locally, six offline publishing-script cases remain documented separately, and Cloudflare and live-smoke checks passed. Automated WebMCP tests use a controlled shim; native browser evidence is separate. |
-| Public repository and license | READY from prior verification | [Repository](https://github.com/lsantos2000/patchwork-webmcp) and [MIT license](LICENSE). TODO: final logged-out visual check that GitHub displays the license. |
-| YouTube video | UPLOADED — owner supplied final link | [Watch the final video](https://youtu.be/so9sDOxzeJY). Final logged-out playback remains a recommended owner check. |
+| Automated tests | READY — re-run September 1 | All 64 application checks passed against local source (`PLAYWRIGHT_USE_LOCAL=1`, 1.0 min), all six offline publishing-script cases passed, `tsc --noEmit` and ESLint were clean, and the Cloudflare Pages bundle built. A separate 6-test capture run regenerated the screen evidence and asserted each documented tool status. Automated WebMCP tests use a controlled shim; native browser evidence is separate. |
+| Public repository and license | READY — confirmed September 1 | An unauthenticated fetch of the [repository](https://github.com/lsantos2000/patchwork-webmcp) showed it as Public with the sidebar reporting "MIT license". |
+| YouTube video | UPLOADED — identity confirmed, visibility NOT confirmed | The oEmbed endpoint resolved [the link](https://youtu.be/so9sDOxzeJY) to "Patchwork WebMCP Short Presentation - Judges Demo (Sep 1, 2026)", confirming it is the refreshed negotiated-planning cut rather than the earlier Discover-only upload. **oEmbed also succeeds for Unlisted videos, so this does not prove the video is Public.** The owner must confirm visibility is Public in YouTube Studio. |
 | Video duration and audio | READY | Local validation records 151.38 seconds (2:31), 1920×1080 H.264 video, AAC audio, and measured audio levels. The final cut is published on YouTube and preserved in the repository. |
 | Project description | READY — draft below | Covers fit, experience, human-agent collaboration, and implementation. |
-| Screenshots and testing instructions | READY | [Visual evidence](README.md#visual-evidence), [resource index](resources/README.md), and [browser guide](resources/docs/browser-test.md). |
+| Screenshots and testing instructions | READY | [Visual evidence](README.md#visual-evidence), [screen evidence for negotiated planning and refusals](resources/screens/README.md), [resource index](resources/README.md), and [browser guide](resources/docs/browser-test.md). |
 | Fresh browser / another-machine test | PARTIAL | Native calls passed in the Codex in-app browser on September 1. A final logged-out or another-machine run is still recommended before submission. |
 | Submitter type and teammates | READY — owner confirmed August 30 | Individual submission; no teammates or invitations involved. |
 | Personal form answers | TODO | Complete the fields identified below; do not infer residence or personal learning outcomes. |
 | Final Devpost submission | TODO | Complete the form and retain its confirmation and public project URL. A saved draft is not sufficient. |
 
-## New workflow extension — after the recorded video
+## Negotiated-planning workflow
 
 Discover remains the original experience. Plan together and Action history add a separate, session-only workspace with `get_workspace` and `propose_plan_revision`: pinned projects, a combined time budget, before/after proposals, revision-conflict protection, explicit UI acceptance/rejection, and undo. The current suite contains 64 application checks plus six offline publishing-script cases. See [workflow testing instructions](resources/docs/negotiated-planning.md).
 
-There are six tool definitions across the app: four registered in Discover and two in the new tabs. The recorded video covers the earlier four-tool experience. The deployed negotiated-planning branch was subsequently tested with native discovery and invocation in the Codex in-app browser: exactly the two scoped tools were advertised, and both returned structured results. See [the native evidence record](resources/evidence/negotiated-planning-native.json).
+There are six tool definitions across the app: four registered in Discover and two in these tabs. The published demo video is the refreshed negotiated-planning cut and covers both workflows. Native discovery and invocation were verified in the Codex in-app browser: exactly the two scoped tools were advertised, and both returned structured results. See [the native evidence record](resources/evidence/negotiated-planning-native.json); note that this capture was taken against the branch preview deployment, and production was independently confirmed to serve all three tabs on September 1.
 
 ## Title
 
@@ -47,37 +47,57 @@ Patchwork WebMCP
 
 ## One-line summary
 
-Small actions. Shared momentum. A shared neighbourhood planning workspace where agents organize opportunities and draft new needs while people retain control.
+Negotiate a plan with your agent — and keep the final say. A neighbourhood planning workspace where the agent can propose changes it is structurally unable to apply on its own.
 
 ## Project description — copy-ready draft
 
 ### Problem
 
-People often want to help their neighbourhood but must compare scattered opportunities, interpret time requirements, and turn a broad intention into a practical plan. An agent's recommendations are less useful when they remain disconnected from the interface where a person must review and act on them.
+When an agent and a person work on the same thing at the same time, the person quietly loses. Screen-scraping and DOM automation give an agent exactly one verb — *act* — so it reads the page, decides, and writes. If you edited anything in the seconds between its read and its write, your edit is gone. There was no way for the agent to be told "no, that's stale, look again," because the page had no way to say it.
+
+Neighbourhood planning is a good place to show this. People want to help locally, but opportunities are scattered, time budgets are real, and some choices are non-negotiable — the food pantry shift is the reason you were planning a weekend at all. Those are precisely the commitments an eager agent will optimize away.
 
 ### Solution
 
-Patchwork turns neighbourhood opportunities into a shared, editable weekend plan. People can browse the visual catalogue themselves or ask a compatible browser agent to search and assemble a plan. An agent can also structure a new local need as a project draft. The draft remains outside the catalogue until the person explicitly approves it.
+Patchwork is a neighbourhood planning workspace with a shared plan that both a person and an agent can work on. The agent can search, assemble plans, draft a missing local need, and propose revisions to a plan you are actively editing. What it cannot do is apply any of them. Every consequential change arrives as a proposal with a visible before/after, and acceptance is reachable only from a human UI action.
 
 ### Why WebMCP is a strong fit
 
-The workflow maps naturally to structured website capabilities: search project records, combine selected IDs into a plan, propose a new need, and prepare a pledge draft. WebMCP lets the website define these operations and their input schemas. The agent can work with application records instead of inferring actions from screenshots or brittle page scraping.
+Because this problem is only solvable if the *site* is the one holding the rules. An agent driving a browser through clicks cannot be refused — whatever it does to the DOM simply happens. WebMCP lets Patchwork expose operations that carry preconditions and can reject a call on its own terms.
+
+The clearest case is `propose_plan_revision`, which requires a `base_revision`. Every human edit bumps the workspace revision, so a proposal built on a stale read returns `stale_revision` and is refused rather than applied. The site enforces that, not the agent's good manners. That is a guarantee no amount of prompt engineering or click automation can provide.
 
 ### How it creates a better experience
 
-Tool handlers update the same React state that powers the visible interface. A person can inspect the result, edit the plan manually, reject a proposed need, or approve it without transferring information between a conversation and a separate form. Plans and approved community projects persist on the same browser/device across visits.
+The agent does the comparison work; you keep the decisions, and you can see exactly what it wanted to do before it happens.
+
+Pin the food pantry, set a three-hour budget, and ask for a better weekend. The agent reads the workspace, proposes a revision, and you get a before/after with its stated reason. If its proposal would drop a pinned project or exceed the budget, it comes back as a `constraint_conflict` with an explanation instead of a silent compromise — the agent is told why its plan is unacceptable rather than quietly shipping a worse one. Constraints are re-checked at acceptance, not only at proposal time, so a proposal that went stale while you thought about it cannot slip through.
+
+The Action history tab then shows what happened and how it entered — `WebMCP tool`, `UI action`, or `Example preview`. It labels the entry path, never a verified identity.
 
 ### What people and agents can do together
 
-An agent can translate an intention such as helping with food access and outdoor work into searches and a proposed plan, then structure a missing local opportunity for review. The person can continue editing that same workspace. This replaces disconnected recommendations and fragile click automation with declared operations and visible results. Agents prepare and organize; people retain the decision to approve a proposed project. Pledge handling remains draft-only and does not create real-world commitments.
+**Co-editing the same live workspace without the agent being able to overwrite you.** That is the thing that was not practical before.
+
+Concretely: you and an agent hold the same plan open. You unpin something; the agent, working from a read taken two seconds earlier, proposes a change. The site refuses it as `stale_revision` and tells the agent to re-read. It does, proposes again against your current state, and this time you see a before/after and click accept. Nothing was lost, nothing was silently merged, and at no point could the agent commit the change itself.
+
+The same boundary runs through the Discover workflow: `propose_neighborhood_project` returns `human_approval_required` with `published: false`, and `pledge_support` returns `confirmation_required` and never contacts an organizer. The agent prepares; the person commits.
 
 ### How WebMCP is implemented
 
-The original Discover workflow defines four tools: `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support`. A reusable React hook registers them through `document.modelContext.registerTool({...})`, with a `navigator.modelContext` compatibility fallback and unregister cleanup. The handlers validate or normalize inputs, update shared UI state, and return structured results. The proposal tool returns `human_approval_required` with `published: false`; only the visible human approval control adds its draft to the device-local catalogue. The pledge tool returns `confirmation_required` and does not submit a pledge.
+Six tools across two independent workflows, registered through `document.modelContext.registerTool({...})` with a `navigator.modelContext` fallback.
+
+Discover registers four: `search_neighborhood_projects`, `build_action_plan`, `propose_neighborhood_project`, and `pledge_support`. The negotiated-planning workspace registers two: `get_workspace` (a structured read — revision, pins, budget, catalogue, pending proposal, any current constraint issue) and `propose_plan_revision` (a guarded write).
+
+They are never all live at once. Registration is **scoped to the active workflow** — `useWebMCP(active ? tools : [])` — so an agent inspecting the Plan together tab is offered exactly two tools, not a menu of six, and cannot reach Discover's write paths from a tab where they make no sense. Registration passes an `AbortController` signal and cleanup aborts it, so tools unregister when a workflow goes inactive.
+
+The negotiation store enforces three guarantees, each covered by unit tests: revision-based optimistic concurrency (`stale_revision`), constraints validated twice — at proposal *and* at acceptance (`constraint_conflict`), and an `accept()` path that no tool handler can call. Each operation is a single synchronous transition, so a proposal cannot be applied against a state the person has already changed.
 
 ### Why this matters
 
-Patchwork demonstrates an open-web interaction pattern in which a site remains usable by people while exposing useful, constrained capabilities to agents. The goal is less coordination work without hiding the result or surrendering the person's decision-making role. The current project is a working prototype, not a production neighbourhood service.
+The interesting question about agents on the open web is not whether they can act, but whether a site can hold a line when they do. Patchwork's answer is that the site declares its own preconditions and refuses calls that would violate them — the agent gets a structured refusal and a reason, and the person keeps the final say by construction rather than by convention.
+
+This is a working prototype, not a production neighbourhood service: the catalogue is demonstration data, publishing means adding to this browser's local catalogue, and pledges stay drafts.
 
 ## How AI and Codex were used — copy-ready draft
 
@@ -87,16 +107,20 @@ Video production also used Piper synthetic narration and local FFmpeg encoding. 
 
 ## Key features
 
-- Human-facing project search and category filters.
-- Agent-created, human-editable plans with calculated time totals.
-- Agent-authored project drafts with explicit approval or rejection.
+- Agent proposals that are refused as `stale_revision` when a person edited the plan first.
+- Pinned projects and a combined time budget, re-validated at acceptance as well as at proposal.
+- `constraint_conflict` with a stated reason instead of a silent compromise.
+- Acceptance reachable only from a human UI action; the agent cannot apply its own proposal.
+- Tool registration scoped to the active workflow — two tools in Plan together, four in Discover, never six at once.
+- Action history that labels how each change entered: WebMCP tool, UI action, or example preview.
+- Human-facing project search and category filters, usable with no agent present.
+- Agent-authored project drafts with explicit approval or rejection, and a draft-only pledge boundary.
 - Browser-local persistence for plans and approved community projects.
-- Structured WebMCP results and a draft-only pledge boundary.
 - Documented browser testing and 64 automated checks; consult the latest CI run for validation status.
 
 ## Architecture
 
-React and TypeScript provide the UI and shared state. Vinext builds the application for Cloudflare Pages. Project-domain helpers supply catalogue search, planning, and persisted-data validation. `useWebMCP` registers the browser tools; `usePersistentState` restores supported state from `localStorage`. There is no shared project database, embedded LLM service, or real pledge-delivery backend.
+React and TypeScript provide the UI and shared state. Vinext builds the application for Cloudflare Pages. Two independent state worlds sit behind one page: Discover uses `usePersistentState` over `localStorage` with a type-guard validator per key, while the negotiated-planning workspace uses `negotiationStore` — an imperative store consumed via `useSyncExternalStore` that owns the revision counter, constraint checks, and event log, and is session-only by design. `useWebMCP` registers each workflow's tools and aborts them on cleanup. There is no server state, shared project database, embedded LLM service, or real pledge-delivery backend; every tool mutates in-browser React state only.
 
 ## Public links — ready to paste
 
@@ -105,6 +129,7 @@ React and TypeScript provide the UI and shared state. Vinext builds the applicat
 - Public YouTube demo: https://youtu.be/so9sDOxzeJY
 - Browser testing guide: https://github.com/lsantos2000/patchwork-webmcp/blob/main/resources/docs/browser-test.md
 - Screenshots: https://github.com/lsantos2000/patchwork-webmcp#visual-evidence
+- Screen evidence (proposals, refusals, honest history): https://github.com/lsantos2000/patchwork-webmcp/blob/main/resources/screens/README.md
 
 ## Testing instructions — copy-ready draft
 
@@ -167,10 +192,10 @@ The final video follows the [11-slide timestamped transcript](resources/video/DE
 ## Final owner TODO checklist
 
 - [ ] Run a fresh-session end-to-end test in a WebMCP-capable browser, ideally on another machine. Record date, client, and result: TODO.
-- [ ] Open GitHub while logged out and confirm the repository and MIT license display correctly.
-- [x] Upload the final YouTube video — owner supplied https://youtu.be/so9sDOxzeJY.
-- [ ] Confirm the replacement upload is Public and works while logged out.
-- [ ] Verify audible narration and final YouTube duration below 3:00.
+- [x] Open GitHub while logged out and confirm the repository and MIT license display correctly — unauthenticated fetch on September 1 showed Public with an "MIT license" sidebar entry.
+- [x] Upload the final YouTube video — owner supplied https://youtu.be/so9sDOxzeJY, confirmed via oEmbed as "Patchwork WebMCP Short Presentation - Judges Demo (Sep 1, 2026)".
+- [ ] **Confirm the upload's visibility is Public, not Unlisted.** oEmbed resolves for both, so this remains unverified and is the single highest-risk open item.
+- [ ] Confirm audible narration on the published upload while logged out. The local master measures 151.38 s (2:31) with AAC audio at mean −18.8 dB, so duration is not a risk; published audio still needs one listen.
 - [x] Refresh the video with the proposal workflow and upload the revision.
 - [ ] Complete personal form answers and confirm New versus Existing.
 - [x] Confirm submitter type: Individual, no teammates — owner confirmed August 30.
